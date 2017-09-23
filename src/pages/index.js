@@ -8,7 +8,7 @@ import Features from '../components/Features'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import logo from '../images/reason_300.png'
-import {headerFontFamily} from '../utils/typography'
+import { headerFontFamily } from '../utils/typography'
 
 const features = [
   {
@@ -148,8 +148,8 @@ const styles = {
     alignItems: 'center',
     margin: '2rem',
     '@media(max-width: 950px)': {
-      flexDirection: 'column'
-    }
+      flexDirection: 'column',
+    },
   },
 
   description: {
@@ -163,8 +163,8 @@ const styles = {
     marginBottom: 0,
     fontFamily: headerFontFamily(),
     '@media(min-width: 800px)': {
-      fontSize: '1.5em'
-    }
+      fontSize: '1.5em',
+    },
   },
   content: {
     maxWidth: 1270,
@@ -175,8 +175,8 @@ const styles = {
     '& .hljs': {
       background: 'transparent',
       border: 'none',
-      marginBottom: 0
-    }
+      marginBottom: 0,
+    },
   },
 
   button: {
@@ -187,7 +187,7 @@ const styles = {
     color: 'currentColor',
     borderRadius: 5,
     margin: 10,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 
   actionButton: {
@@ -201,8 +201,8 @@ const styles = {
     marginBottom: '3rem',
     '@media(max-width: 340px)': {
       flexDirection: 'column',
-      width: '80%'
-    }
+      width: '80%',
+    },
   },
 
   featuresDivider: {
@@ -235,6 +235,6 @@ const styles = {
 
   logo: {
     maxWidth: 300,
-    width: '80%'
-  }
+    width: '80%',
+  },
 }

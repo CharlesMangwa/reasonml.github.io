@@ -28,7 +28,17 @@ opam install merlin.2.5.4
 
 ### Dépannage
 
-Si votre éditeur ne se comporte pas comme prévu avec l'installation ci-dessus, procédez comme suit :
+#### Mauvaise installation
+
+Si votre installation echoue, c'est peut-être parce que vous êtes sur npm 5.4.0 (`npm --version`). Il y a un bug connu sur npm qui a été corrigé avec la 5.4.2. Mettez à jour `npm` et les choses devraient fonctionner.
+
+Si _ceci_ échoue, essayez https://github.com/reasonml/reasonml.github.io/pull/157. Si cette solution résout votre problème, merci de laisser un +1 sur cette issue. Nous ne sommes pas sûrs que ce soit la solution adéquate pour l'instant.
+
+Enfin, si les choses ne fonctionnent toujours pas, veuillez déposer une issue sur https://github.com/reasonml/reason-cli/issues. Désolé pour la gêne occasionnée.
+
+#### Plugin edtieur non fonctionnel
+
+En supposant que l'installation des binaires a réussi, si l'intégration de votre éditeur ne fonctionne pas, procédez comme suit :
 
 ```
 which ocamlmerlin refmt ocamlmerlin-reason
@@ -41,4 +51,3 @@ ocamlmerlin -version
 ```
 
 Il devrait dire "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Non pas OCaml 4.03, ni 4.04, etc.
-

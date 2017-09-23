@@ -3,6 +3,8 @@ title: Function
 order: 100
 ---
 
+_Cheatsheet avec la syntaxe complète des fonctions tout en bas_
+
 Pouvez-vous croire que nous n'avions toujours parlé de fonction jusqu'à présent ?
 
 Les fonctions sont déclarées avec `fun` et retournent une expression.
@@ -226,3 +228,139 @@ OCaml optimise ceci pour éviter l'allocation inutile de fonctions (2 fonctions 
 - une belle syntaxe
 - la curryfication sans effort supplémentaire (chaque fonction prend un seul argument, en fait !)
 - aucun coût de performance
+
+
+### Conseils & astuces
+
+Cheatsheet pour les différentes syntaxes d'une fonction :
+
+#### Déclaration
+
+```reason
+/* fonction anonyme. Listé uniquement par soucis d'exhaustivité */
+fun x => fun y => 1;
+/* sucre syntaxique de la version ci-dessus */
+fun x y => 1;
+/* assigner à un nom */
+let add = fun x y => 1;
+
+/* sucre syntaxique de la version ci-dessus */
+/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formater en celui-ci */
+let add x y => 1;
+
+/* avec labels */
+let add first::x second::y => x + y;
+/* avec sucre syntaxique pour le punning */
+let add ::first ::second => first + second;
+
+/* labels avec valeur par défaut */
+let add first::x=1 second::y=2 => x + y;
+/* avec le punning */
+let add ::first=1 ::second=2 => first + second;
+
+/* optionnel */
+let add first::x=? second::y=? => switch x {...};
+/* avec le punning */
+let add ::first=? ::second=? => switch x {...};
+```
+
+##### Avec annotation de type
+
+```reason
+/* fonction anonyme */
+fun (x: int) => fun (y: int): int => 1;
+/* sucre syntaxique de la version ci-dessus */
+fun (x: int) (y: int): int => 1;
+/* assigner à un nome */
+let add = fun (x: int) (y: int): int => 1;
+
+/* sucre syntaxique de la version ci-dessus. */
+/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formater en celui-ci */
+let add (x: int) (y: int) :int => 1;
+
+/* avec labels */
+let add first::(x: int) second::(y: int): int => x + y;
+/* pas de sucre syntaxique pour le punning des arguments avec labels ayant des types pour l'instant */
+let add first::(first: int) second::(second: int): int => first + second;
+
+/* labels avec valeur par défaut */
+let add first::(x: int)=1 second::(y: int)=2: int => x + y;
+/* pas de punning pour ce cas pour l'instant */
+let add first::(first: int)=1 second::(second: int)=2: int => first + second;
+
+/* optionnel */
+/* attention avec l'espace pour le type retourné ici ! Vous en avez besoin */
+let add first::(x: option int)=? second::(y: option int)=? : int => switch x {...};
+/* pas de punning pour ce cas pour l'instant */
+/* notez que l'appelant passerait un `int` et non `option int` */
+/* À l'intérieur de la fonction, `first` et `second` sont des `option int`. */
+let add first::(first: option int)=? second::(second: option int)=? : int => switch x {...};
+```
+
+#### Appel
+
+```reason
+/* appel anonyme. Listé uniquement par soucis d'exhaustivité */
+add(x)(y);
+/* sucre syntaxique de la version ci-dessus. */
+add x y;
+
+/* avec labels */
+add first::1 second::2;
+/* avec sucre syntaxique pour le punning */
+add ::first ::second;
+
+/* appel avec valeur par défaut. Pareil qu'un appel normal */
+add first::1 second::2;
+
+/* appel avec optionnel explicite */
+add first::?(Some 1) second::?(Some 2);
+/* avec le punning */
+add ::?first ::?second;
+```
+
+##### Avec annotation de type
+
+```reason
+/* application anonyme */
+add (x: int) (y: int);
+
+/* avec labels */
+add first::(1: int) second::(2: int);
+/* pas de sucre syntaxique pour le punning des appels avec arguments labellisés ayant des types pour l'instant */
+add first::(first: int) second::(second: int);
+
+/* appel avec valeur par défaute. Pareil qu'un appel normal */
+add first::(1: int) second::(2: int);
+
+/* appel avec optionnel explicite */
+add first::?(Some 1: option int) second::?(Some 2: option int);
+
+/* pas de punning pour ce cas pour l'instant */
+add first::?(first: option int) second::?(second: option int);
+```
+
+#### Signature de type autonome
+
+```reason
+/* premier arguemnt de type, second argument de type, type retourné */
+type foo = int => int => int;
+
+/* avec labels */
+type foo = first::int => second::int => int;
+
+/* labels avec valeur par défaut */
+type foo = first::int? => second::int? => int;
+```
+
+##### Dans les fichiers d'interface
+
+Pour annoter une fonction à partir du fichier d'implémentation (`.re`) :
+
+```reason
+let add: int => int => int;
+```
+
+Mêmes règles que la section précédente, à l'exception du remplacement de `type foo = bar` par `let add: bar`.
+
+**Ne confondez pas** ceci avec une exportation réelle d'un type dans le fichier d'interface. `let add: bar` annote un valeur `bar` existante depuis le fichier d'implémentation. `type foo = bar` exporte un type de même forme à partir du fichier d'implémentation.

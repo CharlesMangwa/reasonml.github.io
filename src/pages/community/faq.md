@@ -65,7 +65,7 @@ De manière générale, nous recommandons de se bind à la librairie JavaScript 
 Voir aussi notre [guide d'interopérabilité JavaScript](/guide/javascript/interop/).
 
 #### Bsb : existe-t-il un moyen de configurer le répertoire de sortie ?
-Pas actuellement. Nous gardons la configuration minimale. Nous implémenterons peut-être ceci plus tard en fonction des demandes de la communauté.
+Pas actuellement. Bien que vous puissiez produire des artefacts JS aux côtés de vos fichiers Reason. Voyez l'option `in-source` [ici](https://bucklescript.github.io/bucklescript/docson/#build-schema.json), dans package-specs -> package-spec -> module-format-object.
 
 #### Le compilateur me dit qu'il n'arrive pas à trouver le module.
 Êtes-vous entrain d'utiliser un module tiers ? Si vous êtes entrain de compiler en JavaScript, avez-vous ajouté une dépendance au champ `bs-dependencies` de votre [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started) ? Aussi, avez-vous exécutez `bsb -make-world` ? `bsb` par défaut ne crée le projet racine que pour lui-même, pour des questions de performance.

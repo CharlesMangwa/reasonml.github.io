@@ -1,15 +1,16 @@
-
 const fs = require('fs')
 const path = require('path')
 const Remark = require('remark')
 
 const sectionTitles = {
   guide: 'Guide',
-  community: "Communauté",
-};
+  community: 'Communauté'
+}
 
-exports.createPages = ({graphql, boundActionCreators}) => {
-  const {createPage} = boundActionCreators;
+const langsWithPaths = ['es', 'ru'];
+
+exports.createPages = ({ graphql, boundActionCreators }) => {
+  const { createPage } = boundActionCreators
 
   Object.keys(sectionTitles).forEach(section => {
     createPage({
@@ -18,13 +19,13 @@ exports.createPages = ({graphql, boundActionCreators}) => {
       context: {
         section: section,
         sectionTitle: sectionTitles[section],
-        relatedFiles: `/^${section}\\/.*\\.md$/`,
+        relatedFiles: `/^${section}\\/.*\\.md$/`
       }
     })
   })
 
   graphql(`{
-    allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md$/"}}) {
+    allFile(filter:{relativePath:{regex:"/^([a-z]{2}\\\\/)?(guide|community)\\\\/.*\\\\.md$/"}}) {
       edges {
         node {
           relativePath
@@ -32,31 +33,42 @@ exports.createPages = ({graphql, boundActionCreators}) => {
         }
       }
     }
-  }`).then(({errors, data}) => {
-    if (errors) return Promise.reject(errors)
-    if (!data.allFile) {
+  }`
+  )
+    .then(({ errors, data }) => {
+      if (errors) return Promise.reject(errors)
+      if (!data.allFile) {
         throw new Error('No files found')
-    }
-    data.allFile.edges.forEach(({node: {relativePath, childMarkdownRemark}}) => {
-      if (!childMarkdownRemark) return
-      let targetPath = relativePath.slice(0, -'.md'.length)
-      if (relativePath.match(/index\.md$/)) {
-        targetPath = relativePath.slice(0, -'/index.md'.length)
       }
-      const section = relativePath.split('/')[0]
-      createPage({
-        path: targetPath,
-        component: path.resolve('src/templates/Guide.js'),
-        context: {
-          section: section,
-          sectionTitle: sectionTitles[section],
-          relativePath,
-          relatedFiles: `/^${section}\\/.*\\.md$/`,
+      data.allFile.edges.forEach(
+        ({ node: { relativePath, childMarkdownRemark } }) => {
+          if (!childMarkdownRemark) return
+          let targetPath = relativePath.slice(0, -'.md'.length)
+          if (relativePath.match(/index\.md$/)) {
+            targetPath = relativePath.slice(0, -'/index.md'.length)
+          }
+
+          const pathSplit = relativePath.split('/')
+          const [section, langPath] = langsWithPaths.indexOf(pathSplit[0]) === -1
+            ? [pathSplit[0], '']
+            : [pathSplit[1], pathSplit[0]]
+
+          createPage({
+            path: targetPath,
+            component: path.resolve('src/templates/Guide.js'),
+            context: {
+              section: langPath ? langPath + '/' + section : section,
+              sectionTitle: sectionTitles[section],
+              relativePath,
+              relatedFiles: langPath ? `/^${langPath}\\/${section}\\/.*\\.md$/` : `/^${section}\\/.*\\.md$/`
+            }
+          })
         }
-      })
+      )
     })
-  }).then(() => {
-    return graphql(`{
+    .then(() => {
+      return graphql(
+        `{
       allFile(filter:{relativePath:{regex:"/api.*html$/"}}) {
         edges {
           node {
@@ -64,31 +76,32 @@ exports.createPages = ({graphql, boundActionCreators}) => {
           }
         }
       }
-    }`).then(({errors, data}) => {
-      if (errors) return Promise.reject(errors)
-      if (!data.allFile) {
+    }`
+      ).then(({ errors, data }) => {
+        if (errors) return Promise.reject(errors)
+        if (!data.allFile) {
           throw new Error('No files found')
-      }
-      data.allFile.edges.forEach(({node: {relativePath}}) => {
-        createPage({
-          path: relativePath,
-          component: path.resolve('src/templates/API.js'),
-          context: {
-            relativePath,
-          }
+        }
+        data.allFile.edges.forEach(({ node: { relativePath } }) => {
+          createPage({
+            path: relativePath,
+            component: path.resolve('src/templates/API.js'),
+            context: {
+              relativePath
+            }
+          })
         })
       })
     })
-  })
 }
 
-exports.onCreateNode = ({node, boundActionCreators}) => {
-  const {createPage} = boundActionCreators;
+exports.onCreateNode = ({ node, boundActionCreators }) => {
+  const { createPage } = boundActionCreators
 
   if (!node.relativePath || !node.childMarkdownRemark) return
 
-  const {relativePath} = node;
-  if (!relativePath.match(/^(guide|community)\//)) return
+  const { relativePath } = node
+  if (!relativePath.match(/^(es|guide|community)\//)) return
   let targetPath = relativePath.slice(0, -'.md'.length)
   if (relativePath.match(/index\.md$/)) {
     targetPath = relativePath.slice(0, -'/index.md'.length)
@@ -97,7 +110,7 @@ exports.onCreateNode = ({node, boundActionCreators}) => {
     path: targetPath,
     component: path.resolve('src/templates/Guide.js'),
     context: {
-      relativePath,
+      relativePath
     }
   })
 }

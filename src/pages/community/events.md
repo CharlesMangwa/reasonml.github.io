@@ -18,5 +18,6 @@ Il y a quelques meetups Reason autour du monde, entre autres :
 - [Oslo](https://www.meetup.com/Reason-Oslo/) ([Twitter](http://twitter.com/reasonoslo/))
 - [Portland](https://www.meetup.com/Portland-ReasonML/) ([Twitter](https://twitter.com/ReasonPDX))
 - [Copenhague](https://www.meetup.com/preview/ReasonML-CPH)
+- [Bruxelles](https://www.meetup.com/ReasonML-BXL/)
 
 Si vous ne trouvez pas de meetup Reason près de chez vous, cherchez sur https://meetup.com ou créez-en un !

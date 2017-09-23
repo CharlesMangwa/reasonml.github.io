@@ -15,10 +15,7 @@ cd my-first-app
 npm run build
 ```
 
-Vous pouvez aussi build en watch mode :
-```sh
-npm run start
-```
+Il est directement en watch mode, donc n'importe quel changement dans vos fichiers sera intercepté et compilé.
 
 C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
 
