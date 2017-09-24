@@ -1,4 +1,4 @@
-import Link from 'gatsby-link'
+// import Link from 'gatsby-link'
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'

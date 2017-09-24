@@ -39,8 +39,8 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build --prefix-paths",
-    "deploy": "gatsby build --prefix-paths && public && surge -p . -d reasonml-fr.surge.sh",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-paths && cd public && surge -p . -d reasonml-fr.surge.sh",
     "develop": "gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/pages/*.js\" \"src/utils/*.js\" \"src/wrappers/*.js\" \"src/html.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
