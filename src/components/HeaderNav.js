@@ -149,7 +149,7 @@ const styles = {
   hamburgerBar: {
     width: '30px',
     height: '4px',
-    margin: '2.5px 0 2.5px 0',
+    margin: '2.5px 0 2.5px 10px',
     background: accent,
     borderRadius: '3px',
   },

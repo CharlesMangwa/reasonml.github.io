@@ -229,7 +229,6 @@ OCaml optimise ceci pour éviter l'allocation inutile de fonctions (2 fonctions 
 - la curryfication sans effort supplémentaire (chaque fonction prend un seul argument, en fait !)
 - aucun coût de performance
 
-
 ### Conseils & astuces
 
 Cheatsheet pour les différentes syntaxes d'une fonction :
@@ -245,7 +244,7 @@ fun x y => 1;
 let add = fun x y => 1;
 
 /* sucre syntaxique de la version ci-dessus */
-/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formater en celui-ci */
+/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formatés en celui-ci */
 let add x y => 1;
 
 /* avec labels */
@@ -271,11 +270,11 @@ let add ::first=? ::second=? => switch x {...};
 fun (x: int) => fun (y: int): int => 1;
 /* sucre syntaxique de la version ci-dessus */
 fun (x: int) (y: int): int => 1;
-/* assigner à un nome */
+/* assigner à un nom */
 let add = fun (x: int) (y: int): int => 1;
 
 /* sucre syntaxique de la version ci-dessus. */
-/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formater en celui-ci */
+/* Pas besoin de se souvenir de tous les formats ci-dessus. Ils sont formatés en celui-ci */
 let add (x: int) (y: int) :int => 1;
 
 /* avec labels */
@@ -322,7 +321,7 @@ add ::?first ::?second;
 ##### Avec annotation de type
 
 ```reason
-/* application anonyme */
+/* appel anonyme */
 add (x: int) (y: int);
 
 /* avec labels */
@@ -330,7 +329,7 @@ add first::(1: int) second::(2: int);
 /* pas de sucre syntaxique pour le punning des appels avec arguments labellisés ayant des types pour l'instant */
 add first::(first: int) second::(second: int);
 
-/* appel avec valeur par défaute. Pareil qu'un appel normal */
+/* appel avec valeur par défaut. Pareil qu'un appel normal */
 add first::(1: int) second::(2: int);
 
 /* appel avec optionnel explicite */
@@ -343,7 +342,7 @@ add first::?(first: option int) second::?(second: option int);
 #### Signature de type autonome
 
 ```reason
-/* premier arguemnt de type, second argument de type, type retourné */
+/* premier argument de type, second argument de type, type retourné */
 type foo = int => int => int;
 
 /* avec labels */

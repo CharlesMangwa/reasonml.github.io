@@ -3,7 +3,7 @@ title: Meta
 order: 1000
 ---
 
-L'un de nos moments dont nous somme le plus fier est lorsque certains utilisateurs de Reason nous ont dit en privé (paraphrasé):
+L'un des moments dont nous sommes le plus fier est lorsque certains utilisateurs de Reason nous ont dit en privé (paraphrasé):
 
 > Je n'aime pas cette récente décision que nous avons prise, mais je comprends l'objectif de compromettre X afin de rendre les choses plus faciles pour les nouveaux arrivants à moyen terme. En attendant, j'utiliserai mon propre work-around pour patch X.
 
