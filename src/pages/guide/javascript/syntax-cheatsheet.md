@@ -44,6 +44,7 @@ JavaScript                |   Reason
 `3.1415`                    |  Idem
 `3 + 4`                     |  Idem
 `3.0 + 4.5`                 |  `3.0 +. 4.5`
+`5 % 3`                     |  `5 mod 3`
 
 \* JavaScript ne fait pas de distinction entre les integers et les floats.
 
@@ -83,8 +84,8 @@ JavaScript                |   Reason
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
 `arg => retVal`                       |  `fun arg => retVal`
-`function named(arg) {...}`           |  `fun named arg => ...`
-`const f = function named(arg) {...}` |  `let f = fun named arg => ...`
+`function named(arg) {...}`           |  `let named arg => ...`
+`const f = function(arg) {...}`       |  `let f = fun arg => ...`
 `add(4, add(5, 6))`                   |  `add 4 (add 5 6)`
 
 #### Blocks

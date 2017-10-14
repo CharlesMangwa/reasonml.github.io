@@ -25,6 +25,7 @@ Voici l'endroit où il faut être pour suivre ce qui se passe chez l'équipe Rea
 
 Envie de donner un coup de main ?
 
+- **Vous travaillez sur Windows** ? Aidez nous à améliorer le [support du tooling sur Windows](https://github.com/reasonml/reasonml.github.io/issues/195)!
 - [Améliorez la documentation et son site](https://github.com/reasonml/reasonml.github.io/issues). Ou aussi [le manuel de BuckleScript et l'API référence](https://bucklescript.github.io/bucklescript/Manual.html#_contributing_to_the_documentation).
 - [Aidez-nous à traduire les docs !](https://github.com/reasonml/reasonml.github.io/issues/3)
 - Contribuez au projet du [plugin Reason de votre éditeur préféré](/guide/editor-tools/editors-plugins#officially-supported-editors).

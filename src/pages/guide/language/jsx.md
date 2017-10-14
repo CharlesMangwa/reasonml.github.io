@@ -10,7 +10,7 @@ Reason prend en charge la syntaxe JSX, avec quelques légères différences par 
 ### Tag capitalisé
 
 ```reason
-<MyComponent foo=bar />
+<MyComponent foo={bar} />
 ```
 
 devient
@@ -22,7 +22,7 @@ MyComponent.make foo::bar children::[] ()
 ### Tag non-capitalisé
 
 ```reason
-<div foo=bar>child1 child2</div>
+<div foo={bar}>child1 child2</div>
 ```
 
 devient
@@ -39,27 +39,27 @@ Voici un tag JSX qui présente la plupart des fonctionnalités.
 
 ```reason
 <MyComponent
-  booleanAttribute=true
+  booleanAttribute={true}
   stringAttribute="string"
   intAttribute=1
   forcedOptional=?(Some "hello")
   onClick={updater handleClick}
   onClickThisWorksToo=(updater handleClick)>
   <div>
-    (ReasonReact.stringToElement "hello")
+    {ReasonReact.stringToElement "hello"}
   </div>
 </MyComponent>
 ```
 
 ### Différences du JSX JavaScript
 
-- Les attributs ne requièrent pas d'accolades, à moins qu'ils ne soient des expressions complexes (dans ce cas, ils sont formatés avec parenthèses).
+- Les attributs et les enfants ne requièrent pas de `{}`, mais nous les montrons quand même pour faciliter l'apprentissage. Une fois que `refmt`er votre fichier, certains d'entre eux disparaissent et d'autres se transforment en parenthèses.
 - Il n'y a aucun support des attributs spread du JSX.
 - Le punning !
 
 #### Punning
 
-Le punning d'argument du JSX de ReactJS, ex : `<input checked />`, dû à de malheureuses raisons historiques, se *désucre* en `<input checked=true />`, afin de se conformer aux idiomes du DOM. Reason n'a pas un tel passif, alors nous avons décidé de le *désucré* en `<input checked=checked />`. Cela permet aux gens d'ajouter beaucoup d'autres props dans un composant ReasonReact sans qu'il soit trop gonflé :
+Le punning d'argument du JSX de ReactJS, ex : `<input checked />`, dû à de malheureuses raisons historiques, se *désucre* en `<input checked={true} />`, afin de se conformer aux idiomes du DOM. Reason n'a pas un tel passif, alors nous avons décidé de le *désucré* en `<input checked={checked} />`. Cela permet aux gens d'ajouter beaucoup d'autres props dans un composant ReasonReact sans qu'il soit trop gonflé :
 
 ```reason
 <MyComponent isLoading text onClick />

@@ -22,6 +22,6 @@ C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
 
 - Lisez ceci pour en savoir plus sur la façon dont nous compilons en JavaScript grâce à notre partenaire sur ce projet, [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html).
 
-- Sinon, **pour démarrer une application [ReasonReact](//reasonml.github.io/reason-react/gettingStarted.html) app**, essayez `bsb -init my-react-app -theme react`.
+- Sinon, **pour démarrer une application [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, essayez `bsb -init my-react-app -theme react`.
 
 - Rendez-vous sur la partie [Configuration de l'éditeur](/guide/editor-tools/global-installation) pour obtenir le plugin Reason de votre éditeur préféré !

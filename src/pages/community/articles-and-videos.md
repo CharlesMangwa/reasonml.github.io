@@ -30,6 +30,7 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 
 ## Vidéos
 
+- [Playlist de talks Reason maintenue par la communauté](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
 - [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) Juillet 2017
 - [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) Mai 2017
 - [Imperfection](https://www.youtube.com/watch?v=tCVXp6gFD8o) Mai 2017
@@ -37,10 +38,15 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) Mars 2017
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Novembre 2016
 
+## Programmation fonctionnelle générale et système de type
+ 
+- [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
+
 ## Liens niveau pro
 
 Plus ils ont l'air vieux, meilleur est le contenu =P
 
+- [Phantom Types in Reason](https://gist.github.com/busypeoples/3a28d039272ec3eb33ca2fc6b32dafc7) : bel exemple d'une fonctionnalité cachée de Reason/OCaml
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)

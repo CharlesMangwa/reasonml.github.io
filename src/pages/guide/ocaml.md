@@ -456,11 +456,11 @@ let res = switch x {
 Pouvez-vous repérer l'erreur dans l'exemple OCaml ? C'est l'une des erreurs les plus fréquentes chez les développeurs OCaml. Le second `match` *doit* être englobé dans des parenthèses, sinon le cas `Some` est parsé comme appartenant au `match` externe. Les blocs `{}` requis par Reason devraient prévenir ce genre de problèmes.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml (NON FONCTIONNEL)</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
-let res = match x with
+let res x = match x with
   | A (x, y) -> match y with
     | None -> 0
     | Some i -> 10
@@ -468,16 +468,28 @@ let res = match x with
     </td>
     <td>
       <pre>
-let res = switch x {
+let res x = switch x {
   | A (x, y) => switch y {
     | None => 0
     | Some i => 10
   }
-  | B x y => 0
+  | B (x, y) => 0
 };</pre>
     </td>
   </tr>
 </table>
+
+Pouvez-vous repérer l'erreur dans l'exemple OCaml ? C'est l'une des erreurs les plus courantes chez les développeurs OCaml. Le `match` imbriqué *doit* être placé entre parenthèses, sinon le cas `Some` est analysé comme appartenant au `match` externe. Visuellement, c'est en fait :
+
+```ocaml
+let res = match x with
+  | A (x, y) -> match y with
+    | None -> 0
+    | Some i -> 10
+    | B (x, y) -> 0
+```
+
+Les `{}` obligatoires en Reason autour des `switch` cases empêchent ce problème.
 
 ### Modules et Signatures
 

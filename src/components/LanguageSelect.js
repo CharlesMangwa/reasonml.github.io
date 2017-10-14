@@ -3,18 +3,19 @@ import React from "react"
 const langs = [
   {code: 'fr', name: 'Français'},
   {code: 'en', name: 'English'},
-  {code: 'es', name: 'Español'},
+  // {code: 'es', name: 'Español'},
 ];
 
-const ru = {code: 'ru', name: 'русский'};
+// const ru = {code: 'ru', name: 'русский'};
 
 /* TODO ru only translates /guide... - this will help prevent 404s in short term
  * This should be replaces with a better mechanism. */
 const getLangs = () => {
   if (typeof window !== 'undefined') {
-    return window.location.pathname.indexOf('/guide/') !== -1
-    ? langs.concat(ru)
-    : langs;
+    // return window.location.pathname.indexOf('/guide/') !== -1
+    // ? langs.concat(ru)
+    // : langs;
+    return langs;
   }
   return null
 }

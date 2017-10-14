@@ -9,19 +9,19 @@ order: 10
 
 | Platforme  | Commande d'installation
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
-| **Linux** | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
-
-**`reason-cli` ne fonctionne pas actuellement sous Windows**, mais ce n'est pas une exigence pour l'utilisation de Reason. Vous disposez toujours de super messages de diagnostic du CLI du build système via BuckleScript, dont le paquet global NPM  [`bs-platform`](https://www.npmjs.com/package/bs-platform) qui lui fonctionne aussi sur Windows par contre.
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
+| **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 ### (Alternative) Via OPAM
 
 [OPAM](https://opam.ocaml.org) est le package manager natif d'OCaml. Si vous venez d'OCaml et que vous ne disposez pas de NPM/Yarn, vous pouvez éventuellement l'installer de cette façon, mais attention !
 
-**Assurez-vous d'être sur OCaml `4.02.3`**.
+**Si vous utilisez Windows**, veuillez consulter https://github.com/reasonml/reasonml.github.io/issues/195.
 
 ```
 opam update
+opam switch 4.02.3 # mandatory!
 opam install reason.1.13.7
 opam install merlin.2.5.4
 ```
@@ -38,16 +38,26 @@ Enfin, si les choses ne fonctionnent toujours pas, veuillez déposer une issue s
 
 #### Plugin edtieur non fonctionnel
 
-En supposant que l'installation des binaires a réussi, si l'intégration de votre éditeur ne fonctionne pas, procédez comme suit :
+**Si vous êtes sur Windows** : la prise en charge actuelle de l'outil d'édition pour Windows est fragile. Aidez-nous à améliorer le problème ci-dessus ! Merci d'avance !
 
+Assurez-vous de redémarrer votre éditeur. Certains d'entre eux peuvent ne pas avoir pris en compte votre nouvel environnement shell (qui inclut maintenant les binaires nouvellement installés).
+
+Sinon, essayez :
 ```
 which ocamlmerlin refmt ocamlmerlin-reason
 ```
 
-Il devrait renvoyer trois chemins qui contiennent le mot `reason-cli`. Note : durant l'installation `npm/yarn`, les paths `node_modules/reason-cli` peuvent être symlink à `/usr/local/bin` (ce sera affiché ultérieurement si c'est le cas).
+Il devrait renvoyer trois chemins qui contiennent le mot `reason-cli` si l'installation de `reason-cli` à réussit.
 
+Vérifiez la version de Merlin :
 ```
 ocamlmerlin -version
 ```
 
 Il devrait dire "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Non pas OCaml 4.03, ni 4.04, etc.
+
+#### Message d'erreur de l'editeur : "Unbound Module `Js`", etc.
+
+Assurez-vous d'avoir build votre projet au moins une fois, le diagnostic ne reprend qu'après cela. La commande build varie selon le projet, mais est souvent `npm run build` (qui appelle généralement `bsb -make-world`).
+
+Si vous êtes sur le Visual Studio Codeo, assurez-vous d'ouvrir l'éditeur à la racine du projet (là où sont situés `package.json` et` bsconfig.json`). Vous pouvez le faire par exemple, en entrant `code .` dans le terminal à la racine.

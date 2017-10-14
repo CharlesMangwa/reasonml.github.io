@@ -11,6 +11,12 @@ Nom de fichier en majuscule (aka première lettre en haut de casse).
 
 **Justification** : les noms de modules ne peuvent être écrits qu'avec la première lettre en majuscule. Les nouveaux arrivants demandent souvent comment un fichier mappe vers un module, et pourquoi `draw.re` map au module `Draw`, et parfois essayent de se référer à un module via des identificateurs non capitalisés. L'utilisation de `Draw.re` rend ce mapping plus direct. Il aide également certains noms de fichiers qui seraient gênants sous une forme sans majuscule, exemple : `uRI.re`.
 
+### Ignorer le fichier `.merlin`
+
+Ceci est généré par le build system (au moins pour le workflow JavaScript) et vous ne devriez pas avoir à le modifier manuellement. Ne le vérifier pas dans le repo.
+
+**Justification** : `.merlin` permet à Merlin de comprendre la mise en page du projet et de fournir des outils d'édition. Le fichier contient des chemins absolus, qui ne sont pas non plus multi-plateformes (par exemple, les chemins Windows sont différents).
+
 ### Dossiers
 
 Essayez de ne pas avoir trop de hiérarchies imbriquées. Gardez les choses claires et ayez moins de fichiers (pour rappel : vous pouvez utiliser des modules imbriqués).
@@ -42,5 +48,7 @@ N'abusez pas des caractéristiques excessivement chic. Laissez de la place pour 
 ### Publication
 
 S'il s'agit d'un binding avec une bibliothèque JavaScript, ne publiez pas les artefacts JavaScript. Si c'est une libraire légitime, publiez les artefacts dans `lib/js` si vous pensez que les consommateurs de JavaScript pourraient l'utiliser. C'est particulièrement le cas lorsque vous convertissez progressivement une librairie JavaScript en Reason + BuckleScript, sans apporter de breaking changes pour les consommateurs JavaScript existants.
+
+Pensez à préciser les mots-clés `"reason"` et `"bucklescript"` dans le champs your `keywords` de votre package.json. Cela nous permettra de trouver les bindings beaucoup plus facilement dans le futur.
 
 **Justification** : Soyez sympa avec les consommateurs JavaScript de votre librairie. Ce sont vos futurs Reasoners.

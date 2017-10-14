@@ -78,6 +78,12 @@ let obj:
 };
 ```
 
+Vous pouvez utiliser l'objet ci-dessus comme ceci :
+
+```reason
+obj#doYouWant ();
+```
+
 ### Conseils & astuces
 
 Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason natifs, mais plutôt [l'object spécial] (https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) de BuckleScript. Ils sont différents en ce qu'ils :

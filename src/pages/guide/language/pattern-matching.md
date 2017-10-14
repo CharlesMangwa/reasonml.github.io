@@ -104,6 +104,16 @@ let message =
   | NoResult => ...
   };
 ```
+#### Match sur les exceptions
+
+Si la fonction lève une exception (couvert plus tard), vous pouvez également y appliquer un match, en plus des valeurs retournées normalement par la fonction.
+
+```reason
+switch (List.find (fun i => i === theItem) myItems) {
+| item => print_endline item
+| exception Not_found => print_endline "No such item found!"
+};
+```
 
 ### Conseils & astuces
 

@@ -183,7 +183,7 @@ Il est aussi possible de définir une valeur par défaut pour les arguments labe
 ```reason
 let drawCircle ::radius=1 ::color () => {
   setColor color;
-  startAt r r;
+  startAt radius radius;
 };
 ```
 
@@ -260,7 +260,7 @@ let add ::first=1 ::second=2 => first + second;
 /* optionnel */
 let add first::x=? second::y=? => switch x {...};
 /* avec le punning */
-let add ::first=? ::second=? => switch x {...};
+let add ::first=? ::second=? => switch first {...};
 ```
 
 ##### Avec annotation de type
@@ -293,7 +293,7 @@ let add first::(x: option int)=? second::(y: option int)=? : int => switch x {..
 /* pas de punning pour ce cas pour l'instant */
 /* notez que l'appelant passerait un `int` et non `option int` */
 /* À l'intérieur de la fonction, `first` et `second` sont des `option int`. */
-let add first::(first: option int)=? second::(second: option int)=? : int => switch x {...};
+let add first::(first: option int)=? second::(second: option int)=? : int => switch first {...};
 ```
 
 #### Appel

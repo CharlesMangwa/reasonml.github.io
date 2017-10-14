@@ -148,8 +148,8 @@ const styles = {
     alignItems: 'center',
     margin: '2rem',
     '@media(max-width: 950px)': {
-      flexDirection: 'column',
-    },
+      flexDirection: 'column'
+    }
   },
 
   description: {
@@ -175,8 +175,8 @@ const styles = {
     '& .hljs': {
       background: 'transparent',
       border: 'none',
-      marginBottom: 0,
-    },
+      marginBottom: 0
+    }
   },
 
   button: {

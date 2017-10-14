@@ -163,6 +163,23 @@ module Company: EstablishmentType = {
 
 Il est également utile de cacher le type sous-jacent comme un détail d'implémentation sur lequel d'autres ne peuvent pas compter. Si vous demandez quel type `Company.profession` est, au lieu d'exposer la variant, il ne vous dira que "c'est `Company.profession`".
 
+#### Extension de la signature d'un module
+
+Tout comme les modules eux-mêmes, les signatures de modules peuvent également être étendues via `include module type of Foo`:
+
+```reason
+module type BaseComponent = {
+  let defaultGreeting: string;
+  let getAudience: excited::bool => string;
+};
+
+module type ActualComponent = {
+  /* the signature is copied over */
+  include module type of BaseComponent;
+  let render: unit => string;
+};
+```
+
 ### Tout fichier `.rei` est une signature
 
 De la même façon qu'un fichier `react.re` définit implicitement un module React, un fichier `react.rei` définit implicitement une signature pour `React`. Si `react.rei` n'est pas fourni, la signature de `react.re` est par défaut d'exposer tous les champs du module. Parce qu'ils ne contiennent pas de fichiers d'implémentation, les fichiers `.rei` sont utilisés dans l'écosystème pour documenter l'API publique de leurs modules correspondants.

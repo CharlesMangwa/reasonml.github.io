@@ -6,19 +6,26 @@ div {
   align-items: stretch;
 }
 
-button, input {
+button,
+input {
   background: none;
   border: none;
   outline: none;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+pre {
+  @media (max-width: 550px) {
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+  }
 }
 
-li {
-  margin: 0;
-  padding: 0;
+body {
+  @media (max-width: 550px) {
+    overflow: hidden;
+    width: 100%;
+  }
 }
