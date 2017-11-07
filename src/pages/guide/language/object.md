@@ -23,7 +23,7 @@ type tesla = {
 Le point au début indique qu'il s'agit d'un type d'objet «fermé», ce qui signifie qu'un objet basé sur ce type doit avoir exactement cette forme.
 
 ```reason
-type car 'a = {
+type car('a) = {
   ..
   color: string
 } as 'a;
@@ -34,20 +34,17 @@ Deux points, également appelés *élision*, indiquent qu'il s'agit d'un type d'
 #### Création
 
 ```reason
-type tesla = {
-  .
+type tesla = {.
   drive: int => int
 };
 
-let obj :tesla = {
-  val hasEnvy = ref false;
-  pub drive speed => {
-    this#enableEnvy true;
+let obj: tesla = {
+  val hasEnvy = ref(false);
+  pub drive  = (speed) => {
+    this#enableEnvy(true);
     speed
   };
-  pri enableEnvy envy => {
-    hasEnvy := envy
-  };
+  pri enableEnvy = (envy) => hasEnvy := envy
 };
 ```
 
@@ -58,30 +55,26 @@ Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Ex
 L'exemple suivant montre un type d'objet ouvert qui utilise un type comme paramètre. Le paramètre de type d'objet est requis afin d'implémenter toutes les méthodes du type d'objet ouvert.
 
 ```reason
-type tesla 'a = {
+type tesla('a) = {
   ..
   drive: int => int
 } as 'a;
 
-let obj:
-  tesla {. drive: int => int, doYouWant: unit => bool}
-  = {
-  val hasEnvy = ref false;
-  pub drive speed => {
-    this#enableEnvy true;
+let obj: tesla({. drive: int => int, doYouWant: unit => bool}) = {
+  val hasEnvy = ref(false);
+  pub drive = (speed) => {
+    this#enableEnvy(true);
     speed
   };
-  pub doYouWant () => !hasEnvy;
-  pri enableEnvy envy => {
-    hasEnvy := envy
-  };
+  pub doYouWant = () => hasEnvy^;
+  pri enableEnvy = (envy) => hasEnvy := envy
 };
 ```
 
 Vous pouvez utiliser l'objet ci-dessus comme ceci :
 
 ```reason
-obj#doYouWant ();
+obj#doYouWant();
 ```
 
 ### Conseils & astuces
@@ -92,4 +85,4 @@ Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason
 - sont toujours utilisés avec `Js.t` (en tant que paramètres du type `Js.t`).
 - compilent en de véritables objets JavaScript.
 
-Parce qu'ils sont utilisés si souvent, Reason à la valeur de l'objet BuckleScript `[%bs.obj {foo: bar}]` ajoute un *sucre syntaxique* spécial : `{"foo": bar}`. On dirait un record entre guillemets pour faire simple.
+Parce qu'ils sont utilisés si souvent, Reason à la valeur de l'objet BuckleScript `[%bs.obj {foo: bar}]` ajoute un *sucre syntaxique* spécial : `{"foo": bar}`. On dirait un record entre guillemets pour faire simple. De même pour les types : `{. "foo": string}`.

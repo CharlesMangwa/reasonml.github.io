@@ -3,11 +3,55 @@ title: Blog
 order: 0
 ---
 
+### Reason 3
+
+*27 octobre 2017*
+
+J'écris ce post tout en étant assis, par le plus grand des hasards, à côté du manager de l'équipe Reason, qui est entrain d'essayer la nouvelle syntaxe Reason. Sa première impression a été : "C'est exactement comme ça que je pense que ça devrait marcher !". Je pense que cette remarque a elle seule a rendu tous nos efforts valables.
+
+Raison 3 est principalement le travail de [Fred](https://github.com/let-def), le mainteneur de Merlin (oui, _ce_ [Merlin](https://github.com/ocaml/merlin)), [Iwan](https://github.com/iwankaramazow) et [Jared](https://github.com/jaredly), au cours des six derniers mois. La release contient _beaucoup_ de changements sous le capot, dont la plupart, nous l'espérons, vous resteront invisibles et vous feront parfois vous dire : «Oui, c'est comme _ça_ que je pense que ça devrait marcher».
+
+
+Les changements d'infra n'auraient pas eu lieu sans une coopération étroite de personnes des communautés OCaml et JavaScript. Nous sommes _vraiment_ très reconnaissants pour tout le soutien que nous avons reçu. Merci beaucoup.
+
+**Points principaux** :
+
+- [Voici à quoi ça ressmeble](https://github.com/reasonml-community/reason-react-example/commit/3640ce6bb6729c3b3d8a0c200a624996f8da8beb).
+- Plus de 100 problèmes d'analyse et de printing corrigés ! Le nombre total d'issues ouvertes est passé de près de 500 à moins de 300.
+- Nouvelle infro de  messages d'erreur, par Fred. Cela résout beaucoup de pain points existants avec les rapports d'erreur de refmt : mots-clés réservés, point-virgule manquant, etc. Plus à venir ! **S'il vous plaît, laissez un petit message sympathique à Fred sur son [Twitter](https://twitter.com/let_def)**. Montrez-lui que la communauté JavaScript apprécie son aide.
+- Unification de `[@foo]`, `[@@foo]` et `[@@@foo]` en `[@foo]`. Argument labelisé + punning de type, sucre syntaxique de type d'objet JavaScript `{. "foo": string}`, la concaténation de string se fait maintenant via `++`, tweaks de formattage d'opérateurs infixes, etc.
+- Nous avons maintenant exposé des [API dédiées](https://github.com/facebook/reason/tree/9c578b4e5ace89e8966fc9ec747d393985b05933#installation-for-programmatic-usage) pour l'utilisation programmatique du parser et printer Reason, `refmt`, à la fois pour l'utilisation native et Web. En particulier, la version web de refmt alimente [Klipse](http://blog.klipse.tech/reason/2017/10/06/blog-reason.html), [reason-tools](https://github.com/reasonml/reason-tools), le site de la doc Reason, etc. Si vous venez de JavaScript : faites `npm install --save reason` pour avoir le fichier `refmt.js`. Il est gzip à moins de 350kb, donc faites vous plaisir et impressionnez-nous avec votre utilisation de `refmt` !\*
+- **Eeeet oui, syntaxe d'application abstraction JavaScript (aka, parenthèses autour des fonctions/types paramétrés)**. Oui, vous obtenez toujours le currying automatique : c'est un pur changement syntaxique. Honnêtement, ce point mérite à lui seul son propre poste, mais il ouvre les portes au [bikeshedding](http://whatis.techtarget.com/definition/Parkinsons-law-of-triviality-bikeshedding), alors nous allons nous abstenir d'en écrire un et nous allons juste vous regarder vous disputer à ce sujet sur Twitter (et choisir les coups de gueule les plus créatifs et les accrocher sur notre mur !). Plus sérieusement, **si vous vous souciez vraiment de la syntaxe**, alors au lieu de crier sur la place publique, envoyez vos commentaires/plaintes en privé à [@_chenglou](https://twitter.com/_chenglou) et [@jordwalke](https://twitter.com/jordwalke). Si vous ne vous souciez pas de la syntaxe, alors génial !
+
+**Comment l'obtenir ?**
+
+- Il existe un **script de migraiton** disponible à https://github.com/reasonml/upgradeSyntaxFrom2To3. Utilisez-le. Aucune modification manuelle de la syntaxe n'est requise.
+- Désinstallez & mettez à jour [reason-cli](/guide/editor-tools/global-installation) en version `3.0.0` (en lieu et place de l'ancienne version `1.13.7`), pour le tooling de l'éditeur.
+- Mettez à jour la version de [BuckleScript](https://github.com/BuckleScript/bucklescript) de votre projet en `2.0.0`.
+- Précisez `"refmt": 3` dans votre  `bsconfig.json`.
+- Redémarrez votre éditeur.
+- Si vous travaillez en natif, il s'agit de `reason.3.0.0` sur OPAM.
+
+**Comment cela affecte-t-il les projets existants ?**
+
+- Si vous ne précisez pas`"refmt": 3` dans votre `bsconfig.json`, rien ne change.
+- Vos dépendances tierces peuvent toujours rester à la version 2, et inversement. Les choses vont fonctionner comme prévu.
+- Entrain d'apprendre la nouvelle syntaxe ? [Reason-tools](https://github.com/reasonml/reason-tools) convertit maintenant entre les syntaxes aussi !
+- Pour le natif, les dépendances devront d'abord mettre à niveau la syntaxe. Nous allons résoudre cela un peu mieux dans le futur.
+
+Voilà !
+
+**Pour voir la liste complète des modifications**, rendez-vous sur [HISTORY.md](https://github.com/facebook/reason/blob/master/HISTORY.md#300). Encore une fois, vérifiez le script de migration afin de ne pas convertir manuellement chaque fichier.
+
+Merci encore à Fred, Iwan, Jared et tous les autres (hcarty, Sean, Jordan, Cristiano, Hongbo, Ricky, Andrey, etc.) pour tous leurs efforts.
+
+\* Si vous formatez le code Reason de votre propre site de blog à l'aide de celui-ci, la syntaxe de la publication peut potentiellement rester toujours à jour sans que vous n'ayez besoin d'aller mettre à jour manuellement les snippets. Et oui, nous avons quelques des idées assze folles à ce sujet pour bientôt.
+
 ### Messenger.com maintenant converti à Reason à 50%
 
 *8 septembre 2017*
 
-Boom!
+Boom !
 
 Messenger.com est la version web de Facebook Messenger. Nous partageons également notre code avec la boîte de réception de Facebook.com et les onglets de discussion. Depuis plus d'un an, l'équipe Reason travaille directement sur Messenger afin d'intégrer Reason + BuckleScript dans les codebases. Depuis un certain temps, nous avons atteint une couverture du code Reason de 50% !
 

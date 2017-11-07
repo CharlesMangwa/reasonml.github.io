@@ -19,10 +19,10 @@ Les caractères spéciaux dans une string ont besoin d'être échappés :
 let oneSlash = "\\";
 ```
 
-Pour concaténer des strings, utilisez `^` :
+Pour concaténer des strings, utilisez `++` :
 
 ```reason
-let greetings = "Hello " ^ "world!";
+let greetings = "Hello " ++ "world!";
 ```
 
 #### String citée
@@ -52,7 +52,7 @@ Le pré-processeur spécial de BuckleScript peut alors chercher un marqueur `js`
 
 #### Utilisation
 
-[Vous pouvez trouver plus d'opérations sur les strings dans la librairie standard](/api/String.html). Pour la compilation JavaScript, consultez l'API des bindings `JS.String` dans [les docs de l'API BuckleScript](http://bucklescript.github.io/bucklescript/api/Js_string.html). Étant donné qu'une string Reason map vers une string JavaScript, vous pouvez mélanger et associer les opérations de strings dans les deux librairies standard.
+[Vous pouvez trouver plus d'opérations sur les strings dans la librairie standard](/api/String.html). Pour la compilation JavaScript, consultez l'API des bindings `Js.String` dans [les docs de l'API BuckleScript](http://bucklescript.github.io/bucklescript/api/Js_string.html). Étant donné qu'une string Reason map vers une string JavaScript, vous pouvez mélanger et associer les opérations de strings dans les deux librairies standard.
 
 #### Conseils & astuces
 
@@ -68,7 +68,7 @@ https://twitter.com/jusrin00/status/875238742621028355
 
 Plus vous surchargez le type string, moins le système de type peut vous aider ! Reason fournit des types et des structures de données alternatifs aux cas d'utilisation ci-dessus, rapides et maintenables (les variants par exemple, abordés dans une section ultérieure).
 
-Dans la compilation native, les strings Reason compilent en une représentation simple dont la performance est simple à analyser, au détriment parfois d'un réglage manuel des performances. Par exemple, concaténer naïvement des strings comme "salut" ^ "comment" ^ "ça" ^ "va ?" affecte inutilement les strings intermédiaires "ça va ?" et "comment ça va ?". Dans ce cas, préférez [`String.concat`](/api/String.html). D'une certaine manière, il est plutôt appréciable que la traditionnelle analyse du runtime que nous avons appris à l'école puisse finalement être utile à nouveau.
+Dans la compilation native, les strings Reason compilent en une représentation simple dont la performance est simple à analyser, au détriment parfois d'un réglage manuel des performances. Par exemple, concaténer naïvement des strings comme "salut" ++ "comment" ++ "ça" ++ "va ?" affecte inutilement les strings intermédiaires "ça va ?" et "comment ça va ?". Dans ce cas, préférez [`String.concat`](/api/String.html). D'une certaine manière, il est plutôt appréciable que la traditionnelle analyse du runtime que nous avons appris à l'école puisse finalement être utile à nouveau.
 
 Dans la compilation JavaScript, une string Reason map vers une string JavaScript et vice versa, donc le problème mentionné ci-dessus ne s'applique pas.
 
@@ -77,13 +77,13 @@ Dans la compilation JavaScript, une string Reason map vers une string JavaScript
 La fonctionnalité de *string citée* qui permet de ne pas avoir à échapper des caractères spéciaux rend possible des DSLs assez sympatiques comme les [expressions régulières](/api/Str.html) :
 
 ```reason
-let r = Str.regexp {|hello \([A-Za-z]+\)|};
+let r = Str.regexp({|hello \([A-Za-z]+\)|});
 ```
 
 comparé à
 
 ```reason
-let r = Str.regexp "hello \\([A-Za-z]+\\)";
+let r = Str.regexp("hello \\([A-Za-z]+\\)");
 ```
 
 Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) et [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) à la place, vu que `Str` n'est pas disponible.
@@ -105,8 +105,9 @@ let firstLetterOfAlphabet = 'a';
 Un caractère [compile en un integer compris entre 0 et 255](/try/?reason=DYUwLgBAhhC8EHIoKA), par soucis de rapidité. Vous pouvez aussi utilisez le pattern-matching ici (abordé plus tard) :
 
 ```reason
-fun isVowel theChar => switch theChar {
-| 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
-| _ => false
+let isVowel = (theChar) =>
+  switch theChar {
+  | 'a'| 'e'| 'i'| 'o'| 'u'| 'y' => true
+  | _ => false
 };
 ```

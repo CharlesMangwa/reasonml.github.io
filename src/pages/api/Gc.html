@@ -393,7 +393,7 @@ Return the total number of bytes allocated since the program was
    with <code class="code">int</code> on 32-bit machines.<br>
 </div>
 
-<pre id="VALfinalise"><span class="keyword">let</span> finalise: (&apos;a =&gt; unit) =&gt; &apos;a =&gt; unit;
+<pre id="VALfinalise"><span class="keyword">let</span> finalise: (&apos;a =&gt; unit, &apos;a) =&gt; unit;
 </pre><div class="info ">
 <code class="code">finalise f v</code> registers <code class="code">f</code> as a finalisation function for <code class="code">v</code>.
    <code class="code">v</code> must be heap-allocated.  <code class="code">f</code> will be called with <code class="code">v</code> as

@@ -9,9 +9,9 @@ La majorité des structures de données dans la plupart des langages concernent 
 
 ```reason
 type myResponseVariant =
-| Yes
-| No
-| PrettyMuch;
+  | Yes
+  | No
+  | PrettyMuch;
 
 let areYouCrushingIt = Yes;
 ```
@@ -27,11 +27,12 @@ Avec une variant vient l'une des fonctionnalités les plus importantes de Reason
 Un `switch` Reason est visuellement similaire à celui d'autres langages (aka un long `if/elseif/elseif`...). Il vous permet de vérifier tous les cas possibles d'une variant. Pour l'utiliser, énumérez chaque constructeur de la variant que vous souhaitez utiliser, chacun suivi d'un `=>` et de l'expression correspondant à ce cas.
 
 ```reason
-let message = switch (areYouCrushingIt) {
-| No => "No worries. Keep going!"
-| Yes => "Great!"
-| PrettyMuch => "Nice!"
-};
+let message =
+  switch areYouCrushingIt {
+  | No => "No worries. Keep going!"
+  | Yes => "Great!"
+  | PrettyMuch => "Nice!"
+  };
 /* message vaut "Great!" */
 ```
 
@@ -57,20 +58,20 @@ let pet = Zoo.Dog;
 
 #### Arguments de constructeur
 
-Les constructeurs de variants peuvent contenir des données supplémentaires séparées par un espace.
+Les constructeurs de variants peuvent contenir des données supplémentaires séparées par une virgule.
 
 ```reason
 type account =
 | None
-| Instagram string
-| Facebook string int;
+| Instagram(string)
+| Facebook(string, int);
 ```
 
 Ici, `Instagram` contient une `string`, et `Facebook` tient une `string` et un `int`. Utilisation :
 
 ```reason
-let myAccount = Facebook "Josh" 26;
-let friendAccount = Instagram "Jenny";
+let myAccount = Facebook("Josh", 26);
+let friendAccount = Instagram("Jenny");
 ```
 
 **Remarquez comment utiliser un constructeur est sembable à un appel de fonction ?** C'est comme si `Facebook` était une fonction qui acceptait deux arguments. Ce n'est pas un hasard. Il y a une raison pour laquelle les données d'un constructeur s'appellent "arguments de constructeur".
@@ -78,12 +79,12 @@ let friendAccount = Instagram "Jenny";
 À l'aide de `switch`, vous pouvez faire du pattern-matching (encore une fois décrit dans une section ultérieure) sur les arguments d'un constructeur :
 
 ```reason
-let greeting = switch (myAccount) {
-| None => "Hi!"
-| Facebook name age =>
-  "Hi " ^ name ^ ", you're " ^ (string_of_int age) ^ "-year-old."
-| Instagram name => "Hello " ^ name ^ "!"
-}
+let greeting =
+  switch myAccount {
+  | None => "Hi!"
+  | Facebook(name, age) => "Hi " ++ name ++ ", you're " ++ string_of_int(age) ++ "-year-old."
+  | Instagram(name) => "Hello " ++ name ++ "!"
+  };
 ```
 
 #### Mentions honorables
@@ -93,22 +94,22 @@ La [ librairie standard](/api/index.html) expose deux importantes variants dont 
 ##### `option`
 
 ```reason
-type option 'a = None | Some 'a;
+type option('a) = None | Some('a);
 ```
 
-C'est la convention utilisée pour simuler une valeur "nulle" (aka `undefined` ou `null`) d'autres langages. Grâce à cette définition de type de commodité, Reason peut rendre chaque valeur non-nulle par défaut. Un `int` sera toujours un int, jamais "`int` **ou** `null` **ou** `undefined`". Si vous souhaitez exprimer un "int nul", vous utiliserez `option int`, dont les valeurs possibles sont `None` ou `Some int`. `switch` vous force à gérer les deux cas. Par conséquent, **un programme en Reason pur n'a pas d'erreurs `null`**.
+C'est la convention utilisée pour simuler une valeur "nulle" (aka `undefined` ou `null`) d'autres langages. Grâce à cette définition de type de commodité, Reason peut rendre chaque valeur non-nulle par défaut. Un `int` sera toujours un int, jamais "`int` **ou** `null` **ou** `undefined`". Si vous souhaitez exprimer un "int nul", vous utiliserez `option(int)`, dont les valeurs possibles sont `None` ou `Some(int)`. `switch` vous force à gérer les deux cas. Par conséquent, **un programme en Reason pur n'a pas d'erreurs `null`**.
 
 ##### `list`
 
 ```reason
-type list 'a = Empty | Head 'a (list 'a);
+type list('a) = Empty | Head('a, list 'a);
 ```
 
 _Pas la définition de type réelle. Juste un exemple_.
 
 Ceci signifie : "une list contenant une valeur de type `a` (quelle qu'elle soit) est soit vide, soit contient cette valeur plus une autre list".
 
-Reason fournit à `list` un *sucre syntaxique*. `[1, 2, 3]` est conceptuellement équivalent à `Head 1 (Head 2 (Head 3 Empty))`. Encore une fois, le `switch` vous oblige à gérer chaque cas de cette variant, y compris `Empty` (aka `[]`). **Ceci élimine une autre grande catégorie de bugs d'accès.**
+Reason fournit à `list` un *sucre syntaxique*. `[1, 2, 3]` est conceptuellement équivalent à `Head(1, Head(2, Head(3, Empty)))`. Encore une fois, le `switch` vous oblige à gérer chaque cas de cette variant, y compris `Empty` (aka `[]`). **Ceci élimine une autre grande catégorie de bugs d'accès.**
 
 ##### Autres types semblables à des variants
 
@@ -122,13 +123,13 @@ Saviez-vous que vous pouvez utiliser `switch` sur des strings, ints, floats, arr
 
 ```reason
 type account =
-| Facebook string int /* 2 arguments */
+  | Facebook(string, int) /* 2 arguments */;
 type account2 =
-| Instagram (string, int) /* 1 argument - qui se trouve être un 2-uplet */
+  | Instagram((string, int)) /* 1 argument - qui se trouve être un 2-uplet */
 ```
 #### Les variants doivent avoir un constructeur
 
-Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type foo = int | string`. Ceci n'est pas possible en Reason. Vous devriez donner à chaque branche un constructeur : `type foo = Int int | String string`. Bien qu'en général, le simple fait que vous ayez besoin d'écrire ça pourrait bien être un anti-pattern. La section Décisions de conception ci-dessous l'explique plus en détails.
+Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type foo = int | string`. Ceci n'est pas possible en Reason. Vous devriez donner à chaque branche un constructeur : `type foo = Int(int) | String(string)`. Bien qu'en général, le simple fait que vous ayez besoin d'écrire ça pourrait bien être un anti-pattern. La section Décisions de conception ci-dessous l'explique plus en détails.
 
 #### Interopérabilité avec JavaScript
 
@@ -136,26 +137,26 @@ _Cette section suppose des connaissance sur l'[IFE](http://bucklescript.github.i
 
 Beaucoup de librairies JavaScript utilisent des fonctions pouvant accepter de nombreux types d'arguments. Dans ces cas là, il est très tentant de les modéliser par des variants. Par exemple, supposons qu'il existe une fonction JavaScript `myLibrary.draw` qui prend un `number` ou une `string` en paramètre. Vous pourriez être tenté de la bind comme ceci :
 
-```
+```reason
 /* réservé pour un usage interne */
-external draw: 'a => unit = "draw" [@@bs.module "myLibrary"];
+[@bs.module "myLibrary"] external draw : 'a => unit = "draw";
 
 type animal =
-  | MyFloat float
-  | MyString string;
+  | MyFloat(float)
+  | MyString(string);
 
-let betterDraw animal =>
+let betterDraw = (animal) =>
   switch animal {
-  | MyFloat f => draw f
-  | MyString s => draw s
+  | MyFloat(f) => draw(f)
+  | MyString(s) => draw(s)
   };
 ```
 
 Vous pourriez procéder de la sorte, mais il existe de bien meilleures solutions ! Par exemple, deux `external`s tout simplement, qui compilent vers le même appel JavaScript :
 
-```
-external drawFloat: float => unit = "draw" [@@bs.module "myLibrary"];
-external drawString: string => unit = "draw" [@@bs.module "myLibrary"];
+```reason
+[@bs.module "myLibrary"] external drawFloat : float => unit = "draw";
+[@bs.module "myLibrary"] external drawString : string => unit = "draw";
 ```
 
 Ou, faîtes vous plaisir et utilisez une fonctionnalité avancée des variants appelée GADT, puis utilisez la [fonctionnalité de l'argument fantôme de l'IFE](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism) de BuckleScript. Si ces mots ne vous disent absolument rien, pas de soucis. Référez-vous plutôt à la suggestion précédente.
@@ -168,7 +169,7 @@ Veuillez vous référer à cette [section du record](/guide/language/record#reco
 
 La variant sous ses nombreuses formes (variant polymorphe, variant ouverte, GADT, etc.) est probablement *la* fonctionnalité clé d'un système de types comme celui de Reason. La variant `option` susmentionnée, par exemple, supprime le besoin de types nuls, une source majeure de bugs dans d'autres langages. Philosophiquement parlant, un problème est composé de nombreuses branches/conditions possibles. Mal gérer ces conditions est la principale source de ce que nous appelons "bugs". **Un système de types n'élimine pas les bugs par magie. Il souligne les conditions non traitées et vous demande de les couvrir**\*. La capacité à modéliser "ceci ou cela" correctement est cruciale.
 
-Par exemple, certains se demandent comment le système de types peut empêcher les données JSON mal formatées de se propager dans leur programme. Ils ne le font pas, pas par eux-mêmes ! Mais si l'analyseur renvoie le type  `option` `None | Some actualData`, alors vous devriez gérer le cas `None` de façon explicite dans les prochains lieux d'appel. C'est aussi simple que ça.
+Par exemple, certains se demandent comment le système de types peut empêcher les données JSON mal formatées de se propager dans leur programme. Ils ne le font pas, pas par eux-mêmes ! Mais si l'analyseur renvoie le type  `option` `None | Some(actualData)`, alors vous devriez gérer le cas `None` de façon explicite dans les prochains lieux d'appel. C'est aussi simple que ça.
 
 D'un point de vue "performances pures", une variant peut potentiellement accélérer considérablement la logique de votre programme. Voici un morceau de JavaScript :
 

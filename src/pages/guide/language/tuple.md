@@ -43,9 +43,9 @@ Les tuples ne sont pas destinés à être mis à jour de façon mutative. Créez
 Vous utiliserez des tuples dans des situations pratiques qui transmettent plusieurs valeurs sans trop de cérémonie. Par exemple, pour renvoyer plusieurs valeurs :
 
 ```reason
-let getCenterCoordinates () => {
-  let x = doSomeOperationsHere ();
-  let y = doSomeMoreOperationsHere ();
+let getCenterCoordinates = () => {
+  let x = doSomeOperationsHere();
+  let y = doSomeMoreOperationsHere();
   (x, y)
 };
 ```

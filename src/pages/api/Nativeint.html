@@ -46,29 +46,29 @@ The native integer -1.<br>
 Unary negation.<br>
 </div>
 
-<pre id="VALadd"><span class="keyword">let</span> add: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALadd"><span class="keyword">let</span> add: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Addition.<br>
 </div>
 
-<pre id="VALsub"><span class="keyword">let</span> sub: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALsub"><span class="keyword">let</span> sub: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Subtraction.<br>
 </div>
 
-<pre id="VALmul"><span class="keyword">let</span> mul: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALmul"><span class="keyword">let</span> mul: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Multiplication.<br>
 </div>
 
-<pre id="VALdiv"><span class="keyword">let</span> div: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALdiv"><span class="keyword">let</span> div: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Integer division.  Raise <code class="code">Division_by_zero</code> if the second
    argument is zero.  This division rounds the real quotient of
    its arguments towards zero, as specified for <a href="Pervasives.html#VAL(/)"><code class="code">Pervasives.(/)</code></a>.<br>
 </div>
 
-<pre id="VALrem"><span class="keyword">let</span> rem: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALrem"><span class="keyword">let</span> rem: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
    of <code class="code">Nativeint.rem x y</code> satisfies the following properties:
@@ -115,17 +115,17 @@ The greatest representable native integer,
    or -2<sup class="superscript">63</sup> on a 64-bit platform.<br>
 </div>
 
-<pre id="VALlogand"><span class="keyword">let</span> logand: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALlogand"><span class="keyword">let</span> logand: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Bitwise logical and.<br>
 </div>
 
-<pre id="VALlogor"><span class="keyword">let</span> logor: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALlogor"><span class="keyword">let</span> logor: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Bitwise logical or.<br>
 </div>
 
-<pre id="VALlogxor"><span class="keyword">let</span> logxor: nativeint =&gt; nativeint =&gt; nativeint;
+<pre id="VALlogxor"><span class="keyword">let</span> logxor: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Bitwise logical exclusive or.<br>
 </div>
@@ -135,7 +135,7 @@ Bitwise logical exclusive or.<br>
 Bitwise logical negation<br>
 </div>
 
-<pre id="VALshift_left"><span class="keyword">let</span> shift_left: nativeint =&gt; int =&gt; nativeint;
+<pre id="VALshift_left"><span class="keyword">let</span> shift_left: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
 <code class="code">Nativeint.shift_left x y</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= bitsize</code>,
@@ -143,7 +143,7 @@ Bitwise logical negation<br>
    <code class="code">64</code> on a 64-bit platform.<br>
 </div>
 
-<pre id="VALshift_right"><span class="keyword">let</span> shift_right: nativeint =&gt; int =&gt; nativeint;
+<pre id="VALshift_right"><span class="keyword">let</span> shift_right: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
 <code class="code">Nativeint.shift_right x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is an arithmetic shift: the sign bit of <code class="code">x</code> is replicated
@@ -151,7 +151,7 @@ Bitwise logical negation<br>
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= bitsize</code>.<br>
 </div>
 
-<pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: nativeint =&gt; int =&gt; nativeint;
+<pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
 <code class="code">Nativeint.shift_right_logical x y</code> shifts <code class="code">x</code> to the right
    by <code class="code">y</code> bits.
@@ -225,7 +225,7 @@ An alias for the type of native integers.<br>
 </div>
 
 
-<pre id="VALcompare"><span class="keyword">let</span> compare: t =&gt; t =&gt; int;
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
 </pre><div class="info ">
 The comparison function for native integers, with the same specification as
     <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>, this function <code class="code">compare</code>
@@ -235,7 +235,7 @@ The comparison function for native integers, with the same specification as
 <br>
 <h6 id="6_Deprecatedfunctions">Deprecated functions</h6><br>
 
-<pre id="VALformat"><span class="keyword">let</span> format: string =&gt; nativeint =&gt; string;
+<pre id="VALformat"><span class="keyword">let</span> format: (string, nativeint) =&gt; string;
 </pre><div class="info ">
 <code class="code">Nativeint.format fmt n</code> return the string representation of the
    native integer <code class="code">n</code> in the format specified by <code class="code">fmt</code>.

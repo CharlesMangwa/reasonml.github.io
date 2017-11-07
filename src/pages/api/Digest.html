@@ -26,7 +26,7 @@ The type of digests: 16-character strings.<br>
 </div>
 
 
-<pre id="VALcompare"><span class="keyword">let</span> compare: t =&gt; t =&gt; int;
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
 </pre><div class="info ">
 The comparison function for 16-character digest, with the same
     specification as <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a> and the implementation
@@ -47,20 +47,20 @@ Return the digest of the given byte sequence.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALsubstring"><span class="keyword">let</span> substring: string =&gt; int =&gt; int =&gt; t;
+<pre id="VALsubstring"><span class="keyword">let</span> substring: (string, int, int) =&gt; t;
 </pre><div class="info ">
 <code class="code">Digest.substring s ofs len</code> returns the digest of the substring
    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.<br>
 </div>
 
-<pre id="VALsubbytes"><span class="keyword">let</span> subbytes: bytes =&gt; int =&gt; int =&gt; t;
+<pre id="VALsubbytes"><span class="keyword">let</span> subbytes: (bytes, int, int) =&gt; t;
 </pre><div class="info ">
 <code class="code">Digest.subbytes s ofs len</code> returns the digest of the subsequence
     of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALchannel"><span class="keyword">let</span> channel: Pervasives.in_channel =&gt; int =&gt; t;
+<pre id="VALchannel"><span class="keyword">let</span> channel: (Pervasives.in_channel, int) =&gt; t;
 </pre><div class="info ">
 If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel ic len</code> reads <code class="code">len</code>
    characters from channel <code class="code">ic</code> and returns their digest, or raises
@@ -75,7 +75,7 @@ If <code class="code">len</code> is nonnegative, <code class="code">Digest.chann
 Return the digest of the file whose name is given.<br>
 </div>
 
-<pre id="VALoutput"><span class="keyword">let</span> output: Pervasives.out_channel =&gt; t =&gt; unit;
+<pre id="VALoutput"><span class="keyword">let</span> output: (Pervasives.out_channel, t) =&gt; unit;
 </pre><div class="info ">
 Write a digest on the given output channel.<br>
 </div>

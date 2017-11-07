@@ -11,57 +11,63 @@ Class expressions<br>
 <hr width="100%">
 
 <pre id="VALmk"><span class="keyword">let</span> mk:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Parsetree.class_expr_desc =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.class_expr_desc) =&gt;
   Parsetree.class_expr;
 </pre>
-<pre id="VALattr"><span class="keyword">let</span> attr: Parsetree.class_expr =&gt; Parsetree.attribute =&gt; Parsetree.class_expr;
+<pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.class_expr, Parsetree.attribute) =&gt; Parsetree.class_expr;
 </pre>
 <pre id="VALconstr"><span class="keyword">let</span> constr:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Ast_helper.lid =&gt;
-  list Parsetree.core_type =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.lid,
+    list(Parsetree.core_type)
+  ) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALstructure"><span class="keyword">let</span> structure:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Parsetree.class_structure =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.class_structure) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALfun_"><span class="keyword">let</span> fun_:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Asttypes.label =&gt;
-  option Parsetree.expression =&gt;
-  Parsetree.pattern =&gt;
-  Parsetree.class_expr =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.label,
+    option(Parsetree.expression),
+    Parsetree.pattern,
+    Parsetree.class_expr
+  ) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALapply"><span class="keyword">let</span> apply:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Parsetree.class_expr =&gt;
-  list (Asttypes.label, Parsetree.expression) =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.class_expr,
+    list((Asttypes.label, Parsetree.expression))
+  ) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALlet_"><span class="keyword">let</span> let_:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Asttypes.rec_flag =&gt;
-  list Parsetree.value_binding =&gt;
-  Parsetree.class_expr =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.rec_flag,
+    list(Parsetree.value_binding),
+    Parsetree.class_expr
+  ) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALconstraint_"><span class="keyword">let</span> constraint_:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  Parsetree.class_expr =&gt;
-  Parsetree.class_type =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.class_expr,
+    Parsetree.class_type
+  ) =&gt;
   Parsetree.class_expr;
 </pre>
 <pre id="VALextension"><span class="keyword">let</span> extension:
-  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.extension =&gt; Parsetree.class_expr;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt; Parsetree.class_expr;
 </pre></div>

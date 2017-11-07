@@ -43,29 +43,29 @@ The 64-bit integer -1.<br>
 Unary negation.<br>
 </div>
 
-<pre id="VALadd"><span class="keyword">let</span> add: int64 =&gt; int64 =&gt; int64;
+<pre id="VALadd"><span class="keyword">let</span> add: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Addition.<br>
 </div>
 
-<pre id="VALsub"><span class="keyword">let</span> sub: int64 =&gt; int64 =&gt; int64;
+<pre id="VALsub"><span class="keyword">let</span> sub: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Subtraction.<br>
 </div>
 
-<pre id="VALmul"><span class="keyword">let</span> mul: int64 =&gt; int64 =&gt; int64;
+<pre id="VALmul"><span class="keyword">let</span> mul: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Multiplication.<br>
 </div>
 
-<pre id="VALdiv"><span class="keyword">let</span> div: int64 =&gt; int64 =&gt; int64;
+<pre id="VALdiv"><span class="keyword">let</span> div: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Integer division.  Raise <code class="code">Division_by_zero</code> if the second
    argument is zero.  This division rounds the real quotient of
    its arguments towards zero, as specified for <a href="Pervasives.html#VAL(/)"><code class="code">Pervasives.(/)</code></a>.<br>
 </div>
 
-<pre id="VALrem"><span class="keyword">let</span> rem: int64 =&gt; int64 =&gt; int64;
+<pre id="VALrem"><span class="keyword">let</span> rem: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
    of <code class="code">Int64.rem x y</code> satisfies the following property:
@@ -98,17 +98,17 @@ The greatest representable 64-bit integer, 2<sup class="superscript">63</sup> - 
 The smallest representable 64-bit integer, -2<sup class="superscript">63</sup>.<br>
 </div>
 
-<pre id="VALlogand"><span class="keyword">let</span> logand: int64 =&gt; int64 =&gt; int64;
+<pre id="VALlogand"><span class="keyword">let</span> logand: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Bitwise logical and.<br>
 </div>
 
-<pre id="VALlogor"><span class="keyword">let</span> logor: int64 =&gt; int64 =&gt; int64;
+<pre id="VALlogor"><span class="keyword">let</span> logor: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Bitwise logical or.<br>
 </div>
 
-<pre id="VALlogxor"><span class="keyword">let</span> logxor: int64 =&gt; int64 =&gt; int64;
+<pre id="VALlogxor"><span class="keyword">let</span> logxor: (int64, int64) =&gt; int64;
 </pre><div class="info ">
 Bitwise logical exclusive or.<br>
 </div>
@@ -118,13 +118,13 @@ Bitwise logical exclusive or.<br>
 Bitwise logical negation<br>
 </div>
 
-<pre id="VALshift_left"><span class="keyword">let</span> shift_left: int64 =&gt; int =&gt; int64;
+<pre id="VALshift_left"><span class="keyword">let</span> shift_left: (int64, int) =&gt; int64;
 </pre><div class="info ">
 <code class="code">Int64.shift_left x y</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= 64</code>.<br>
 </div>
 
-<pre id="VALshift_right"><span class="keyword">let</span> shift_right: int64 =&gt; int =&gt; int64;
+<pre id="VALshift_right"><span class="keyword">let</span> shift_right: (int64, int) =&gt; int64;
 </pre><div class="info ">
 <code class="code">Int64.shift_right x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is an arithmetic shift: the sign bit of <code class="code">x</code> is replicated
@@ -132,7 +132,7 @@ Bitwise logical negation<br>
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= 64</code>.<br>
 </div>
 
-<pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: int64 =&gt; int =&gt; int64;
+<pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: (int64, int) =&gt; int64;
 </pre><div class="info ">
 <code class="code">Int64.shift_right_logical x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is a logical shift: zeroes are inserted in the vacated bits
@@ -236,7 +236,7 @@ An alias for the type of 64-bit integers.<br>
 </div>
 
 
-<pre id="VALcompare"><span class="keyword">let</span> compare: t =&gt; t =&gt; int;
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
 </pre><div class="info ">
 The comparison function for 64-bit integers, with the same specification as
     <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>, this function <code class="code">compare</code>
@@ -246,7 +246,7 @@ The comparison function for 64-bit integers, with the same specification as
 <br>
 <h6 id="6_Deprecatedfunctions">Deprecated functions</h6><br>
 
-<pre id="VALformat"><span class="keyword">let</span> format: string =&gt; int64 =&gt; string;
+<pre id="VALformat"><span class="keyword">let</span> format: (string, int64) =&gt; string;
 </pre><div class="info ">
 Do not use this deprecated function.  Instead,
    used <a href="Printf.html#VALsprintf"><code class="code">Printf.sprintf</code></a> with a <code class="code">%L...</code> format.<br>

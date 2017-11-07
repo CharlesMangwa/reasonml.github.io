@@ -19,7 +19,7 @@ Syntaxe
 
 *Conseil*: n'oubliez pas que vous pouvez utiliser `refmt` dans votre éditeur/terminal ! Si par exemple vous ne connaissez pas la préséance de certaines opérations, enveloppez-les dans autant de parenthèses que vous le souhaitez, puis `refmt`-ez votre code et voyez celles qui restent. De même, il n'est pas nécessaire de perdre du temps sur les indentations et l'espacement : `refmt` prend soin d'eux.
 
-```reason
+```js
 /* fichier JavaScript original que vous avez copié */
 const school = require('school');
 
@@ -48,17 +48,17 @@ Encore une fois, **ne vous inquiétez que de rendre le fichier syntaxiquement va
 ```reason
 /* syntaxe valide, conversion sémantiquement incorrecte */
 /* const school = require('school'); */
-
 let defaultId = 10;
 
-let queryResult usePayload payload => {
+let queryResult = (usePayload, payload) =>
   if (usePayload) {
     payload.student
   } else {
     /* pas besoin de return anticipé en reason; if-else est une expression */
-    school.getStudentById defaultId;
-  }
-};
+    school.getStudentById(
+      defaultId
+    )
+  };
 ```
 
 Types, Passe 1
@@ -85,17 +85,16 @@ C'est la première passe, les types finaux semblent différents. Pour l'instant,
 
 ```reason
 /* syntaxiquement valide, toujours sémantiquement faux, mais mieux */
-external getStudentById: 'whatever => 'whateverElse = "getStudentById" [@@bs.module "school"];
+[@bs.module "school"] external getStudentById : 'whatever => 'whateverElse = "getStudentById";
 
 let defaultId = 10;
 
-let queryResult usePayload payload => {
+let queryResult = (usePayload, payload) =>
   if (usePayload) {
     payload##student /* cela sera déduit comme `Js.t 'a` */
   } else {
-    getStudentById defaultId;
-  }
-};
+    getStudentById(defaultId)
+  };
 ```
 
 Sémantiques d'exécution
@@ -113,19 +112,17 @@ Vérifiez le résultat en quête de n'importe quel changement.
 
 ```reason
 type student; /* type abstrait, décrit plus tard */
-external getStudentById: 'whatever => student = "getStudentById" [@@bs.module "school"];
+[@bs.module "school"] external getStudentById : 'whatever => student = "getStudentById";
 
-type payloadType = Js.t {. student: student};
-
+type payloadType = {. "student": student};
 let defaultId = 10;
 
-let queryResult usePayload (payload: payloadType) => {
-  if (Js.to_bool usePayload) {
+let queryResult = (usePayload, payload: payloadType) =>
+  if (Js.to_bool(usePayload)) {
     payload##student
   } else {
-    getStudentById defaultId;
-  }
-};
+    getStudentById(defaultId)
+  };
 ```
 
 Nettoyage (Types, Passe 2)
@@ -141,24 +138,23 @@ Reprenez tout bug que vous auriez laissé pendant la première passe et corrigez
 
 ```reason
 /* dans le fichier actuel */
-type payloadType = Js.t {. student: School.student}; /* TODO: mettre ça ailleurs ! */
+type payloadType = {. "student": School.student}; /* TODO: put this somewhere else! */
 
 let defaultId = 10;
 
-let queryResult usePayload (payload: payloadType) => {
-  if (Js.to_bool usePayload) {
+let queryResult = (usePayload, payload: payloadType) =>
+  if (Js.to_bool(usePayload)) {
     payload##student
   } else {
-    School.getStudentById defaultId;
-  }
-};
+    School.getStudentById(defaultId)
+  };
 ```
 
 ```reason
 /* dans un fichier School.re dédié */
 type student;
-external getStudentById: int => student = "getStudentById" [@@bs.module "School"];
-external getAllStudents: unit => array student = "getAllStudents" [@@bs.module "School"];
+external getStudentById: int => student = "getStudentById" +[@bs.module "School"] external getStudentById : int => student = "getStudentById";
+[@bs.module "School"] external getAllStudents : unit => array(student) = "getAllStudents";
 ```
 
 Le type `sudent` n'a pas de contenu réel, c'est ce qu'on appelle [un type abstrait](#modules-signatures). C'est un moyen pratique de spécifier la relation entre les appels externes sans savoir quelle est la forme des données sous le capot. 
@@ -171,7 +167,7 @@ Conseils
 
 **N'essayez pas** de convertir complètement un fichier JavaScript en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de types.
 
-Quels que soient les utilitaires agréables que vous trouveriez (par exemple, convertir un `Js.null_undefined Js.boolean` vers un `bool`), placez-les dans un fichier `tempUtil.re` ou quelque chose comme ça. Ils sont des exemples faciles pour vos collègues et réduisent certains problèmes de conversion.
+Quels que soient les utilitaires agréables que vous trouveriez (par exemple, convertir un `Js.null_undefined(Js.boolean)` vers un `bool`), placez-les dans un fichier `tempUtil.re` ou quelque chose comme ça. Ils sont des exemples faciles pour vos collègues et réduisent certains problèmes de conversion.
 
 Nous vous **recommandons vivement** de vérifier le résultat JavaScript dans le contrôle de version. Cela rend l'intégration de système de build quasi inexistante et vous assure que lorsque vous n'êtes pas là, vos coéquipiers peuvent faire de petits changements, auditer le diff de sortie et catch n'importe quelle erreur. Le fait que la sortie JavaScript enregistrée soit compatible avec des correctifs d'urgence est un bon argument de vente (surtout auprès des managers !). Même si vous mettez à niveau la version de BuckleScript, vous allez catch n'importe quelle différence de sortie. C'est comme des [snapshots Jest](https://facebook.github.io/jest/docs/snapshot-testing.html), mais gratuitement !
 

@@ -23,7 +23,7 @@ Et d'autres fonctionnalités. Regardez, par exemple, la [section fonctionnalité
   - Installez les paquets associés avec `apm install language-reason linter linter-refmt reason-refmt`.
   - Si vous utilisez [Nuclide](https://nuclide.io/), le support de Reason est fourni par défaut.
   - Fidèle à l'esprit de JavaScript, [voici encore un autre plugin Reason pour Atom](https://github.com/zaaack/atom-ide-reason) ! En fait, celui-ci pourrait potentiellement être le plugin Reason recommandé pour Atom.
-- [Vim](https://github.com/reasonml-editor/vim-reason)
+- [Vim](https://github.com/reasonml-editor/vim-reason-plus)
 - [Emacs](https://github.com/reasonml-editor/reason-mode)
 - [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)

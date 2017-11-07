@@ -29,25 +29,25 @@ Operations on internal representations of values.
 </pre>
 <pre id="VALtag"><span class="keyword">let</span> tag: t =&gt; int;
 </pre>
-<pre id="VALset_tag"><span class="keyword">let</span> set_tag: t =&gt; int =&gt; unit;
+<pre id="VALset_tag"><span class="keyword">let</span> set_tag: (t, int) =&gt; unit;
 </pre>
 <pre id="VALsize"><span class="keyword">let</span> size: t =&gt; int;
 </pre>
-<pre id="VALfield"><span class="keyword">let</span> field: t =&gt; int =&gt; t;
+<pre id="VALfield"><span class="keyword">let</span> field: (t, int) =&gt; t;
 </pre>
-<pre id="VALset_field"><span class="keyword">let</span> set_field: t =&gt; int =&gt; t =&gt; unit;
+<pre id="VALset_field"><span class="keyword">let</span> set_field: (t, int, t) =&gt; unit;
 </pre>
-<pre id="VALdouble_field"><span class="keyword">let</span> double_field: t =&gt; int =&gt; float;
+<pre id="VALdouble_field"><span class="keyword">let</span> double_field: (t, int) =&gt; float;
 </pre>
-<pre id="VALset_double_field"><span class="keyword">let</span> set_double_field: t =&gt; int =&gt; float =&gt; unit;
+<pre id="VALset_double_field"><span class="keyword">let</span> set_double_field: (t, int, float) =&gt; unit;
 </pre>
-<pre id="VALnew_block"><span class="keyword">let</span> new_block: int =&gt; int =&gt; t;
+<pre id="VALnew_block"><span class="keyword">let</span> new_block: (int, int) =&gt; t;
 </pre>
 <pre id="VALdup"><span class="keyword">let</span> dup: t =&gt; t;
 </pre>
-<pre id="VALtruncate"><span class="keyword">let</span> truncate: t =&gt; int =&gt; unit;
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: (t, int) =&gt; unit;
 </pre>
-<pre id="VALadd_offset"><span class="keyword">let</span> add_offset: t =&gt; Int32.t =&gt; t;
+<pre id="VALadd_offset"><span class="keyword">let</span> add_offset: (t, Int32.t) =&gt; t;
 </pre>
 <pre id="VALfirst_non_constant_constructor_tag"><span class="keyword">let</span> first_non_constant_constructor_tag: int;
 </pre>
@@ -94,5 +94,5 @@ The following two functions are deprecated.  Use module <a href="Marshal.html"><
 
 <pre id="VALmarshal"><span class="keyword">let</span> marshal: t =&gt; bytes;
 </pre>
-<pre id="VALunmarshal"><span class="keyword">let</span> unmarshal: bytes =&gt; int =&gt; (t, int);
+<pre id="VALunmarshal"><span class="keyword">let</span> unmarshal: (bytes, int) =&gt; (t, int);
 </pre></div>

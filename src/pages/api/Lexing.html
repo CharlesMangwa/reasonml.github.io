@@ -188,7 +188,7 @@ Create a lexer buffer which reads from
    end of the string is reached.<br>
 </div>
 
-<pre id="VALfrom_function"><span class="keyword">let</span> from_function: (bytes =&gt; int =&gt; int) =&gt; lexbuf;
+<pre id="VALfrom_function"><span class="keyword">let</span> from_function: ((bytes, int) =&gt; int) =&gt; lexbuf;
 </pre><div class="info ">
 Create a lexer buffer with the given function as its reading method.
    When the scanner needs more characters, it will call the given
@@ -217,7 +217,7 @@ The following functions can be called from the semantic actions
            the regular expression.<br>
 </div>
 
-<pre id="VALlexeme_char"><span class="keyword">let</span> lexeme_char: lexbuf =&gt; int =&gt; char;
+<pre id="VALlexeme_char"><span class="keyword">let</span> lexeme_char: (lexbuf, int) =&gt; char;
 </pre><div class="info ">
 <code class="code">Lexing.lexeme_char lexbuf i</code> returns character number <code class="code">i</code> in
    the matched string.<br>

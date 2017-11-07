@@ -11,11 +11,13 @@ Value declarations<br>
 <hr width="100%">
 
 <pre id="VALmk"><span class="keyword">let</span> mk:
-  loc::Ast_helper.loc? =&gt;
-  attrs::Ast_helper.attrs? =&gt;
-  docs::Docstrings.docs? =&gt;
-  prim::list string? =&gt;
-  Ast_helper.str =&gt;
-  Parsetree.core_type =&gt;
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~prim: list(string)=?,
+    Ast_helper.str,
+    Parsetree.core_type
+  ) =&gt;
   Parsetree.value_description;
 </pre></div>

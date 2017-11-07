@@ -18,12 +18,12 @@ The type of the hashtable keys.<br>
 </div>
 
 
-<pre id="VALequal"><span class="keyword">let</span> equal: t =&gt; t =&gt; bool;
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
 </pre><div class="info ">
 The equality predicate used to compare keys.<br>
 </div>
 
-<pre id="VALhash"><span class="keyword">let</span> hash: int =&gt; t =&gt; int;
+<pre id="VALhash"><span class="keyword">let</span> hash: (int, t) =&gt; int;
 </pre><div class="info ">
 A seeded hashing function on keys.  The first argument is
           the seed.  It must be the case that if <code class="code">equal x y</code> is true,

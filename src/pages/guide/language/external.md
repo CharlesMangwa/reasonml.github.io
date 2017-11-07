@@ -8,12 +8,11 @@ L'`external`, ou "IFE" (Interface de Fonction Étrangère), ou simplement "inter
 Imaginez que vous écrivez un binding let, mais en omettant son contenu et en le typant de façon arbitraire :
 
 ```reason
-external myCFunction: int => string = "theCFunction";
+external myCFunction : int => string = "theCFunction";
 ```
 
 ```reason
-external getElementsByClassName : string => array Dom.element =
-  "document.getElementsByClassName" [@@bs.val];
+[@bs.val] external getElementsByClassName : string => array(Dom.element) = "document.getElementsByClassName";
 ```
 
 (Le code ci-dessus est un external spécifique à [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html) qui bind une fonction JavaScript portant le même nom).

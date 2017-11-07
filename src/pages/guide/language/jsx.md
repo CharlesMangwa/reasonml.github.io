@@ -16,19 +16,19 @@ Reason prend en charge la syntaxe JSX, avec quelques légères différences par 
 devient
 
 ```reason
-MyComponent.make foo::bar children::[] ()
+MyComponent.make(~foo=bar, ~children=[], ());
 ```
 
 ### Tag non-capitalisé
 
 ```reason
-<div foo={bar}>child1 child2</div>
+<div foo={bar}> child1 child2 </div>;
 ```
 
 devient
 
 ```reason
-div foo::bar children::[child1, child2] () [@JSX]
+([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
 ```
 
 ### Utilisation
@@ -42,12 +42,9 @@ Voici un tag JSX qui présente la plupart des fonctionnalités.
   booleanAttribute={true}
   stringAttribute="string"
   intAttribute=1
-  forcedOptional=?(Some "hello")
-  onClick={updater handleClick}
-  onClickThisWorksToo=(updater handleClick)>
-  <div>
-    {ReasonReact.stringToElement "hello"}
-  </div>
+  forcedOptional=?{Some("hello")}
+  onClick={reduce(handleClick)}>
+  <div> {ReasonReact.stringToElement("hello")} </div>
 </MyComponent>
 ```
 
@@ -59,11 +56,15 @@ Voici un tag JSX qui présente la plupart des fonctionnalités.
 
 #### Punning
 
-Le punning d'argument du JSX de ReactJS, ex : `<input checked />`, dû à de malheureuses raisons historiques, se *désucre* en `<input checked={true} />`, afin de se conformer aux idiomes du DOM. Reason n'a pas un tel passif, alors nous avons décidé de le *désucré* en `<input checked={checked} />`. Cela permet aux gens d'ajouter beaucoup d'autres props dans un composant ReasonReact sans qu'il soit trop gonflé :
+"Punning" se réfère à la syntaxe du raccourci utilisé lorsqu'un label et une valeur sont identiques. Par exemple, en JavaScript, au lieu de faire `return {name: name}`, vous pouvez faire `return {name}`.
+
+Le JSX Reason supporte le punning. `<input checked />` est juste un raccourci pour `<input checked = checked />`. Le formateur vous aidera à mettre en forme ce dernier autant que possible. C'est pratique dans les cas où il y a beaucoup de props à passer :
 
 ```reason
 <MyComponent isLoading text onClick />
 ```
+
+De ce fait, un composant JSX Reason peut accepter un peu plus de props avant qu'on ait besoin d'utiliser des librairies supplémentaires qui évitent le passage de props.
 
 ### Conseils & astuces
 

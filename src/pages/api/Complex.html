@@ -64,17 +64,17 @@ Unary negation.<br>
 Conjugate: given the complex <code class="code">x + i.y</code>, returns <code class="code">x - i.y</code>.<br>
 </div>
 
-<pre id="VALadd"><span class="keyword">let</span> add: t =&gt; t =&gt; t;
+<pre id="VALadd"><span class="keyword">let</span> add: (t, t) =&gt; t;
 </pre><div class="info ">
 Addition<br>
 </div>
 
-<pre id="VALsub"><span class="keyword">let</span> sub: t =&gt; t =&gt; t;
+<pre id="VALsub"><span class="keyword">let</span> sub: (t, t) =&gt; t;
 </pre><div class="info ">
 Subtraction<br>
 </div>
 
-<pre id="VALmul"><span class="keyword">let</span> mul: t =&gt; t =&gt; t;
+<pre id="VALmul"><span class="keyword">let</span> mul: (t, t) =&gt; t;
 </pre><div class="info ">
 Multiplication<br>
 </div>
@@ -84,7 +84,7 @@ Multiplication<br>
 Multiplicative inverse (<code class="code">1/z</code>).<br>
 </div>
 
-<pre id="VALdiv"><span class="keyword">let</span> div: t =&gt; t =&gt; t;
+<pre id="VALdiv"><span class="keyword">let</span> div: (t, t) =&gt; t;
 </pre><div class="info ">
 Division<br>
 </div>
@@ -115,7 +115,7 @@ Argument.  The argument of a complex number is the angle
     negative real axis.<br>
 </div>
 
-<pre id="VALpolar"><span class="keyword">let</span> polar: float =&gt; float =&gt; t;
+<pre id="VALpolar"><span class="keyword">let</span> polar: (float, float) =&gt; t;
 </pre><div class="info ">
 <code class="code">polar norm arg</code> returns the complex having norm <code class="code">norm</code>
     and argument <code class="code">arg</code>.<br>
@@ -131,7 +131,7 @@ Exponentiation.  <code class="code">exp z</code> returns <code class="code">e</c
 Natural logarithm (in base <code class="code">e</code>).<br>
 </div>
 
-<pre id="VALpow"><span class="keyword">let</span> pow: t =&gt; t =&gt; t;
+<pre id="VALpow"><span class="keyword">let</span> pow: (t, t) =&gt; t;
 </pre><div class="info ">
 Power function.  <code class="code">pow z1 z2</code> returns <code class="code">z1</code> to the <code class="code">z2</code> power.<br>
 </div>

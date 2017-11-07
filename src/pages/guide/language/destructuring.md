@@ -17,7 +17,11 @@ let (ten, twenty) = someInts;
 Admettons les binds de variables suivants : `name = "Guy"`, `age = 30`
 
 ```reason
-type person = {name: string, age: int};
+type person = {
+  name: string,
+  age: int
+};
+
 let somePerson = {name: "Guy", age: 30};
 let {name, age} = somePerson;
 ```
@@ -40,11 +44,11 @@ Il est aussi possible de destructurer les arguments labellisés d'une fonction.
 ```reason
 type person = {name: string, age: int};
 
-let someFunction person::{name} => {
+let someFunction = (~person as {name}) => {
   /* vous pouvez utiliser `name` ici */
-}
+};
 
-let otherFunction person::({name} as thePerson) => {
+let otherFunction = (~person as {name} as thePerson) => {
   /* vous pouvez utiliser à la fois `name` et tout le record via `thePerson` ici */
 }
 ```

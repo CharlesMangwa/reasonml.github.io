@@ -7,7 +7,7 @@ Un booléen possède le type `bool` et peut valoir`true` ou `false`. Les opérat
 
 - `&&` : ET logique
 - `||` : OU logique
-- `not` : NON logique. **Vous noterez que le symbole `!` est réservé pour autre chose**
+- `!` : NON logique.
 - `<=`, `>=`, `<`, `>`
 - `==` : égalité physique, compare les structures de données profondément : `(1, 2) == (1, 2)` vaut `true`. Pratique, mais à utiliser avec prudence
 - `===` : égalité structurelle, compare superficiellement. `(1, 2) === (1, 2)` vaut `false`. `let myTuple = (1, 2); myTuple === myTuple` vaut `true`.

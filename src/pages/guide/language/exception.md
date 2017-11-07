@@ -8,38 +8,41 @@ Les exceptions sont juste des variants un peu spéciales, "lancées" dans cas **
 ### Utilisation
 
 ```reason
-let getItem theList => {
+let getItem = (theList) =>
   if (...) {
     /* retourne l'item trouvé ici */
   } else {
-    raise Not_found
-  }
-};
+    raise(Not_found)
+  };
 
-let result = try (getItem [1, 2, 3]) {
-| Not_found => print_endline "Item not found!"
-};
+let result =
+  try (getItem([1, 2, 3])) {
+  | Not_found => 0 /* Default value if getItem throws */
+  };
 ```
+
+Notez que ce qui précède est juste à des fins de démonstration. En réalité, vous retourneriez une `option(int)` directement depuis `getItem` et éviteriez complètement `try`.
+
 Vous pouvez directement match les exceptions _while_ en obtenant une autre valeur de retour d'une fonction :
 
 ```reason
-switch (List.find (fun i => i === theItem) myItems) {
-| item => print_endline item
-| exception Not_found => print_endline "No such item found!"
+switch (List.find((i) => i === theItem, myItems)) {
+| item => print_endline(item)
+| exception Not_found => print_endline("No such item found!")
 };
 ```
 
 Vous pouvez créer vos propres exceptions comme vous le feriez avec une variant (les exceptions doivent également avoir leur première lettre en majuscule).
 
 ```
-exception InputClosed string;
+exception InputClosed(string);
 ...
-raise (InputClosed "the stream has closed!");
+raise(InputClosed("the stream has closed!"));
 ```
 
 ### Conseils & astuces
 
-Lorsque vous avez des variants ordinaires, vous n'avez pas souvent **besoin** d'exceptions. Par exemple, au lieu d'en lancer une lorsque `item` ne peut être trouvé dans une collection, essayez de renvoyer un `option item` (`None` dans le cas d'espèce) à la place.
+Lorsque vous avez des variants ordinaires, vous n'avez pas souvent **besoin** d'exceptions. Par exemple, au lieu d'en lancer une lorsque `item` ne peut être trouvé dans une collection, essayez de renvoyer un `option(item)` (`None` dans le cas d'espèce) à la place.
 
 ### Décisions de conception
 

@@ -66,21 +66,21 @@
 
 
 
-<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error error Location.t;
+<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error(error, Location.t);
 </pre>
 
-<pre id="VALreport_error"><span class="keyword">let</span> report_error: Format.formatter =&gt; error =&gt; unit;
+<pre id="VALreport_error"><span class="keyword">let</span> report_error: (Format.formatter, error) =&gt; unit;
 </pre>
 <pre id="VALin_comment"><span class="keyword">let</span> in_comment: unit =&gt; bool;
 </pre>
 <pre id="VALin_string"><span class="keyword">let</span> in_string: unit =&gt; bool;
 </pre>
-<pre id="VALprint_warnings"><span class="keyword">let</span> print_warnings: Pervasives.ref bool;
+<pre id="VALprint_warnings"><span class="keyword">let</span> print_warnings: Pervasives.ref(bool);
 </pre>
-<pre id="VALcomments"><span class="keyword">let</span> comments: unit =&gt; list (string, Location.t);
+<pre id="VALcomments"><span class="keyword">let</span> comments: unit =&gt; list((string, Location.t));
 </pre>
 <pre id="VALtoken_with_comments"><span class="keyword">let</span> token_with_comments: Lexing.lexbuf =&gt; Parser.token;
 </pre>
 <pre id="VALset_preprocessor"><span class="keyword">let</span> set_preprocessor:
-  (unit =&gt; unit) =&gt; ((Lexing.lexbuf =&gt; Parser.token) =&gt; Lexing.lexbuf =&gt; Parser.token) =&gt; unit;
+  (unit =&gt; unit, (Lexing.lexbuf =&gt; Parser.token, Lexing.lexbuf) =&gt; Parser.token) =&gt; unit;
 </pre></div>

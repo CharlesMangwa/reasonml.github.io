@@ -44,9 +44,9 @@ let _ =
       <pre>
 {
   let msg = "Hello";
-  print_string msg;
+  print_string(msg);
   let msg2 = "Goodbye";
-  print_string msg2
+  print_string(msg2)
 };</pre>
     </td>
   </tr>
@@ -75,8 +75,8 @@ let () = imperativeFunc 0 0</pre>
     <td>
       <pre>
 let ten = 10;
-imperativeFunc ten ten;
-imperativeFunc 0 0;</pre>
+imperativeFunc(ten, ten);
+imperativeFunc(0, 0);</pre>
     </td>
   </tr>
   <tr>
@@ -162,8 +162,8 @@ let myFuncs = {
     <td>
       <pre>
 let myFuncs = {
-  myFun: fun x => x + 1,
-  your: fun a b => a + b
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
 };</pre>
     </td>
 </table>
@@ -190,15 +190,15 @@ Record OCaml | Record Reason
 Fonction OCaml | Fonction Reason
 ------|-------
 `type func = int -> int` | `type func = int => int;`
-`let x: func = fun a -> a + 1` | `let x: func = fun a => a + 1;`
+`let x: func = fun a -> a + 1` | `let x: func = (a) => a + 1;`
 
 ### Fonctions
 
 OCaml | Reason
 ------|-------
-`let x a b = e` | `let x a b => e;`
-`let x = fun a b -> e` | `let x = fun a b => e;`
-`let x = fun a -> fun b -> e` | `let x = fun a => fun b => e;`
+`let x a b = e` | `let x = (a, b) => e;`
+`let x = fun a b -> e` | `let x = (a, b) => e;`
+`let x = fun a -> fun b -> e` | `let x = (a, b) => e;`
 
 #### Fonctions match à un argument
 
@@ -254,15 +254,15 @@ fun | pat => e
 En Reason et en OCaml, les arguments sont annotés avec des types (comme pour tout le reste), les enveloppant entre parenthèses après l'ajout de `:typeAnnotation`.
 
 ```reason
-fun (arg : argType) => returnValue;
+(arg : argType) => returnValue;
 ```
 
 ```reason
-fun (arg : argType) => fun (arg2 : arg2Type) => returnValue;
+(arg : argType) => (arg2 : arg2Type) => returnValue;
 ```
 
 ```reason
-fun (arg : argType) (arg2 : arg2Type) => returnValue;
+(arg : argType, arg2 : arg2Type) => returnValue;
 ```
 
 Reason ainsi qu'OCaml permettent d'annoter le type retourné, lorsqu'on utilise la forme du "super binding let *sucré*".
@@ -276,9 +276,9 @@ let myFunc (a:int) (b:int) :int -> int = fun x -> x + a + b
 
 ```reason
 /* Reason */
-let myFunc (a:int) (b:int) :(int, int) => (a, b);
-let myFunc (a:int) (b:int) :list int => [1];
-let myFunc (a:int) (b:int) :(int => int) => fun x => x + a + b;
+let myFunc (a: int, b: int) :(int, int) => (a, b);
+let myFunc (a: int, b: int) :list(int) => [1];
+let myFunc (a: int, b: int) :(int => int) => (x) => x + a + b;
 ```
 
 Parce que nous utilisons `=>` pour les fonctions partout en Reason, il y a un cas où nous avons besoin d'ajouter des parenthèses supplémentaires atour du type retourné, qui est lui-même un type de fonction.
@@ -337,10 +337,10 @@ let tuples: pairs = [(2, 3)]</pre>
     </td>
     <td>
       <pre>
-let x: list int = [2];
+let x: list(int) = [2];
 type listOfListOfInts = list (list int);
-type tup 'a 'b = ('a, 'b);
-type pairs = list (tup int int);
+type tup('a, 'b) = ('a, 'b);
+type pairs = list (tup(int, int));
 let tuples: pairs = [(2, 3)];</pre>
     </td>
   </tr>
@@ -354,12 +354,12 @@ Les exemples suivants montrent la différence entre passer *deux* paramètres de
 
 OCaml | Reason
 ------|-------
-`type intPair = (int, int) pair` | `type intPair = pair int int;`
-`type pairList = (int * int) list` | `type pairList = list (int, int);`
+`type intPair = (int, int) pair` | `type intPair = pair(int, int);`
+`type pairList = (int * int) list` | `type pairList = list((int, int));`
 
 - En Reason, la syntaxe qui représente un tuple ou des types de tuples ressemble toujours à un tuple.
 - En Reason, la syntaxe qui représente un record ou des types de records ressemble toujours à un record.
-- À peu près tout le reste utilise le modèle syntaxique de l'application de fonction (arguments séparés par des espaces).
+- À peu près tout le reste utilise le modèle syntaxique de l'application de fonction (arguments séparés par des virgules).
 
 
 ### Variants
@@ -371,8 +371,8 @@ OCaml | Reason
 
 ###### Reason
 
-- Les types de constructeurs de variants doivent être listés sous forme de listes séparées par des espaces, en utilisant des parenthèses pour regrouper par priorité (comme *tout* le reste).
-- La construction des instances de la variant (comme vous l'aurez deviné) suit le style d'application de la fonction (listes séparées par des espaces).
+- Les types de constructeurs de variants doivent être listés sous forme de listes séparées par des virgules, en utilisant des parenthèses pour regrouper par priorité (comme *tout* le reste).
+- La construction des instances de la variant (comme vous l'aurez deviné) suit le style d'application de la fonction (listes séparées par des virgules).
 - Les tuples *ressemblent* **toujours** à des tuples, et tout autre chose qui ressemblerait à un type … *est* un tuple.
 
 <table>
@@ -401,10 +401,10 @@ type myVariant =
       <pre>
 type myVariant =
   | HasNothing
-  | HasSingleInt int
-  | HasSingleTuple (int, int)
-  | HasMultipleInts int int
-  | HasMultipleTuples (int, int) (int, int);
+  | HasSingleInt(int)
+  | HasSingleTuple((int, int))
+  | HasMultipleInts(int, int)
+  | HasMultipleTuples((int, int), (int, int));
       </pre>
     </td>
   </tr>
@@ -419,17 +419,17 @@ let a = HasMultipleTuples ((10, 10), (10, 10))
     </td>
     <td>
       <pre>
-let a = HasSingleInt 10;
-let a = HasSingleTuple (10, 10);
-let a = HasMultipleInts 10 10;
-let a = HasMultipleTuples (10, 10) (10, 10);
+let a = HasSingleInt(10);
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));
       </pre>
     </td>
   </tr>
   <tr>
     <td>
       <pre>
-let res = match x with
+let res x = match x with
   | HasNothing -> 0
   | HasSingleInt x -> 0
   | HasSingleTuple (x, y) -> 0
@@ -439,13 +439,14 @@ let res = match x with
     </td>
     <td>
       <pre>
-let res = switch x {
-| HasNothing => 0
-| HasSingleInt x => 0
-| HasSingleTuple (x, y) => 0
-| HasMultipleInts x y => 0
-| HasMultipleTuples (x, y) (q, r) => 0
-};
+let res = (x) =>
+  switch x {
+  | HasNothing => 0
+  | HasSingleInt(x) => 0
+  | HasSingleTuple((x, y)) => 0
+  | HasMultipleInts(x, y) => 0
+  | HasMultipleTuples((x, y), (q, r)) => 0
+  };
       </pre>
     </td>
   </tr>
@@ -521,13 +522,15 @@ module type MySig = {
   type t = int;
   let x: int;
 };
+
 module MyModule: MySig = {
   type t = int;
   let x = 10;
 };
+
 module MyModule = {
   module NestedModule = {
-     let msg = "hello";
+    let msg = "hello";
   };
 };
       </pre>
@@ -571,8 +574,8 @@ module F =
     <td>
       <pre>
 module F =
-  fun (A: ASig) =>
-  fun (B: BSig) => {};</pre>
+  (A: ASig) =>
+  (B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -582,7 +585,7 @@ module F = functor (A: ASig) (B: BSig) -> struct end</pre>
     </td>
     <td>
       <pre>
-module F = fun (A: ASig) (B: BSig) => {};</pre>
+module F = (A: ASig, B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -592,7 +595,7 @@ module F (A: ASig) (B: BSig) = struct end</pre>
     </td>
     <td>
       <pre>
-module F (A: ASig) (B: BSig) => {};</pre>
+module F (A: ASig, B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -602,7 +605,7 @@ module Res = F(A)(B)</pre>
     </td>
     <td>
       <pre>
-module Res = F A B;</pre>
+module Res = F(A, B);</pre>
     </td>
   </tr>
 </table>
@@ -633,9 +636,9 @@ let myFuncs = {
     <td>
       <pre>
 let myFuncs = {
-  myFun: fun x => x + 1,
-  your: fun a b => a + b
-}</pre>
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</pre>
     </td>
   </tr>
 </table>
@@ -657,11 +660,12 @@ let x = match prnt with
     </td>
     <td>
       <pre>
-let x = switch prnt {
-| None => fun a => blah
-| Some "_" => fun a => ()
-| Some "ml" => blah
-};</pre>
+let x =
+  switch prnt {
+  | None => (a) => blah
+  | Some("_") => (a) => ()
+  | Some("ml") => blah
+  };</pre>
     </td>
   </tr>
 </table>
@@ -670,7 +674,7 @@ let x = switch prnt {
 
 OCaml | Reason
 ------|-------
-`let tuple = ((fun x -> x), 20)` | `let tuple = (fun x => x, 20);`
+`let tuple = ((fun x -> x), 20)` | `let tuple = ((x) => x, 20);`
 `let tuple = (("hi": string), (20: int))` | `let tuple = ("hi": string, 20: int);`
 
 ### Différences diverses
@@ -691,23 +695,12 @@ let ppp = match MyThing 20 with
     </td>
     <td>
       <pre>
-let ppp = switch (MyThing 20) {
-| MyThing x as ppp
-| YourThing x as ppp => ppp;
-};
+let ppp =
+switch (MyThing(20)) {
+  | MyThing(x) as ppp
+  | YourThing(x) as ppp => ppp;
+  };
       </pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre>
-let | (MyThing _ as ppp)
-    | (YourThing _ as ppp) = ppp;</pre>
-    </td>
-    <td>
-      <pre>
-let | MyThing _ as ppp
-    | YourThing _ as ppp = ppp;</pre>
     </td>
   </tr>
 </table>
@@ -722,16 +715,16 @@ OCaml | Reason
 
 #### Opérateurs préfixes
 
-En Reason, `!` et d'autres opérateurs préfixes ont une priorité moindre que celle du point `.` ou du dièse `#`. C'est plus cohérent avec ce que font d'autres langages, et plus pratique lorsque (ou si) le symbole `!` est utilisé pour représenter le booléen `not`.
+En Reason, `!` est utilisé pour le booléen `not`. Le déréférencement utilise le suffixe `^`.
 
 OCaml                                 | Reason
 --------------------------------------|--------------------------------
-`let x = !(foo.bar)`    | `let x = !foo.bar;`
-`let x = !(foo#bar)`    | `let x = !foo#bar;`
-`let x = !(!foo.bar)`   | `let x = !(!foo).bar;`
-`let x = !(!foo#bar)`   | `let x = !(!foo)#bar;`
-`let x = !(!(foo.bar))` | `let x = !(!foo.bar);`
-`let x = !(!(foo#bar))` | `let x = !(!foo#bar);`
+`let x = !(foo.bar)`    | `let x = foo.bar^;`
+`let x = !(foo#bar)`    | `let x = foo#bar^;`
+`let x = !(!foo.bar)`   | `let x = foo^.bar^;`
+`let x = !(!foo#bar)`   | `let x = (foo^)#bar^;`
+`let x = !(!(foo.bar))` | `let x = foo.bar^ ^;`
+`let x = !(!(foo#bar))` | `let x = foo#bar^ ^;
 `let x = !!(foo.bar)`   | `let x = !!foo.bar;`
 `let x = !!(foo#bar)`   | `let x = !!foo#bar;`
 `let x = !~(foo.bar)`   | `let x = !~foo.bar;`
@@ -747,12 +740,12 @@ Plus précisément, si un caractère, à l'exception du premier, d'un opérateur
 OCaml                                        | Reason
 ---------------------------------------------|--------------------------------
 `let (/*) a b = a + b`      |  `let (/\*) a b => a + b;`
-`let x = 12 /-* 23 /-* 12`   |  `let x = 12 /-\* 23 /-\* 12;`
-`let y = (/*) a b`           |  `let y = (/\*) a b;`
-`let (!=*) q r => q + r`     |  `let (!=\*) q r => q + r;`
-`let res = q (!=*) r`        |  `let res = q (!=\*) r;`
-`let (!=/*) q r = q + r`    |  `let (!=\/\*) q r => q + r;`
-`let res = q (!=/*) r`       |  `let res = q (!=\/\*) r;`
+`let x = 12 /-* 23 /-* 12`   |  `let x = 12 /-* 23 /-* 12;`
+`let y = (/*) a b`           |  `let y = a /\* b;`
+`let (!=*) q r = q + r`     |  `let ( !=* ) = (q, r) => q + r;`
+`let res = q (!=*) r`        |  `let res = q(( !=* ), r);`
+`let (!=/*) q r = q + r`    |  `let ( !=/\* ) = (q, r) => q + r;`
+`let res = q (!=/*) r`       |  `let res = q(( !=/\* ), r);
 
 #### Renommage d'opérateur
 

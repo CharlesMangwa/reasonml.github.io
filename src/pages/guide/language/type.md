@@ -27,13 +27,13 @@ Vous pouvez aussi englober des expressions dans des parenthèses et les annoter 
 
 ```reason
 let myInt = 5;
-let myInt = (5: int);
+let myInt: int = 5;
 let myInt = (5: int) + (4: int);
-let add (x: int) (y: int) :int => x + y;
-let drawCircle radius::(r: int) :unit => ...;
+let add = (x: int, y: int) : int => x + y;
+let drawCircle = (~radius as r: int) : unit => ...;
 ```
 
-Note : à la dernière ligne, `radius::(r: int)` est un "*argument labellisé*". Plus à ce sujet [ici](/guide/language/function).
+Note : à la dernière ligne, `(~radius as r: int)` est un "*argument labellisé*". Plus à ce sujet [ici](/guide/language/function).
 
 ### Alias
 

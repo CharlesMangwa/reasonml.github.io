@@ -16,7 +16,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
    the exception <code class="code">e</code>.<br>
 </div>
 
-<pre id="VALprint"><span class="keyword">let</span> print: (&apos;a =&gt; &apos;b) =&gt; &apos;a =&gt; &apos;b;
+<pre id="VALprint"><span class="keyword">let</span> print: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
 <code class="code">Printexc.print fn x</code> applies <code class="code">fn</code> to <code class="code">x</code> and returns the result.
    If the evaluation of <code class="code">fn x</code> raises any exception, the
@@ -26,7 +26,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
    escape a function application.<br>
 </div>
 
-<pre id="VALcatch"><span class="keyword">let</span> catch: (&apos;a =&gt; &apos;b) =&gt; &apos;a =&gt; &apos;b;
+<pre id="VALcatch"><span class="keyword">let</span> catch: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
 <code class="code">Printexc.catch fn x</code> is similar to <a href="Printexc.html#VALprint"><code class="code">Printexc.print</code></a>, but
    aborts the program with exit code 2 after printing the
@@ -71,7 +71,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 <b>Since</b> 3.11.0<br>
 </div>
 
-<pre id="VALregister_printer"><span class="keyword">let</span> register_printer: (exn =&gt; option string) =&gt; unit;
+<pre id="VALregister_printer"><span class="keyword">let</span> register_printer: (exn =&gt; option(string)) =&gt; unit;
 </pre><div class="info ">
 <code class="code">Printexc.register_printer fn</code> registers <code class="code">fn</code> as an exception
     printer.  The printer should return <code class="code">None</code> or raise an exception
@@ -123,7 +123,7 @@ The abstract type <code class="code">raw_backtrace</code> stores a backtrace in
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre id="VALprint_raw_backtrace"><span class="keyword">let</span> print_raw_backtrace: Pervasives.out_channel =&gt; raw_backtrace =&gt; unit;
+<pre id="VALprint_raw_backtrace"><span class="keyword">let</span> print_raw_backtrace: (Pervasives.out_channel, raw_backtrace) =&gt; unit;
 </pre><div class="info ">
 Print a raw backtrace in the same format
     <code class="code">Printexc.print_backtrace</code> uses.<br>
@@ -150,7 +150,7 @@ Return a string from a raw backtrace, in the same format
 <br>
 <h6 id="6_Uncaughtexceptions">Uncaught exceptions</h6><br>
 
-<pre id="VALset_uncaught_exception_handler"><span class="keyword">let</span> set_uncaught_exception_handler: (exn =&gt; raw_backtrace =&gt; unit) =&gt; unit;
+<pre id="VALset_uncaught_exception_handler"><span class="keyword">let</span> set_uncaught_exception_handler: ((exn, raw_backtrace) =&gt; unit) =&gt; unit;
 </pre><div class="info ">
 <code class="code">Printexc.set_uncaught_exception_handler fn</code> registers <code class="code">fn</code> as the handler
     for uncaught exceptions. The default handler prints the exception and
@@ -186,7 +186,7 @@ The abstract type <code class="code">backtrace_slot</code> represents a single s
 </div>
 
 
-<pre id="VALbacktrace_slots"><span class="keyword">let</span> backtrace_slots: raw_backtrace =&gt; option (array backtrace_slot);
+<pre id="VALbacktrace_slots"><span class="keyword">let</span> backtrace_slots: raw_backtrace =&gt; option(array(backtrace_slot));
 </pre><div class="info ">
 Returns the slots of a raw backtrace, or <code class="code">None</code> if none of them
     contain useful information.
@@ -275,7 +275,7 @@ This type allows direct access to raw backtrace slots, without any
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALget_raw_backtrace_slot"><span class="keyword">let</span> get_raw_backtrace_slot: raw_backtrace =&gt; int =&gt; raw_backtrace_slot;
+<pre id="VALget_raw_backtrace_slot"><span class="keyword">let</span> get_raw_backtrace_slot: (raw_backtrace, int) =&gt; raw_backtrace_slot;
 </pre><div class="info ">
 <code class="code">get_slot bckt pos</code> returns the slot in position <code class="code">pos</code> in the
     backtrace <code class="code">bckt</code>.<br>

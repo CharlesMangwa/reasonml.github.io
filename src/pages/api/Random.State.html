@@ -12,7 +12,7 @@ The type of PRNG states.<br>
 </div>
 
 
-<pre id="VALmake"><span class="keyword">let</span> make: array int =&gt; t;
+<pre id="VALmake"><span class="keyword">let</span> make: array(int) =&gt; t;
 </pre><div class="info ">
 Create a new state and initialize it with the given seed.<br>
 </div>
@@ -30,15 +30,15 @@ Return a copy of the given state.<br>
 
 <pre id="VALbits"><span class="keyword">let</span> bits: t =&gt; int;
 </pre>
-<pre id="VALint"><span class="keyword">let</span> int: t =&gt; int =&gt; int;
+<pre id="VALint"><span class="keyword">let</span> int: (t, int) =&gt; int;
 </pre>
-<pre id="VALint32"><span class="keyword">let</span> int32: t =&gt; Int32.t =&gt; Int32.t;
+<pre id="VALint32"><span class="keyword">let</span> int32: (t, Int32.t) =&gt; Int32.t;
 </pre>
-<pre id="VALnativeint"><span class="keyword">let</span> nativeint: t =&gt; Nativeint.t =&gt; Nativeint.t;
+<pre id="VALnativeint"><span class="keyword">let</span> nativeint: (t, Nativeint.t) =&gt; Nativeint.t;
 </pre>
-<pre id="VALint64"><span class="keyword">let</span> int64: t =&gt; Int64.t =&gt; Int64.t;
+<pre id="VALint64"><span class="keyword">let</span> int64: (t, Int64.t) =&gt; Int64.t;
 </pre>
-<pre id="VALfloat"><span class="keyword">let</span> float: t =&gt; float =&gt; float;
+<pre id="VALfloat"><span class="keyword">let</span> float: (t, float) =&gt; float;
 </pre>
 <pre id="VALbool"><span class="keyword">let</span> bool: t =&gt; bool;
 </pre><div class="info ">

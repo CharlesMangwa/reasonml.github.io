@@ -18,7 +18,7 @@ Les bindings peuvent être scopés via `{}`.
 ```reason
 if (displayGreeting) {
   let message = "Enjoying the docs so far?";
-  print_endline message;
+  print_endline(message);
 };
 /* `message` n'est pas accessible ici ! */
 ```
@@ -29,9 +29,9 @@ if (displayGreeting) {
 
 ```reason
 let message = "hello";
-print_endline message; /* Print "hello" */
+print_endline(message); /* Print "hello" */
 let message = "bye";
-print_endline message; /* Print "bye" */
+print_endline(message); /* Print "bye" */
 ```
 
 ### Conseils & astuces
@@ -42,7 +42,7 @@ print_endline message; /* Print "bye" */
 let message = {
   let part1 = "hello";
   let part2 = "world";
-  part1 ^ " " ^ part2
+  part1 ++  " " ++ part2
 };
 /* `part1` et `part2` ne sont pas accessibles ici ! */
 ```
@@ -81,8 +81,8 @@ Ce qui pourrait vous rappeler :
 
 ```reason
 /* syntaxe reason */
-fun a =>
-  fun b =>
+(a) =>
+  (b) =>
     a + b;
 ```
 

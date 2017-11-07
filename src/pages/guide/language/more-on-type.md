@@ -20,14 +20,14 @@ let buddy: intCoordinates = (10, 20, 20);
 Après :
 
 ```reason
-type coordinates 'a = ('a, 'a, 'a);
+type coordinates('a) = ('a, 'a, 'a);
 
 /* applique les coordonnées à la "fonction de type" et retourne le type (int, int, int) */
-type intCoordinatesAlias = coordinates int;
+type intCoordinatesAlias = coordinates(int);
 let buddy: intCoordinatesAlias = (10, 20, 20);
 
 /* ou, plus communément, l'écrire en ligne */
-let buddy: coordinates float = (10.5, 20.5, 20.5);
+let buddy: coordinates(float) = (10.5, 20.5, 20.5);
 ```
 
 Dans la pratique, les types sont inférés pour vous. Ainsi la version la plus concise du code ci-dessus serait : 
@@ -41,7 +41,7 @@ Le système de types en infère qu'il s'agit d'un `(int, int, int)`. Pas besoin 
 Les arguments de types apparaissent partout.
 
 ```reason
-/* déduit comme étant `list string` */
+/* déduit comme étant `list(string)` */
 let greetings = ["hello", "world", "how are you"];
 ```
 
@@ -50,18 +50,18 @@ Si les types n'acceptaient pas de paramètres (aka, si nous n'avions pas défini
 Les types peuvent recevoir plus d'arguments et être composables.
 
 ```reason
-type result 'a 'b =
-| Ok 'a
-| Error 'b;
+type result('a, 'b) =
+  | Ok('a)
+  | Error('b);
 
 type myPayload = {data: string};
 
-type myPayloadResults 'errorType = list (result myPayload 'errorType);
+type myPayloadResults('errorType) = list(result(myPayload, 'errorType));
 
-let payloadResults: myPayloadResults string = [
-  Ok {data: "hi"},
-  Ok {data: "bye"},
-  Error "Something wrong happened!"
+let payloadResults: myPayloadResults(string) = [
+  Ok({data: "hi"}),
+  Ok({data: "bye"}),
+  Error("Something wrong happened!")
 ];
 ```
 
@@ -71,14 +71,14 @@ Tout comme les fonctions, les types peuvent être mutuellement récursifs via `a
 
 ```reason
 type student = {taughtBy: teacher}
-and teacher = {students: list student};
+and teacher = {students: list(student)};
 ```
 
 **Notez** qu'il n'y a pas de point-virgule à la fin de la première ligne ni de `type` à la seconde.
 
 ### Décisions de conception
 
-Un système de types permettant d'avoir un argument de type consiste essentiellement à permettre des fonctions de types. `list int` est vraiment la fonction du type `list` prenant le type `int` en entrée, et retournant le type final que vous utiliserez. Vous avez peut-être remarqué que dans d'autres langages, cela est plus ou moins appelé des «génériques». Par exemple,`ArrayList<Integer>` en Java.
+Un système de types permettant d'avoir un argument de type consiste essentiellement à permettre des fonctions de types. `list(int)` est vraiment la fonction du type `list` prenant le type `int` en entrée, et retournant le type final que vous utiliserez. Vous avez peut-être remarqué que dans d'autres langages, cela est plus ou moins appelé des «génériques». Par exemple,`ArrayList<Integer>` en Java.
 
 [Le principe de la moindre puissance (principle of least power)](https://en.wikipedia.org/wiki/Rule_of_least_power) s'applique lorsque vous essayez de "faire avancer les choses". Si le domaine du problème le permet, choisissez sans hésitation la solution la moins abstraite possible (aka, la plus concrète). De sorte que la solution soit atteinte le plus rapidement possible et comporte moins d'indirections instables que vous auriez à traverser. Par exemple, préférez les types aux données de forme libre, préférez la configuration basée sur les données aux appels de fonctions Turing-complets, préférez les appels de fonctions aux macros, préférez les macros aux forks de projets, etc. Lorsque vous contraignez votre domaine et votre puissance, les choses deviennent plus simples à analyser. Le tout, _si_ le domaine est suffisamment limité pour le permettre.
 

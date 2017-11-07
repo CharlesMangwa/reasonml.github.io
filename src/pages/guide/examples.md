@@ -13,11 +13,11 @@ Cette section est consacrée aux néophytes essayant de trouver des idiomes et d
 
 ```reason
 let possiblyNullValue1 = None;
-let possiblyNullValue2 : option string = Some "Hello@";
+let possiblyNullValue2: option string = Some("Hello@");
 
 switch possiblyNullValue2 {
-| None => print_endline "Nothing to see here."
-| Some message => print_endline message
+| None => print_endline("Nothing to see here.")
+| Some(message) => print_endline(message)
 };
 ```
 
@@ -26,9 +26,12 @@ switch possiblyNullValue2 {
 ```reason
 type universityStudent = {gpa: float};
 
-type response 'studentType = {status: int, student: 'studentType};
+type response('studentType) = {
+  status: int,
+  student: 'studentType
+};
 
-let result: response universityStudent = fetchDataFromServer ();
+let result: response(universityStudent) = fetchDataFromServer();
 ```
 
 ### Création d'un object JavaScript
@@ -48,9 +51,9 @@ Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulé
 ### Typage d'un object JavaScript
 
 ```reason
-type payload = Js.t {.
-  name: string,
-  age: int
+type payload = {.
+  "name": string,
+  "age": int
 };
 let obj1: payload = {"name": "John", "age": 30};
 ```
@@ -62,10 +65,11 @@ Vous noterez que `{. name: string, age: int}` est la syntaxe requise pour la dé
 En supposant que le module est nommé `store.js`, et a un export par défault ainsi qu'une méthode `getDate`.
 
 ```reason
-type store = Js.t {. getDate : (unit => float) [@bs.meth]};
-external store : store = "./store" [@@bs.module];
-Js.log store;
-Js.log (store##getDate ());
+type store = {. "getDate": [@bs.meth] (unit => float)};
+[@bs.module] external store : store = "./store";
+
+Js.log(store);
+Js.log(store##getDate());
 ```
 
 ### Vérification des types nuls JavaScript en utilisant le type `option`
@@ -73,11 +77,11 @@ Js.log (store##getDate ());
 Pour une fonction dont l'argument passé est une valeur JavaScript potentiellement `null` ou `undefined`, il faut penser à le convertir en un `option` Reason. La conversion se fait par l'intermédiaire des fonctions helpers du module Bucklescript [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable). Dans le cas d'espèce, `to_opt`:
 
 ```reason
-let greetByName possiblyNullName => {
-  let optionName = Js.Nullable.to_opt possiblyNullName;
+let greetByName = (possiblyNullName) => {
+  let optionName = Js.Nullable.to_opt(possiblyNullName);
   switch optionName {
   | None => "Hi"
-  | Some name => "Hello " ^ name
+  | Some(name) => "Hello " ++ name
   }
 };
 ```

@@ -43,11 +43,12 @@ Mettre à jour de façon arbitraire un élément au milieu d'une liste est déco
 
 `switch` (abordé dans la [section pattern-matching](/guide/language/destructuring-pattern-matching)) est habituellement utilisé pour accéder aux éléments d'une list :
 
-```
-let message = switch myList {
+```reason
+let message =
+switch myList {
 | [] => "This list is empty"
-| [a, ...rest] => "The head of the list is the string " ^ a
-}
+| [a, ...rest] => "The head of the list is the string " ++ a
+};
 ```
 
 Pour accéder à un élément précis d'une list, utilisez `List.nth`.
@@ -83,9 +84,9 @@ L'accès et la mise à jour d'un array se font comme suit :
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
 
-let firstItem = myArray.(0); /* "hello" */
+let firstItem = myArray[0]; /* "hello" */
 
-myArray.(0) = "hey";
+myArray[0] = "hey";
 
 /* maintenant [|"hey", "world", "how are you"|] */
 ```

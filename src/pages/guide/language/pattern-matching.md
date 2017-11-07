@@ -13,21 +13,21 @@ Considérons une variant :
 
 ```reason
 type payload =
-| BadResult int
-| GoodResult string
-| NoResult;
+  | BadResult(int)
+  | GoodResult(string)
+  | NoResult;
 ```
 
 Si on l'utilise avec l'expresion `switch`, on peut "destructurer" notre variant de la sorte :
 
 ```reason
-let data = GoodResult "Product shipped!";
+let data = GoodResult("Product shipped!");
 
 let message =
   switch data {
-  | GoodResult theMessage => "Success! " ^ theMessage
-  | BadResult errorCode =>
-    "Something's wrong. The error code is: " ^ (string_of_int errorCode)
+  | GoodResult(theMessage) => "Success! " ++ theMessage
+  | BadResult(errorCode) =>
+    "Something's wrong. The error code is: " ++ string_of_int(errorCode)
   };
 ```
 
@@ -43,15 +43,15 @@ N'est-ce pas merveilleux ? Tout en correspondant à la forme de nos données, le
 
 ```reason
 switch myList {
-| [] => print_endline "Empty list"
-| [a, ...theRest] => print_endline ("list with the head value " ^ a)
+| [] => print_endline("Empty list")
+| [a, ...theRest] => print_endline("list with the head value " ++ a)
 };
 
 switch myArray {
-| [|1, 2|] => print_endline "This is an array with item 1 and 2"
-| [||] => print_endline "This array has no element"
-| _ => print_endline "This is an array"
-}
+| [|1, 2|] => print_endline("This is an array with item 1 and 2")
+| [||] => print_endline("This array has no element")
+| _ => print_endline("This is an array")
+};
 ```
 
 Le cas `_` est un cas spécial qui permet à toutes les conditions inégalées d'accéder à cette branche.
@@ -73,9 +73,9 @@ Combiné avec d'autres structures de données, le pattern matching peut produire
 ```reason
 let message =
   switch data {
-  | GoodResult theMessage => "Success! " ^ theMessage
-  | BadResult (0 | 1 | 5) => "Something's wrong. It's a server side problem."
-  | BadResult errorCode => "Unknown error occurred. Code: " ^ string_of_int errorCode
+  | GoodResult(theMessage) => "Success! " ++ theMessage
+  | BadResult(0 | 1 | 5) => "Something's wrong. It's a server side problem."
+  | BadResult(errorCode) => "Unknown error occurred. Code: " ++ string_of_int(errorCode)
   | NoResult => "Things look fine"
   };
 ```
@@ -85,7 +85,7 @@ let message =
 ```reason
 let myMessage = "Hello";
 switch greeting {
-| myMessage => print_endline "Hi to you"
+| myMessage => print_endline("Hi to you")
 }
 ```
 
@@ -98,9 +98,9 @@ Lorsque vous avez vraiment besoin d'utiliser une logique arbitraire avec un patt
 ```reason
 let message =
   switch data {
-  | GoodResult theMessage => ...
-  | BadResult errorCode when isServerError errorCode => ...
-  | BadResult errorCode => ... /* otherwise */
+  | GoodResult(theMessage) => ...
+  | BadResult(errorCode) when isServerError(errorCode) => ...
+  | BadResult(errorCode) => ... /* otherwise */
   | NoResult => ...
   };
 ```
@@ -109,9 +109,9 @@ let message =
 Si la fonction lève une exception (couvert plus tard), vous pouvez également y appliquer un match, en plus des valeurs retournées normalement par la fonction.
 
 ```reason
-switch (List.find (fun i => i === theItem) myItems) {
-| item => print_endline item
-| exception Not_found => print_endline "No such item found!"
+switch (List.find((i) => i === theItem, myItems)) {
+| item => print_endline(item)
+| exception Not_found => print_endline("No such item found!")
 };
 ```
 
@@ -124,7 +124,7 @@ Ne pas trop abuser du cas par défaut `_`. Cela empêche le compilateur de vous 
 Voici une série d'exemples, du pire au meilleur :
 
 ```reason
-let optionBoolToJsBoolean opt =>
+let optionBoolToJsBoolean = (opt) =>
   if (opt == None) {
     Js.false_
   } else {
@@ -139,40 +139,42 @@ let optionBoolToJsBoolean opt =>
 OK : ceci n'est que pure folie =). Passons le tout au pattern matching : 
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| None => Js.false_
-| Some a => switch a {
-  | true => Js.true_
-  | false => Js.false_
-  }
-};
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | None => Js.false_
+  | Some(a) => a ? Js.true_ : Js.false_
+  };
 ```
 
 Un peu mieux, mais encore imbriqué. Le pattern matching vous permet par ailleurs de faire ceci :
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| None => Js.false_
-| Some true => Js.true_
-| Some false => Js.false_
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | None => Js.false_
+  | Some(true) => Js.true_
+  | Some(false) => Js.false_
 };
 ```
 
 Beaucoup plus linéaire ! Maintenant, vous pourriez être tenté(e) de faire :
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| Some true => Js.true_
-| _ => Js.false_
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | Some(true) => Js.true_
+  | _ => Js.false_
 };
 ```
 
 Ce qui est beaucoup plus concis, mais tue le contrôle d'exhaustivité mentionné ci-dessus. Ceci est la meilleure option :
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| Some true => Js.true_
-| Some false | None => Js.false_
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | Some(true) => Js.true_
+  | Some(false)
+  | None => Js.false_
 };
 ```
 

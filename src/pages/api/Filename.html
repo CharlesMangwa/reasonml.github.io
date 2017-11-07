@@ -27,7 +27,7 @@ The directory separator (e.g. <code class="code">/</code> in Unix).<br>
 <b>Since</b> 3.11.2<br>
 </div>
 
-<pre id="VALconcat"><span class="keyword">let</span> concat: string =&gt; string =&gt; string;
+<pre id="VALconcat"><span class="keyword">let</span> concat: (string, string) =&gt; string;
 </pre><div class="info ">
 <code class="code">concat dir file</code> returns a file name that designates file
    <code class="code">file</code> in directory <code class="code">dir</code>.<br>
@@ -48,13 +48,13 @@ Return <code class="code">true</code> if the file name is relative and does not 
    to the root directory or the current directory.<br>
 </div>
 
-<pre id="VALcheck_suffix"><span class="keyword">let</span> check_suffix: string =&gt; string =&gt; bool;
+<pre id="VALcheck_suffix"><span class="keyword">let</span> check_suffix: (string, string) =&gt; bool;
 </pre><div class="info ">
 <code class="code">check_suffix name suff</code> returns <code class="code">true</code> if the filename <code class="code">name</code>
    ends with the suffix <code class="code">suff</code>.<br>
 </div>
 
-<pre id="VALchop_suffix"><span class="keyword">let</span> chop_suffix: string =&gt; string =&gt; string;
+<pre id="VALchop_suffix"><span class="keyword">let</span> chop_suffix: (string, string) =&gt; string;
 </pre><div class="info ">
 <code class="code">chop_suffix name suff</code> removes the suffix <code class="code">suff</code> from
    the filename <code class="code">name</code>. The behavior is undefined if <code class="code">name</code> does not
@@ -93,7 +93,7 @@ See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</co
    <code class="code">dirname</code> utility.<br>
 </div>
 
-<pre id="VALtemp_file"><span class="keyword">let</span> temp_file: temp_dir::string? =&gt; string =&gt; string =&gt; string;
+<pre id="VALtemp_file"><span class="keyword">let</span> temp_file: (~temp_dir: string=?, string, string) =&gt; string;
 </pre><div class="info ">
 <code class="code">temp_file prefix suffix</code> returns the name of a
    fresh temporary file in the temporary directory.
@@ -110,10 +110,7 @@ See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</co
 </div>
 
 <pre id="VALopen_temp_file"><span class="keyword">let</span> open_temp_file:
-  mode::list Pervasives.open_flag? =&gt;
-  temp_dir::string? =&gt;
-  string =&gt;
-  string =&gt;
+  (~mode: list(Pervasives.open_flag)=?, ~temp_dir: string=?, string, string) =&gt;
   (string, Pervasives.out_channel);
 </pre><div class="info ">
 Same as <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_file</code></a>, but returns both the name of a fresh

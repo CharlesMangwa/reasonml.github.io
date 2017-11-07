@@ -52,7 +52,7 @@ The <code class="code">Exit</code> exception is not raised by any library functi
 <br>
 <h6 id="6_Comparisons">Comparisons</h6><br>
 
-<pre id="VAL(=)"><span class="keyword">let</span> (=): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(=)"><span class="keyword">let</span> (==): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 <code class="code">e1 = e2</code> tests for structural equality of <code class="code">e1</code> and <code class="code">e2</code>.
    Mutable structures (e.g. references and arrays) are equal
@@ -62,27 +62,27 @@ The <code class="code">Exit</code> exception is not raised by any library functi
    Equality between cyclic data structures may not terminate.<br>
 </div>
 
-<pre id="VAL(&lt;&gt;)"><span class="keyword">let</span> (&lt;&gt;): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(&lt;&gt;)"><span class="keyword">let</span> (!=): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 Negation of <a href="Pervasives.html#VAL(=)"><code class="code">Pervasives.(=)</code></a>.<br>
 </div>
 
-<pre id="VAL(&lt;)"><span class="keyword">let</span> (&lt;): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(&lt;)"><span class="keyword">let</span> (&lt;): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 See <a href="Pervasives.html#VAL(&gt;=)"><code class="code">Pervasives.(&gt;=)</code></a>.<br>
 </div>
 
-<pre id="VAL(&gt;)"><span class="keyword">let</span> (&gt;): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(&gt;)"><span class="keyword">let</span> (&gt;): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 See <a href="Pervasives.html#VAL(&gt;=)"><code class="code">Pervasives.(&gt;=)</code></a>.<br>
 </div>
 
-<pre id="VAL(&lt;=)"><span class="keyword">let</span> (&lt;=): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(&lt;=)"><span class="keyword">let</span> (&lt;=): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 See <a href="Pervasives.html#VAL(&gt;=)"><code class="code">Pervasives.(&gt;=)</code></a>.<br>
 </div>
 
-<pre id="VAL(&gt;=)"><span class="keyword">let</span> (&gt;=): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(&gt;=)"><span class="keyword">let</span> (&gt;=): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 Structural ordering functions. These functions coincide with
    the usual orderings over integers, characters, strings, byte sequences
@@ -94,7 +94,7 @@ Structural ordering functions. These functions coincide with
    Comparison between cyclic structures may not terminate.<br>
 </div>
 
-<pre id="VALcompare"><span class="keyword">let</span> compare: &apos;a =&gt; &apos;a =&gt; int;
+<pre id="VALcompare"><span class="keyword">let</span> compare: (&apos;a, &apos;a) =&gt; int;
 </pre><div class="info ">
 <code class="code">compare x y</code> returns <code class="code">0</code> if <code class="code">x</code> is equal to <code class="code">y</code>,
    a negative integer if <code class="code">x</code> is less than <code class="code">y</code>, and a positive integer
@@ -117,21 +117,21 @@ Structural ordering functions. These functions coincide with
    the <a href="List.html#VALsort"><code class="code">List.sort</code></a> and <a href="Array.html#VALsort"><code class="code">Array.sort</code></a> functions.<br>
 </p></div>
 
-<pre id="VALmin"><span class="keyword">let</span> min: &apos;a =&gt; &apos;a =&gt; &apos;a;
+<pre id="VALmin"><span class="keyword">let</span> min: (&apos;a, &apos;a) =&gt; &apos;a;
 </pre><div class="info ">
 Return the smaller of the two arguments.
     The result is unspecified if one of the arguments contains
     the float value <code class="code">nan</code>.<br>
 </div>
 
-<pre id="VALmax"><span class="keyword">let</span> max: &apos;a =&gt; &apos;a =&gt; &apos;a;
+<pre id="VALmax"><span class="keyword">let</span> max: (&apos;a, &apos;a) =&gt; &apos;a;
 </pre><div class="info ">
 Return the greater of the two arguments.
     The result is unspecified if one of the arguments contains
     the float value <code class="code">nan</code>.<br>
 </div>
 
-<pre id="VAL(==)"><span class="keyword">let</span> (==): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(==)"><span class="keyword">let</span> (===): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 <code class="code">e1 == e2</code> tests for physical equality of <code class="code">e1</code> and <code class="code">e2</code>.
    On mutable types such as references, arrays, byte sequences, records with
@@ -143,38 +143,38 @@ Return the greater of the two arguments.
    <code class="code">e1 == e2</code> implies <code class="code">compare e1 e2 = 0</code>.<br>
 </div>
 
-<pre id="VAL(!=)"><span class="keyword">let</span> (!=): &apos;a =&gt; &apos;a =&gt; bool;
+<pre id="VAL(!=)"><span class="keyword">let</span> (!==): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
 Negation of <a href="Pervasives.html#VAL(==)"><code class="code">Pervasives.(==)</code></a>.<br>
 </div>
 <br>
 <h6 id="6_Booleanoperations">Boolean operations</h6><br>
 
-<pre id="VALnot"><span class="keyword">let</span> not: bool =&gt; bool;
+<pre id="VALnot"><span class="keyword">let</span> (!): bool =&gt; bool;
 </pre><div class="info ">
 The boolean negation.<br>
 </div>
 
-<pre id="VAL(&amp;&amp;)"><span class="keyword">let</span> (&amp;&amp;): bool =&gt; bool =&gt; bool;
+<pre id="VAL(&amp;&amp;)"><span class="keyword">let</span> (&amp;&amp;): (bool, bool) =&gt; bool;
 </pre><div class="info ">
 The boolean &apos;and&apos;. Evaluation is sequential, left-to-right:
    in <code class="code">e1 &amp;&amp; e2</code>, <code class="code">e1</code> is evaluated first, and if it returns <code class="code">false</code>,
    <code class="code">e2</code> is not evaluated at all.<br>
 </div>
 
-<pre id="VAL(&amp;)"><span class="keyword">let</span> (&amp;): bool =&gt; bool =&gt; bool;
+<pre id="VAL(&amp;)"><span class="keyword">let</span> (&amp;): (bool, bool) =&gt; bool;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span><a href="Pervasives.html#VAL(&amp;&amp;)"><code class="code">Pervasives.(&amp;&amp;)</code></a> should be used instead.<br>
 </div>
 
-<pre id="VAL(||)"><span class="keyword">let</span> (||): bool =&gt; bool =&gt; bool;
+<pre id="VAL(||)"><span class="keyword">let</span> (||): (bool, bool) =&gt; bool;
 </pre><div class="info ">
 The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
    in <code class="code">e1 || e2</code>, <code class="code">e1</code> is evaluated first, and if it returns <code class="code">true</code>,
    <code class="code">e2</code> is not evaluated at all.<br>
 </div>
 
-<pre id="VAL(or)"><span class="keyword">let</span> (or): bool =&gt; bool =&gt; bool;
+<pre id="VAL(or)"><span class="keyword">let</span> (or): (bool, bool) =&gt; bool;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span><a href="Pervasives.html#VAL(||)"><code class="code">Pervasives.(||)</code></a> should be used instead.<br>
 </div>
@@ -250,14 +250,14 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 <br>
 <h6 id="6_Compositionoperators">Composition operators</h6><br>
 
-<pre id="VAL(|&gt;)"><span class="keyword">let</span> (|&gt;): &apos;a =&gt; (&apos;a =&gt; &apos;b) =&gt; &apos;b;
+<pre id="VAL(|&gt;)"><span class="keyword">let</span> (|&gt;): (&apos;a, &apos;a =&gt; &apos;b) =&gt; &apos;b;
 </pre><div class="info ">
 Reverse-application operator: <code class="code">x |&gt; f |&gt; g</code> is exactly equivalent
  to <code class="code">g (f (x))</code>.<br>
 <b>Since</b> 4.01<br>
 </div>
 
-<pre id="VAL(@@)"><span class="keyword">let</span> (@@): (&apos;a =&gt; &apos;b) =&gt; &apos;a =&gt; &apos;b;
+<pre id="VAL(@@)"><span class="keyword">let</span> (@@): (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
 Application operator: <code class="code">g @@ f @@ x</code> is exactly equivalent to
  <code class="code">g (f (x))</code>.<br>
@@ -293,22 +293,22 @@ Unary addition. You can also write <code class="code">+ e</code> instead of <cod
 <code class="code">pred x</code> is <code class="code">x - 1</code>.<br>
 </div>
 
-<pre id="VAL(+)"><span class="keyword">let</span> (+): int =&gt; int =&gt; int;
+<pre id="VAL(+)"><span class="keyword">let</span> (+): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer addition.<br>
 </div>
 
-<pre id="VAL(-)"><span class="keyword">let</span> (-): int =&gt; int =&gt; int;
+<pre id="VAL(-)"><span class="keyword">let</span> (-): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer subtraction.<br>
 </div>
 
-<pre id="VAL( * )"><span class="keyword">let</span> ( * ): int =&gt; int =&gt; int;
+<pre id="VAL( * )"><span class="keyword">let</span> ( * ): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer multiplication.<br>
 </div>
 
-<pre id="VAL(/)"><span class="keyword">let</span> (/): int =&gt; int =&gt; int;
+<pre id="VAL(/)"><span class="keyword">let</span> (/): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer division.
    Raise <code class="code">Division_by_zero</code> if the second argument is 0.
@@ -318,7 +318,7 @@ Integer division.
    <code class="code">(- x) / y = x / (- y) = - (x / y)</code>.<br>
 </div>
 
-<pre id="VAL(mod)"><span class="keyword">let</span> (mod): int =&gt; int =&gt; int;
+<pre id="VAL(mod)"><span class="keyword">let</span> (mod): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
    of <code class="code">x mod y</code> satisfies the following properties:
@@ -347,17 +347,17 @@ The smallest representable integer.<br>
 <br>
 <div class="h7" id="7_Bitwiseoperations">Bitwise operations</div><br>
 
-<pre id="VAL(land)"><span class="keyword">let</span> (land): int =&gt; int =&gt; int;
+<pre id="VAL(land)"><span class="keyword">let</span> (land): (int, int) =&gt; int;
 </pre><div class="info ">
 Bitwise logical and.<br>
 </div>
 
-<pre id="VAL(lor)"><span class="keyword">let</span> (lor): int =&gt; int =&gt; int;
+<pre id="VAL(lor)"><span class="keyword">let</span> (lor): (int, int) =&gt; int;
 </pre><div class="info ">
 Bitwise logical or.<br>
 </div>
 
-<pre id="VAL(lxor)"><span class="keyword">let</span> (lxor): int =&gt; int =&gt; int;
+<pre id="VAL(lxor)"><span class="keyword">let</span> (lxor): (int, int) =&gt; int;
 </pre><div class="info ">
 Bitwise logical exclusive or.<br>
 </div>
@@ -367,7 +367,7 @@ Bitwise logical exclusive or.<br>
 Bitwise logical negation.<br>
 </div>
 
-<pre id="VAL(lsl)"><span class="keyword">let</span> (lsl): int =&gt; int =&gt; int;
+<pre id="VAL(lsl)"><span class="keyword">let</span> (lsl): (int, int) =&gt; int;
 </pre><div class="info ">
 <code class="code">n lsl m</code> shifts <code class="code">n</code> to the left by <code class="code">m</code> bits.
    The result is unspecified if <code class="code">m &lt; 0</code> or <code class="code">m &gt;= bitsize</code>,
@@ -375,7 +375,7 @@ Bitwise logical negation.<br>
    <code class="code">64</code> on a 64-bit platform.<br>
 </div>
 
-<pre id="VAL(lsr)"><span class="keyword">let</span> (lsr): int =&gt; int =&gt; int;
+<pre id="VAL(lsr)"><span class="keyword">let</span> (lsr): (int, int) =&gt; int;
 </pre><div class="info ">
 <code class="code">n lsr m</code> shifts <code class="code">n</code> to the right by <code class="code">m</code> bits.
    This is a logical shift: zeroes are inserted regardless of
@@ -383,7 +383,7 @@ Bitwise logical negation.<br>
    The result is unspecified if <code class="code">m &lt; 0</code> or <code class="code">m &gt;= bitsize</code>.<br>
 </div>
 
-<pre id="VAL(asr)"><span class="keyword">let</span> (asr): int =&gt; int =&gt; int;
+<pre id="VAL(asr)"><span class="keyword">let</span> (asr): (int, int) =&gt; int;
 </pre><div class="info ">
 <code class="code">n asr m</code> shifts <code class="code">n</code> to the right by <code class="code">m</code> bits.
    This is an arithmetic shift: the sign bit of <code class="code">n</code> is replicated.
@@ -415,27 +415,27 @@ Unary addition. You can also write <code class="code">+. e</code> instead of <co
 <b>Since</b> 3.12.0<br>
 </div>
 
-<pre id="VAL(+.)"><span class="keyword">let</span> (+.): float =&gt; float =&gt; float;
+<pre id="VAL(+.)"><span class="keyword">let</span> (+.): (float, float) =&gt; float;
 </pre><div class="info ">
 Floating-point addition<br>
 </div>
 
-<pre id="VAL(-.)"><span class="keyword">let</span> (-.): float =&gt; float =&gt; float;
+<pre id="VAL(-.)"><span class="keyword">let</span> (-.): (float, float) =&gt; float;
 </pre><div class="info ">
 Floating-point subtraction<br>
 </div>
 
-<pre id="VAL( *. )"><span class="keyword">let</span> ( *. ): float =&gt; float =&gt; float;
+<pre id="VAL( *. )"><span class="keyword">let</span> ( *. ): (float, float) =&gt; float;
 </pre><div class="info ">
 Floating-point multiplication<br>
 </div>
 
-<pre id="VAL(/.)"><span class="keyword">let</span> (/.): float =&gt; float =&gt; float;
+<pre id="VAL(/.)"><span class="keyword">let</span> (/.): (float, float) =&gt; float;
 </pre><div class="info ">
 Floating-point division.<br>
 </div>
 
-<pre id="VAL( ** )"><span class="keyword">let</span> ( ** ): float =&gt; float =&gt; float;
+<pre id="VAL( ** )"><span class="keyword">let</span> ( ** ): (float, float) =&gt; float;
 </pre><div class="info ">
 Exponentiation.<br>
 </div>
@@ -507,14 +507,14 @@ Arc tangent.
     Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.<br>
 </div>
 
-<pre id="VALatan2"><span class="keyword">let</span> atan2: float =&gt; float =&gt; float;
+<pre id="VALatan2"><span class="keyword">let</span> atan2: (float, float) =&gt; float;
 </pre><div class="info ">
 <code class="code">atan2 y x</code> returns the arc tangent of <code class="code">y /. x</code>.  The signs of <code class="code">x</code>
     and <code class="code">y</code> are used to determine the quadrant of the result.
     Result is in radians and is between <code class="code">-pi</code> and <code class="code">pi</code>.<br>
 </div>
 
-<pre id="VALhypot"><span class="keyword">let</span> hypot: float =&gt; float =&gt; float;
+<pre id="VALhypot"><span class="keyword">let</span> hypot: (float, float) =&gt; float;
 </pre><div class="info ">
 <code class="code">hypot x y</code> returns <code class="code">sqrt(x *. x + y *. y)</code>, that is, the length
   of the hypotenuse of a right-angled triangle with sides of length
@@ -558,7 +558,7 @@ Round below to an integer value.
 <code class="code">abs_float f</code> returns the absolute value of <code class="code">f</code>.<br>
 </div>
 
-<pre id="VALcopysign"><span class="keyword">let</span> copysign: float =&gt; float =&gt; float;
+<pre id="VALcopysign"><span class="keyword">let</span> copysign: (float, float) =&gt; float;
 </pre><div class="info ">
 <code class="code">copysign x y</code> returns a float whose absolute value is that of <code class="code">x</code>
   and whose sign is that of <code class="code">y</code>.  If <code class="code">x</code> is <code class="code">nan</code>, returns <code class="code">nan</code>.
@@ -567,7 +567,7 @@ Round below to an integer value.
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALmod_float"><span class="keyword">let</span> mod_float: float =&gt; float =&gt; float;
+<pre id="VALmod_float"><span class="keyword">let</span> mod_float: (float, float) =&gt; float;
 </pre><div class="info ">
 <code class="code">mod_float a b</code> returns the remainder of <code class="code">a</code> with respect to
    <code class="code">b</code>.  The returned value is <code class="code">a -. n *. b</code>, where <code class="code">n</code>
@@ -583,7 +583,7 @@ Round below to an integer value.
    <code class="code">f = x *. 2 ** n</code> and <code class="code">0.5 &lt;= x &lt; 1.0</code>.<br>
 </div>
 
-<pre id="VALldexp"><span class="keyword">let</span> ldexp: float =&gt; int =&gt; float;
+<pre id="VALldexp"><span class="keyword">let</span> ldexp: (float, int) =&gt; float;
 </pre><div class="info ">
 <code class="code">ldexp x n</code> returns <code class="code">x *. 2 ** n</code>.<br>
 </div>
@@ -721,7 +721,7 @@ Return the class of the given floating-point number:
 
    More string operations are provided in module <a href="String.html"><code class="code">String</code></a>.<br>
 
-</p><pre id="VAL(^)"><span class="keyword">let</span> (^): string =&gt; string =&gt; string;
+</p><pre id="VAL(^)"><span class="keyword">let</span> (++): (string, string) =&gt; string;
 </pre><div class="info ">
 String concatenation.<br>
 </div>
@@ -799,12 +799,12 @@ Convert the given string to a float.  Raise <code class="code">Failure &quot;flo
 <br>
 <h6 id="6_Pairoperations">Pair operations</h6><br>
 
-<pre id="VALfst"><span class="keyword">let</span> fst: (&apos;a, &apos;b) =&gt; &apos;a;
+<pre id="VALfst"><span class="keyword">let</span> fst: ((&apos;a, &apos;b)) =&gt; &apos;a;
 </pre><div class="info ">
 Return the first component of a pair.<br>
 </div>
 
-<pre id="VALsnd"><span class="keyword">let</span> snd: (&apos;a, &apos;b) =&gt; &apos;b;
+<pre id="VALsnd"><span class="keyword">let</span> snd: ((&apos;a, &apos;b)) =&gt; &apos;b;
 </pre><div class="info ">
 Return the second component of a pair.<br>
 </div>
@@ -814,7 +814,7 @@ Return the second component of a pair.<br>
 
    More list operations are provided in module <a href="List.html"><code class="code">List</code></a>.<br>
 
-</p><pre id="VAL(@)"><span class="keyword">let</span> (@): list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
+</p><pre id="VAL(@)"><span class="keyword">let</span> (@): (list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
 </pre><div class="info ">
 List concatenation.<br>
 </div>
@@ -1073,7 +1073,7 @@ Same as <a href="Pervasives.html#VALopen_out"><code class="code">Pervasives.open
    mode, this function behaves like <a href="Pervasives.html#VALopen_out"><code class="code">Pervasives.open_out</code></a>.<br>
 </div>
 
-<pre id="VALopen_out_gen"><span class="keyword">let</span> open_out_gen: list open_flag =&gt; int =&gt; string =&gt; out_channel;
+<pre id="VALopen_out_gen"><span class="keyword">let</span> open_out_gen: (list(open_flag), int, string) =&gt; out_channel;
 </pre><div class="info ">
 <code class="code">open_out_gen mode perm filename</code> opens the named file for writing,
    as described above. The extra argument <code class="code">mode</code>
@@ -1096,23 +1096,23 @@ Flush the buffer associated with the given output channel,
 Flush all open output channels; ignore errors.<br>
 </div>
 
-<pre id="VALoutput_char"><span class="keyword">let</span> output_char: out_channel =&gt; char =&gt; unit;
+<pre id="VALoutput_char"><span class="keyword">let</span> output_char: (out_channel, char) =&gt; unit;
 </pre><div class="info ">
 Write the character on the given output channel.<br>
 </div>
 
-<pre id="VALoutput_string"><span class="keyword">let</span> output_string: out_channel =&gt; string =&gt; unit;
+<pre id="VALoutput_string"><span class="keyword">let</span> output_string: (out_channel, string) =&gt; unit;
 </pre><div class="info ">
 Write the string on the given output channel.<br>
 </div>
 
-<pre id="VALoutput_bytes"><span class="keyword">let</span> output_bytes: out_channel =&gt; bytes =&gt; unit;
+<pre id="VALoutput_bytes"><span class="keyword">let</span> output_bytes: (out_channel, bytes) =&gt; unit;
 </pre><div class="info ">
 Write the byte sequence on the given output channel.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALoutput"><span class="keyword">let</span> output: out_channel =&gt; bytes =&gt; int =&gt; int =&gt; unit;
+<pre id="VALoutput"><span class="keyword">let</span> output: (out_channel, bytes, int, int) =&gt; unit;
 </pre><div class="info ">
 <code class="code">output oc buf pos len</code> writes <code class="code">len</code> characters from byte sequence <code class="code">buf</code>,
    starting at offset <code class="code">pos</code>, to the given output channel <code class="code">oc</code>.
@@ -1120,21 +1120,21 @@ Write the byte sequence on the given output channel.<br>
    designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
-<pre id="VALoutput_substring"><span class="keyword">let</span> output_substring: out_channel =&gt; string =&gt; int =&gt; int =&gt; unit;
+<pre id="VALoutput_substring"><span class="keyword">let</span> output_substring: (out_channel, string, int, int) =&gt; unit;
 </pre><div class="info ">
 Same as <code class="code">output</code> but take a string as argument instead of
    a byte sequence.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALoutput_byte"><span class="keyword">let</span> output_byte: out_channel =&gt; int =&gt; unit;
+<pre id="VALoutput_byte"><span class="keyword">let</span> output_byte: (out_channel, int) =&gt; unit;
 </pre><div class="info ">
 Write one 8-bit integer (as the single character with that code)
    on the given output channel. The given integer is taken modulo
    256.<br>
 </div>
 
-<pre id="VALoutput_binary_int"><span class="keyword">let</span> output_binary_int: out_channel =&gt; int =&gt; unit;
+<pre id="VALoutput_binary_int"><span class="keyword">let</span> output_binary_int: (out_channel, int) =&gt; unit;
 </pre><div class="info ">
 Write one integer in binary format (4 bytes, big-endian)
    on the given output channel.
@@ -1144,7 +1144,7 @@ Write one integer in binary format (4 bytes, big-endian)
    all machines for a given version of OCaml.<br>
 </div>
 
-<pre id="VALoutput_value"><span class="keyword">let</span> output_value: out_channel =&gt; &apos;a =&gt; unit;
+<pre id="VALoutput_value"><span class="keyword">let</span> output_value: (out_channel, &apos;a) =&gt; unit;
 </pre><div class="info ">
 Write the representation of a structured value of any type
    to a channel. Circularities and sharing inside the value
@@ -1154,7 +1154,7 @@ Write the representation of a structured value of any type
    to <a href="Marshal.html#VALto_channel"><code class="code">Marshal.to_channel</code></a> with an empty list of flags.<br>
 </div>
 
-<pre id="VALseek_out"><span class="keyword">let</span> seek_out: out_channel =&gt; int =&gt; unit;
+<pre id="VALseek_out"><span class="keyword">let</span> seek_out: (out_channel, int) =&gt; unit;
 </pre><div class="info ">
 <code class="code">seek_out chan pos</code> sets the current writing position to <code class="code">pos</code>
    for channel <code class="code">chan</code>. This works only for regular files. On
@@ -1191,7 +1191,7 @@ Close the given channel, flushing all buffered write operations.
 Same as <code class="code">close_out</code>, but ignore all errors.<br>
 </div>
 
-<pre id="VALset_binary_mode_out"><span class="keyword">let</span> set_binary_mode_out: out_channel =&gt; bool =&gt; unit;
+<pre id="VALset_binary_mode_out"><span class="keyword">let</span> set_binary_mode_out: (out_channel, bool) =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_binary_mode_out oc true</code> sets the channel <code class="code">oc</code> to binary
    mode: no translations take place during output.
@@ -1219,7 +1219,7 @@ Same as <a href="Pervasives.html#VALopen_in"><code class="code">Pervasives.open_
    mode, this function behaves like <a href="Pervasives.html#VALopen_in"><code class="code">Pervasives.open_in</code></a>.<br>
 </div>
 
-<pre id="VALopen_in_gen"><span class="keyword">let</span> open_in_gen: list open_flag =&gt; int =&gt; string =&gt; in_channel;
+<pre id="VALopen_in_gen"><span class="keyword">let</span> open_in_gen: (list(open_flag), int, string) =&gt; in_channel;
 </pre><div class="info ">
 <code class="code">open_in_gen mode perm filename</code> opens the named file for reading,
    as described above. The extra arguments
@@ -1243,7 +1243,7 @@ Read characters from the given input channel, until a
    at the beginning of line.<br>
 </div>
 
-<pre id="VALinput"><span class="keyword">let</span> input: in_channel =&gt; bytes =&gt; int =&gt; int =&gt; int;
+<pre id="VALinput"><span class="keyword">let</span> input: (in_channel, bytes, int, int) =&gt; int;
 </pre><div class="info ">
 <code class="code">input ic buf pos len</code> reads up to <code class="code">len</code> characters from
    the given channel <code class="code">ic</code>, storing them in byte sequence <code class="code">buf</code>, starting at
@@ -1262,7 +1262,7 @@ Read characters from the given input channel, until a
    do not designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
-<pre id="VALreally_input"><span class="keyword">let</span> really_input: in_channel =&gt; bytes =&gt; int =&gt; int =&gt; unit;
+<pre id="VALreally_input"><span class="keyword">let</span> really_input: (in_channel, bytes, int, int) =&gt; unit;
 </pre><div class="info ">
 <code class="code">really_input ic buf pos len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>,
    storing them in byte sequence <code class="code">buf</code>, starting at character number <code class="code">pos</code>.
@@ -1272,7 +1272,7 @@ Read characters from the given input channel, until a
    <code class="code">pos</code> and <code class="code">len</code> do not designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
-<pre id="VALreally_input_string"><span class="keyword">let</span> really_input_string: in_channel =&gt; int =&gt; string;
+<pre id="VALreally_input_string"><span class="keyword">let</span> really_input_string: (in_channel, int) =&gt; string;
 </pre><div class="info ">
 <code class="code">really_input_string ic len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>
    and returns them in a new string.
@@ -1305,7 +1305,7 @@ Read the representation of a structured value, as produced
    in particular concerning the lack of type safety.<br>
 </div>
 
-<pre id="VALseek_in"><span class="keyword">let</span> seek_in: in_channel =&gt; int =&gt; unit;
+<pre id="VALseek_in"><span class="keyword">let</span> seek_in: (in_channel, int) =&gt; unit;
 </pre><div class="info ">
 <code class="code">seek_in chan pos</code> sets the current reading position to <code class="code">pos</code>
    for channel <code class="code">chan</code>. This works only for regular files. On
@@ -1340,7 +1340,7 @@ Close the given channel.  Input functions raise a <code class="code">Sys_error</
 Same as <code class="code">close_in</code>, but ignore all errors.<br>
 </div>
 
-<pre id="VALset_binary_mode_in"><span class="keyword">let</span> set_binary_mode_in: in_channel =&gt; bool =&gt; unit;
+<pre id="VALset_binary_mode_in"><span class="keyword">let</span> set_binary_mode_in: (in_channel, bool) =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_binary_mode_in ic true</code> sets the channel <code class="code">ic</code> to binary
    mode: no translations take place during input.
@@ -1376,30 +1376,30 @@ The type of references (mutable indirection cells) containing
 </div>
 
 
-<pre id="VALref"><span class="keyword">let</span> ref: &apos;a =&gt; ref &apos;a;
+<pre id="VALref"><span class="keyword">let</span> ref: &apos;a =&gt; ref(&apos;a);
 </pre><div class="info ">
 Return a fresh reference containing the given value.<br>
 </div>
 
-<pre id="VAL(!)"><span class="keyword">let</span> (!): ref &apos;a =&gt; &apos;a;
+<pre id="VAL(!)"><span class="keyword">let</span> (^): ref(&apos;a) =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">!r</code> returns the current contents of reference <code class="code">r</code>.
    Equivalent to <code class="code">fun r -&gt; r.contents</code>.<br>
 </div>
 
-<pre id="VAL(:=)"><span class="keyword">let</span> (:=): ref &apos;a =&gt; &apos;a =&gt; unit;
+<pre id="VAL(:=)"><span class="keyword">let</span> (:=): (ref(&apos;a), &apos;a) =&gt; unit;
 </pre><div class="info ">
 <code class="code">r := a</code> stores the value of <code class="code">a</code> in reference <code class="code">r</code>.
    Equivalent to <code class="code">fun r v -&gt; r.contents &lt;- v</code>.<br>
 </div>
 
-<pre id="VALincr"><span class="keyword">let</span> incr: ref int =&gt; unit;
+<pre id="VALincr"><span class="keyword">let</span> incr: ref(int) =&gt; unit;
 </pre><div class="info ">
 Increment the integer contained in the given reference.
    Equivalent to <code class="code">fun r -&gt; r := succ !r</code>.<br>
 </div>
 
-<pre id="VALdecr"><span class="keyword">let</span> decr: ref int =&gt; unit;
+<pre id="VALdecr"><span class="keyword">let</span> decr: ref(int) =&gt; unit;
 </pre><div class="info ">
 Decrement the integer contained in the given reference.
    Equivalent to <code class="code">fun r -&gt; r := pred !r</code>.<br>
@@ -1519,24 +1519,24 @@ Format strings have a general and highly polymorphic type
 </ul>
 <br>
 
-<pre id="TYPEformat6"><span class="keyword">type</span> format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f = CamlinternalFormatBasics.format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+<pre id="TYPEformat6"><span class="keyword">type</span> format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) = CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre>
 
 
-<pre id="TYPEformat4"><span class="keyword">type</span> format4 &apos;a &apos;b &apos;c &apos;d = format6 &apos;a &apos;b &apos;c &apos;c &apos;c &apos;d;
+<pre id="TYPEformat4"><span class="keyword">type</span> format4(&apos;a, &apos;b, &apos;c, &apos;d) = format6(&apos;a, &apos;b, &apos;c, &apos;c, &apos;c, &apos;d);
 </pre>
 
 
-<pre id="TYPEformat"><span class="keyword">type</span> format &apos;a &apos;b &apos;c = format4 &apos;a &apos;b &apos;c &apos;c;
+<pre id="TYPEformat"><span class="keyword">type</span> format(&apos;a, &apos;b, &apos;c) = format4(&apos;a, &apos;b, &apos;c, &apos;c);
 </pre>
 
 
-<pre id="VALstring_of_format"><span class="keyword">let</span> string_of_format: format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; string;
+<pre id="VALstring_of_format"><span class="keyword">let</span> string_of_format: format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
 </pre><div class="info ">
 Converts a format string into a string.<br>
 </div>
 
-<pre id="VALformat_of_string"><span class="keyword">let</span> format_of_string: format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+<pre id="VALformat_of_string"><span class="keyword">let</span> format_of_string: format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre><div class="info ">
 <code class="code">format_of_string s</code> returns a format string read from the string
     literal <code class="code">s</code>.
@@ -1545,7 +1545,9 @@ Converts a format string into a string.<br>
     <a href="Scanf.html#VALformat_from_string"><code class="code">Scanf.format_from_string</code></a> function.<br>
 </div>
 
-<pre id="VAL(^^)"><span class="keyword">let</span> (^^): format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; format6 &apos;f &apos;b &apos;c &apos;e &apos;g &apos;h =&gt; format6 &apos;a &apos;b &apos;c &apos;d &apos;g &apos;h;
+<pre id="VAL(^^)"><span class="keyword">let</span> (^^):
+  (format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f), format6(&apos;f, &apos;b, &apos;c, &apos;e, &apos;g, &apos;h)) =&gt;
+  format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;g, &apos;h);
 </pre><div class="info ">
 <code class="code">f1 ^^ f2</code> catenates format strings <code class="code">f1</code> and <code class="code">f2</code>. The result is a
   format string that behaves as the concatenation of format strings <code class="code">f1</code> and

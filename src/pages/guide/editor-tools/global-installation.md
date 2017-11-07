@@ -9,9 +9,11 @@ order: 10
 
 | Platforme  | Commande d'installation
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
-| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
+
+Note : les bundles sont actuellement assez volumineux (environ `100 Mo`), mais `npm` n'affichera pas la progression lors du téléchargement.
 
 ### (Alternative) Via OPAM
 
@@ -22,7 +24,7 @@ order: 10
 ```
 opam update
 opam switch 4.02.3 # mandatory!
-opam install reason.1.13.7
+opam install reason.3.0.0
 opam install merlin.2.5.4
 ```
 

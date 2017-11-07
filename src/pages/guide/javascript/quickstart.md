@@ -8,7 +8,13 @@ npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
 
-Ensuite lancez votre projet comme d'habitude :
+**Rendez-vous dans `bsconfig.json`** et ajoutez la ligne suivante :
+
+```json
+"refmt": 3
+```
+
+Ceci active la nouvelle syntaxe Reason. Ensuite lancez votre projet comme d'habitude :
 
 ```sh
 cd my-first-app
@@ -22,6 +28,6 @@ C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
 
 - Lisez ceci pour en savoir plus sur la façon dont nous compilons en JavaScript grâce à notre partenaire sur ce projet, [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html).
 
-- Sinon, **pour démarrer une application [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, essayez `bsb -init my-react-app -theme react`.
+- Sinon, **pour démarrer une application [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, essayez `bsb -init my-react-app -theme react`.
 
 - Rendez-vous sur la partie [Configuration de l'éditeur](/guide/editor-tools/global-installation) pour obtenir le plugin Reason de votre éditeur préféré !

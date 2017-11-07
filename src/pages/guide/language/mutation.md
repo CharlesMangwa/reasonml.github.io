@@ -10,15 +10,15 @@ Reason a de grandes capacités de programmation impératives et mutatives tradit
 Les bindings let sont immutables, mais vous pouvez les englober dans un `ref`, qui est un peu comme une boîte dont le contenu peut changer :
 
 ```reason
-let foo = ref 5;
+let foo = ref(5);
 ```
 
 ### Utilisation
 
-Vous pouvez accéder à la valeur d'un `ref` via l'opérateur `!` :
+Vous pouvez accéder à la valeur d'un `ref` via l'opérateur postfixé `^` :
 
 ```
-let five = !foo; /* 5 */
+let five = foo^; /* 5 */
 ```
 
 Affectez une nouvelle valeur à `foo` comme ceci :
@@ -36,7 +36,7 @@ Notez que le précédent binding `five` reste `5`, puisqu'il a obtenu l'élémen
 ```reason
 let foo = {contents: 5};
 let five = foo.contents;
-foo.contents = 5;
+foo.contents = 6;
 ```
 
 Avant d'essayer d'utiliser des `ref`s, sachez que vous pouvez obtenir des «mutations» légères et locales via des overrides de bindings let :
@@ -44,5 +44,5 @@ Avant d'essayer d'utiliser des `ref`s, sachez que vous pouvez obtenir des «muta
 ```reason
 let foo = 10;
 let foo = someCondition ? foo + 5 : foo;
-print_int foo; /* soit 15 soit 10 */
+print_int(foo); /* soit 15 soit 10 */
 ```

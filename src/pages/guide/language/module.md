@@ -16,7 +16,7 @@ module School = {
   type profession = Teacher | Director;
 
   let person1 = Teacher;
-  let getProfession person =>
+  let getProfession = (person) =>
     switch person {
     | Teacher => "A teacher"
     | Director => "A director"
@@ -28,7 +28,7 @@ Vous pouvez accéder au contenu d'un module (types inclus !) de la même façon 
 
 ```reason
 let anotherPerson: School.profession = School.Teacher;
-print_endline (School.getProfession anotherPerson); /* "A teacher" */
+print_endline(School.getProfession(anotherPerson)); /* "A teacher" */
 ```
 
 Les modules imbriqués fonctionnent aussi.
@@ -36,7 +36,7 @@ Les modules imbriqués fonctionnent aussi.
 ```reason
 module MyModule = {
   module NestedModule = {
-     let message = "hello";
+    let message = "hello";
   };
 };
 
@@ -64,7 +64,7 @@ Ouverture globale. **Utilisez-la avec précaution, certes cela permet une certai
 ```reason
 open School;
 let anotherPerson: profession = Teacher;
-printProfession anotherPerson;
+printProfession(anotherPerson);
 ```
 
 #### Extension de module
@@ -74,7 +74,7 @@ Utiliser `include` à l'intérieur d'un module "spread" statiquement son contenu
 ```reason
 module BaseComponent = {
   let defaultGreeting = "Hello";
-  let getAudience ::excited => excited ? "world!" : "world";
+  let getAudience = (~excited) => excited ? "world!" : "world";
 };
 
 module ActualComponent = {
@@ -82,7 +82,7 @@ module ActualComponent = {
   include BaseComponent;
   /* override BaseComponent.defaultGreeting */
   let defaultGreeting = "Hey";
-  let render () => defaultGreeting ^ " " ^ getAudience excited::true;
+  let render = () => defaultGreeting ++ " " ++ getAudience(~excited=true);
 };
 ```
 
@@ -138,7 +138,7 @@ Une signature définit la liste des exigences qu'un module doit satisfaire afin 
 
 - `type t = someType;` requiert un champ de type `t` étant égal à `someType`.
 
-- `type t;` requiert un champ de type `t`, mais sans imposer d'exigences sur le type concret de `t`. Nous pourrions utiliser `t` dans d'autres entrées de la signature pour décrire les relations, par exemple `let makePair: t -> (t, t)`, mais on ne peut pas par exemple, supposer que `t` est un `int`. Cela nous donne de grandes capacités d'abstraction forcées.
+- `type t;` requiert un champ de type `t`, mais sans imposer d'exigences sur le type concret de `t`. Nous pourrions utiliser `t` dans d'autres entrées de la signature pour décrire les relations, par exemple `let makePair: t => (t, t)`, mais on ne peut pas par exemple, supposer que `t` est un `int`. Cela nous donne de grandes capacités d'abstraction forcées.
 
 Pour illustrer les différents entrées de type, considérez la signature `EstablishmentType` ci-dessus qui nécessite un module qui :
 
@@ -155,7 +155,7 @@ Le type `EstablishmentType.profession` est **abstrait** : il n'a pas de type con
 module Company: EstablishmentType = {
   type profession = CEO | Designer | Engineer | ...;
 
-  let getProfession person => ...
+  let getProfession = (person) => ...
   let person1 = ...;
   let person2 = ...;
 };
@@ -170,12 +170,12 @@ Tout comme les modules eux-mêmes, les signatures de modules peuvent également 
 ```reason
 module type BaseComponent = {
   let defaultGreeting: string;
-  let getAudience: excited::bool => string;
+  let getAudience: (~excited: bool) => string;
 };
 
 module type ActualComponent = {
   /* the signature is copied over */
-  include module type of BaseComponent;
+  include (module type of BaseComponent);
   let render: unit => string;
 };
 ```
@@ -187,7 +187,7 @@ De la même façon qu'un fichier `react.re` définit implicitement un module Rea
 ```reason
 /* fichier react.re (implémentation. Compile en un module React) */
 type state = int;
-let render = fun str => str;
+let render = (str) => str;
 ```
 
 ```reason
@@ -203,7 +203,7 @@ Les modules peuvent être transmis aux fonctions ! Ce serait l'équivalent de pa
 
 La syntaxe de définition et d'utilisation des functors ressemble beaucoup à la syntaxe pour définir et utiliser des fonctions régulières. Les principales différences sont les suivantes :
 
-- Les functors utilisent le mot-clé `module` en lieu et place de `let` et le mot-clé `fun` désigne ici "functor" et non "function".
+- Les functors utilisent le mot-clé `module` en lieu et place de `let`.
 - Les functors prennent des modules en entrée et retournent des modules.
 - Les functors **requièrent** une annotation des arguments.
 - Les functors doivent débuter avec une lettre majuscule (exactement comme les modules/signatures).
@@ -213,20 +213,23 @@ Voici un functor `MakeSet` pour l'exemple, qui prend en argument un module de ty
 ```reason
 module type Comparable = {
   type t;
-  let equal: t => t => bool;
+  let equal: (t, t) => bool;
 };
 
-module MakeSet = fun (Item: Comparable) => {
+module MakeSet = (Item: Comparable) => {
   /* utilisons une liste comme notre structure de données de support naïve */
-  type backingType = list Item.t;
+  type backingType = list(Item.t);
   let empty = [];
-  let add (currentSet: backingType) (newItem: Item.t) :backingType =>
+  let add (currentSet: backingType, newItem: Item.t) :backingType =>
     /* si item exist */
-    if (List.exists (fun x => Item.equal x newItem) currentSet) {
+    if (List.exists((x) => Item.equal(x, newItem), currentSet)) {
       currentSet /* retourne le même ensemble immutable (une list en réalité) */
     } else {
-      [newItem, ...currentSet]; /* prepend l'ensemble et le retourne */
-    }
+      [
+        newItem,
+        ...currentSet /* prepend l'ensemble et le retourne */
+      ]
+    };
 };
 ```
 
@@ -235,12 +238,12 @@ Les functors peuvent être appliqués à l'aide de la syntaxe d'application de f
 ```reason
 module IntPair = {
   type t = (int, int);
-  let equal (x1, y1) (x2, y2) => x1 == x2 && y1 == y2;
-  let create x y => (x, y);
+  let equal = ((x1, y1), (x2, y2)) => x1 == x2 && y1 == y2;
+  let create = (x, y) => (x, y);
 };
 
 /* IntPair respecte la signature Comparable requise par MakeSet */
-module SetOfIntPairs = MakeSet IntPair;
+module SetOfIntPairs = MakeSet(IntPair);
 ```
 
 #### Types de fonctions de module
@@ -253,10 +256,10 @@ module type Comparable = ...
 module type MakeSetType = (Item: Comparable) => {
   type backingType;
   let empty: backingType;
-  let add: backingType => Item.t => backingType;
+  let add: (backingType, Item.t) => backingType;
 };
 
-module MakeSet: MakeSetType = fun (Item: Comparable) => {
+module MakeSet: MakeSetType = (Item: Comparable) => {
   ...
 };
 ```

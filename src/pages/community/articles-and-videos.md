@@ -31,6 +31,9 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 ## Vidéos
 
 - [Playlist de talks Reason maintenue par la communauté](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
+- [The Why and How of ReasonML](https://www.youtube.com/watch?v=j5mlMUzpE5g) Octobre 2017
+- [Critical ReasonML'ing](https://www.youtube.com/watch?v=k77aR_JyvEE) Octobre 2017
+- [Universal Reason](https://www.youtube.com/watch?v=L0xz-ILKsLE&list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK) Octobre 2017
 - [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) Juillet 2017
 - [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) Mai 2017
 - [Imperfection](https://www.youtube.com/watch?v=tCVXp6gFD8o) Mai 2017
@@ -39,7 +42,8 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Novembre 2016
 
 ## Programmation fonctionnelle générale et système de type
- 
+
+- [C# and F# approaches to illegal states](http://enterprisecraftsmanship.com/2015/09/28/c-and-f-approaches-to-illegal-states/): F# est un cousin de Reason. Super article sur l'équivalent des variants en F#
 - [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
 
 ## Liens niveau pro

@@ -15,7 +15,7 @@ System interface.
 </p></div>
 <hr width="100%">
 
-<pre id="VALargv"><span class="keyword">let</span> argv: array string;
+<pre id="VALargv"><span class="keyword">let</span> argv: array(string);
 </pre><div class="info ">
 The command line arguments given to the process.
    The first element is the command name used to invoke the program.
@@ -46,7 +46,7 @@ Returns <code class="code">true</code> if the given name refers to a directory,
 Remove the given file name from the file system.<br>
 </div>
 
-<pre id="VALrename"><span class="keyword">let</span> rename: string =&gt; string =&gt; unit;
+<pre id="VALrename"><span class="keyword">let</span> rename: (string, string) =&gt; unit;
 </pre><div class="info ">
 Rename a file. The first argument is the old name and the
    second is the new name. If there is already another file
@@ -81,7 +81,7 @@ Change the current working directory of the process.<br>
 Return the current working directory of the process.<br>
 </div>
 
-<pre id="VALreaddir"><span class="keyword">let</span> readdir: string =&gt; array string;
+<pre id="VALreaddir"><span class="keyword">let</span> readdir: string =&gt; array(string);
 </pre><div class="info ">
 Return the names of all files present in the given directory.
    Names denoting the current directory and the parent directory
@@ -92,7 +92,7 @@ Return the names of all files present in the given directory.
    appear in alphabetical order.<br>
 </div>
 
-<pre id="VALinteractive"><span class="keyword">let</span> interactive: Pervasives.ref bool;
+<pre id="VALinteractive"><span class="keyword">let</span> interactive: Pervasives.ref(bool);
 </pre><div class="info ">
 This reference is initially set to <code class="code">false</code> in standalone
    programs and to <code class="code">true</code> if the code is being executed under
@@ -190,7 +190,7 @@ What to do when receiving a signal:<ul>
 </div>
 
 
-<pre id="VALsignal"><span class="keyword">let</span> signal: int =&gt; signal_behavior =&gt; signal_behavior;
+<pre id="VALsignal"><span class="keyword">let</span> signal: (int, signal_behavior) =&gt; signal_behavior;
 </pre><div class="info ">
 Set the behavior of the system on receipt of a given signal.  The
    first argument is the signal number.  Return the behavior
@@ -199,7 +199,7 @@ Set the behavior of the system on receipt of a given signal.  The
    exception is raised.<br>
 </div>
 
-<pre id="VALset_signal"><span class="keyword">let</span> set_signal: int =&gt; signal_behavior =&gt; unit;
+<pre id="VALset_signal"><span class="keyword">let</span> set_signal: (int, signal_behavior) =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Sys.html#VALsignal"><code class="code">Sys.signal</code></a> but return value is ignored.<br>
 </div>

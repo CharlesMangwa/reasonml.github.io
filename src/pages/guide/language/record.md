@@ -84,7 +84,7 @@ baby.age = baby.age + 1; /* altère `baby`. Joyeux anniversaire ! */
 
 ### Syntaxe du shorthand
 
-Pour réduire la redondance, nous fournissons le **punning** pour les types et les valeurs d'un record. Vous pouvez l'utiliser lorsque le nom d'un champ de record correspond au nom de sa valeur/type.
+Pour réduire la redondance, nous fournissons le **punning** pour les types et les valeurs d'un record. Le punning fait référence à la syntaxe que vous pouvez utiliser lorsque le nom d'un champ correspond au nom de sa valeur/type :
 
 ```reason
 type horsePower = {power: int, metric: bool};
@@ -107,12 +107,11 @@ Si vous travaillez avec JavaScript, la syntaxe et les opérations de records dev
 <!-- TODO: link to object doc  -->
 
 ```reason
-type payload = Js.t {
-    .
-    name: string
-};
-external sendQuery: payload => unit = "sendQuery" [@@bs.module "myAjaxLibrary"];
-sendQuery {"name": "Reason"};
+type payload = {. "name": string};
+
+[@bs.module "myAjaxLibrary"] external sendQuery : payload => unit = "sendQuery";
+
+sendQuery({"name": "Reason"});
 ```
 Notez le point dans la définition de type. C'est une notation de type d'objet, et n'a rien à voir avec un record ! Les objets seront décrits dans une section ultérieure.
 
@@ -124,7 +123,7 @@ Avec les records, vous ne pouvez pas dire "j'aimerais que cette fonction prenne 
 type person = {age: int, name: string};
 type monster = {age: int, hasTentacles: bool};
 
-let getAge entity => entity.age;
+let getAge = (entity) => entity.age;
 ```
 
 La dernière ligne de la fonction va supposée que le paramètre `entity` doit être de type `monster`. Donc on aura une erreur à la dernière ligne du code suivant :
@@ -133,8 +132,8 @@ La dernière ligne de la fonction va supposée que le paramètre `entity` doit �
 let kraken = {age: 9999, hasTentacles: true};
 let me = {age: 5, name: "Baby Reason"};
 
-getAge kraken;
-getAge me;
+getAge(kraken);
+getAge(me);
 ```
 
 Le système de types va soulever une erreur parce que  `me` est une `person`, et que `getAge` ne fonctionne qu'avec `monster`. Si vous avez besoin de telles fonctionnalités, utilisez les objects Reason, abordés dans une section ultérieure.
