@@ -16,7 +16,7 @@ Un booléen possède le type `bool` et peut valoir`true` ou `false`. Les opérat
 
 ### Utilisation
 
-**Note : BuckleScript fournit des bindings pour les** `true` **et** `false` **JavaScript**, qui [ne sont pas les mêmes `true` et `false` que ceux de Reason/OCaml](http://bucklescript.github.io/bucklescript/Manual.html#_boolean) ! Ne les utilisez pas de façon interchangeable sans conversion appropriée (`Js.to_bool` et `Js.Boolean.to_js_boolean`).
+**Note : BuckleScript fournit des bindings pour les** `true` **et** `false` **JavaScript**, qui [ne sont pas les mêmes `true` et `false` que ceux de Reason/OCaml](https://bucklescript.github.io/docs/en/boolean.html) ! Ne les utilisez pas de façon interchangeable sans conversion appropriée (`Js.to_bool` et `Js.Boolean.to_js_boolean`).
 
 ### Conseils & astuces
 

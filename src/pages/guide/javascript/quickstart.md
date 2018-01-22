@@ -8,25 +8,16 @@ npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
 
-**Rendez-vous dans `bsconfig.json`** et ajoutez la ligne suivante :
-
-```json
-"refmt": 3
-```
-
-Ceci active la nouvelle syntaxe Reason. Ensuite lancez votre projet comme d'habitude :
+Ensuite lancez votre projet comme d'habitude :
 
 ```sh
 cd my-first-app
 npm run build
 ```
 
-Il est directement en watch mode, donc n'importe quel changement dans vos fichiers sera intercepté et compilé.
+Il est directement en watch mode, donc n'importe quel changement dans vos fichiers sera intercepté et compilé. C'est tout !
 
-C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
-
-
-- Lisez ceci pour en savoir plus sur la façon dont nous compilons en JavaScript grâce à notre partenaire sur ce projet, [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html).
+- Lisez ceci pour en savoir plus sur la façon dont nous compilons en JavaScript grâce à notre partenaire sur ce projet, [BuckleScript](https://bucklescript.github.io/).
 
 - Sinon, **pour démarrer une application [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, essayez `bsb -init my-react-app -theme react`.
 

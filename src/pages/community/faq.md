@@ -57,21 +57,6 @@ Reason/OCaml n'a pas besoin que vous écriviez d'import. Les modules référenc�
 
 Un nom de module est le nom du fichier avec la première lettre en majuscule. Il doit être unique par projet. Cela met de côté le système de fichiers et vous permet de déplacer des fichiers sans modifier votre code.
 
-#### BuckleScript : existe-t-il un moyen générique de transformer un record en un objet JavaScript ?
-Pas actuellement. Vous devriez faire la traduction manuellement. Sinon, essayez [d'utiliser directement les objets JavaScript](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj).
-
-De manière générale, nous recommandons de se bind à la librairie JavaScript plutôt que de le faire de façon grossière et idiomatique. Mieux vaut rester léger et intercepter des erreurs de conversion. 
-
-Voir aussi notre [guide d'interopérabilité JavaScript](/guide/javascript/interop/).
-
-#### Bsb : existe-t-il un moyen de configurer le répertoire de sortie ?
-Pas actuellement. Bien que vous puissiez produire des artefacts JS aux côtés de vos fichiers Reason. Voyez l'option `in-source` [ici](https://bucklescript.github.io/bucklescript/docson/#build-schema.json), dans package-specs -> package-spec -> module-format-object.
-
-#### Le compilateur me dit qu'il n'arrive pas à trouver le module.
-Êtes-vous entrain d'utiliser un module tiers ? Si vous êtes entrain de compiler en JavaScript, avez-vous ajouté une dépendance au champ `bs-dependencies` de votre [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started) ? Aussi, avez-vous exécutez `bsb -make-world` ? `bsb` par défaut ne crée le projet racine que pour lui-même, pour des questions de performance.
-
-De plus, n'oubliez pas d'ajouter les dossiers source dans votre `bsconfig.json` ! Par soucis de performance, `bsb` ne crée pas automatiquement et de façon récursive des dossiers imbriqués.
-
 #### Est-ce que `Some | None`, `contents`, `Array`, `List` ont quelque chose de particulier ? D'où vient-ils ?
 Ce sont des variantes/records/définitions de modules ordinaires qui viennent avec la [librairie standard](http://caml.inria.fr/pub/docs/manual-ocaml/libref/), `open` par défaut lors de la compilation par soucis de commodité.
 

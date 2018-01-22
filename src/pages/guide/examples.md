@@ -46,7 +46,7 @@ let obj1 = {
 /* Compile en un objet JavaScript qui ressemble exactement à ce que vous voyez là */
 ```
 
-Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulées dans une string via le apostrophes. C'est le *syntax sugar* de Reason pour [bs.obj](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj). Le type est déduit. L'exemple suivant l'identifie explicitement.
+Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulées dans une string via le apostrophes. C'est le *syntax sugar* de Reason pour [bs.obj](https://bucklescript.github.io/docs/en/object.html#creation). Le type est déduit. L'exemple suivant l'identifie explicitement.
 
 ### Typage d'un object JavaScript
 

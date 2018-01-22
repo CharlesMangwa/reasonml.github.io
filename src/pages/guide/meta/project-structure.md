@@ -29,9 +29,13 @@ Aussi peu que possible.
 
 **Justification** : un langage compilé, statiquement typé, ne peut pas modéliser ses dépendances facilement en se confondant comme dans un langage dynamique. Surtout quand nous sommes encore entrain de nous appuer sur NPM/Yarn (pour réduire les frais généraux d'apprentissage à moyen terme), tous deux non réalisés avec Reason/BuckleScript à l'esprit. Garder les dépendances simples et légères aide à réduire la possibilité de conflits (par exemple, deux dépendances diamants ou des interfaces en conflit).
 
+Modéliser le code tiers en tant que `dependencies`, et non 'peerDependencies`.
+
+**Justification** : vous devriez les traiter psychologiquement comme des détails d'implémentation qui pourraient être modifiés un jour.
+
 ### Documentation
 
-Ayez-en. Dépensez plus d'énergie à les rendre géniales (exemples, pièges à éviter, etc) et professionnelles plutôt que _juste_ belles à regarder.
+Ayez-en. Dépensez plus d'énergie à les rendre géniales (exemples, pièges à éviter, etc) et professionnelles plutôt que _juste_ belles à regarder. Utilisez des exemples et évitez d'utiliser des noms tels que `foo` et` bar`. Il y a toujours des noms plus concrets (c'est un exemple, pas besoin d'être abstrait/de généraliser pour le moment. Les docs de l'API le font déjà pleinement). Pour les articles de blog, ne répétez pas la doc elle-même, décrivez la _transition_ de l'ancien au nouveau, et le pourquoi (par exemple "c'était un composant, maintenant c'est une fonction, parce que ...").
 
 **Justification** : il est difficile pour les nouveaux arrivants de distinguer une bibliothèque simple et décente d'une autre qui semble juste jolie. Pour le bien de la communauté, n'essayez pas trop de vous calquer sur les bibliothèques d'un autre. Faites passer le mot, mais utilisez votre propre jugement aussi.
 

@@ -133,7 +133,7 @@ Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type
 
 #### Interopérabilité avec JavaScript
 
-_Cette section suppose des connaissance sur l'[IFE](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) de BuckleScript. Sautez cette partie si vous n'avez pas encore ressenti le besoin d'utiliser des variants pour gérer des bindings de fonctions JavaScript_.
+_Cette section suppose des connaissance sur l'[IFE](https://bucklescript.github.io/docs/en/interop-overview.html) de BuckleScript. Sautez cette partie si vous n'avez pas encore ressenti le besoin d'utiliser des variants pour gérer des bindings de fonctions JavaScript_.
 
 Beaucoup de librairies JavaScript utilisent des fonctions pouvant accepter de nombreux types d'arguments. Dans ces cas là, il est très tentant de les modéliser par des variants. Par exemple, supposons qu'il existe une fonction JavaScript `myLibrary.draw` qui prend un `number` ou une `string` en paramètre. Vous pourriez être tenté de la bind comme ceci :
 
@@ -159,7 +159,7 @@ Vous pourriez procéder de la sorte, mais il existe de bien meilleures solutions
 [@bs.module "myLibrary"] external drawString : string => unit = "draw";
 ```
 
-Ou, faîtes vous plaisir et utilisez une fonctionnalité avancée des variants appelée GADT, puis utilisez la [fonctionnalité de l'argument fantôme de l'IFE](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism) de BuckleScript. Si ces mots ne vous disent absolument rien, pas de soucis. Référez-vous plutôt à la suggestion précédente.
+Plus de tricks de binding de fonctions [ici](http://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function).
 
 #### Les types de variants se trouvent par nom de champ
 

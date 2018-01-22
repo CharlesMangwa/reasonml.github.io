@@ -9,7 +9,7 @@ Reason n'est pas un nouveau langage. C'est une nouvelle syntaxe et chaine de com
 
 À cet égard, Reason peut presque être considéré comme un cousin fortement typé statiquement, plus rapide et plus simple de JavaScript. Les accrocs historiques en moins, mais les fonctionnalités d'ES2030 que vous pouvez utiliser dès aujourd'hui et l'accès à l'écosystème JavaScript et OCaml en plus !
 
-Reason compile en JavaScript grâce au partenaire de notre projet [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html), qui compile OCaml/Reason en un JavaScript lisible avec une interopérabilité impéccable. Reason compile également en assembleur grâce à OCaml lui-même.
+Reason compile en JavaScript grâce au partenaire de notre projet [BuckleScript](https://bucklescript.github.io/), qui compile OCaml/Reason en un JavaScript lisible avec une interopérabilité impéccable. Reason compile également en assembleur grâce à OCaml lui-même.
 
 ### Pourquoi Reason ?
 
@@ -25,7 +25,7 @@ Toutes ces décisions ont été prises de sorte à ce que, pour les cas d'utilis
 
 - **Un système de types solide comme le roc**. Les types OCaml possèdent une couverture de 100% (chaque ligne de code), l'inférence (les types peuvent être déduits et ne doivent pas forcément être écrits manuellement) et la sûreté (une fois que ça compile, les types sont garantis pour être précis).
 - **Une attention à la simplicité et au pragmatisme**. Nous autorisons la mutation et l'objet par soucis de familiarité et d'interopérabilité, tout en conservant le reste du langage pur, immutable et fonctionnel.
-- **Un focus sur la taille & la performance**. Le système de build de Reason, [`bsb`](http://bucklescript.github.io/bucklescript/Manual.html#_bucklescript_build_system_code_bsb_code), build en moins de 100ms (incrémental). Notre résultat en sortie est aussi [assez léger](https://twitter.com/bobzhang1988/status/827562467148623875).
+- **Un focus sur la taille & la performance**. Le système de build de Reason, [`bsb`](https://bucklescript.github.io/docs/en/build-performance.html), build en moins de 100ms (incrémental). Notre résultat en sortie est aussi [assez léger](https://twitter.com/bobzhang1988/status/827562467148623875).
 - **Apprentissage progressif & conversion de codebase**. Récupérez les avantages d'un fichier entièrement typé dès le premier jour. Si tout le reste échoue, [collez des extraits de JavaScript brut directement dans votre fichier Reason](/guide/javascript/interop).
 - **Super écosystème & outillage**. Utilisez [votre éditeur préféré](/guide/editor-tools/editors-plugins), [votre package NPM favori](/guide/javascript/libraries), et n'importe laquelle de vos [stacks](https://webpack.js.org) [favorites](https://github.com/reasonml/reason-react) [existantes](https://github.com/reasonml-community/bs-jest).
 

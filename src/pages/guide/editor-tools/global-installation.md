@@ -9,8 +9,8 @@ order: 10
 
 | Platforme  | Commande d'installation
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-darwin.tar.gz`
-| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-linux.tar.gz`
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 Note : les bundles sont actuellement assez volumineux (environ `100 Mo`), mais `npm` n'affichera pas la progression lors du téléchargement.
@@ -24,7 +24,7 @@ Note : les bundles sont actuellement assez volumineux (environ `100 Mo`), mais `
 ```
 opam update
 opam switch 4.02.3 # mandatory!
-opam install reason.3.0.0
+opam install reason.3.0.4
 opam install merlin.2.5.4
 ```
 
@@ -38,7 +38,7 @@ Si _ceci_ échoue, essayez https://github.com/reasonml/reasonml.github.io/pull/1
 
 Enfin, si les choses ne fonctionnent toujours pas, veuillez déposer une issue sur https://github.com/reasonml/reason-cli/issues. Désolé pour la gêne occasionnée.
 
-#### Plugin edtieur non fonctionnel
+#### Plugin éditeur non fonctionnel
 
 **Si vous êtes sur Windows** : la prise en charge actuelle de l'outil d'édition pour Windows est fragile. Aidez-nous à améliorer le problème ci-dessus ! Merci d'avance !
 

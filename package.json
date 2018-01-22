@@ -6,7 +6,7 @@
   "dependencies": {
     "codemirror": "^5.27.4",
     "gatsby": "^1.0.1",
-    "gatsby-link": "^1.0.1",
+    "gatsby-link": "1.6.31",
     "gatsby-plugin-catch-links": "^1.0.2",
     "gatsby-plugin-glamor": "1.0.6",
     "gatsby-plugin-react-helmet": "^1.0.1",
@@ -18,7 +18,7 @@
     "gatsby-remark-smartypants": "^1.0.1",
     "gatsby-source-filesystem": "^1.0.1",
     "gatsby-transformer-remark": "^1.0.1",
-    "glamor": "^3.0.0-2",
+    "glamor": "3.0.0-2",
     "gray-matter": "^3.0.2",
     "lz-string": "^1.4.4",
     "react-codemirror": "^1.0.0",

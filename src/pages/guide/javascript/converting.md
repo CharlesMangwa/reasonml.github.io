@@ -41,7 +41,7 @@ Voici certaines choses que vous feriez à cette étape :
 
 - Commenter les `require`s.
 
-- Effectuer d'autres changements similaires. Pour les expressions idiomatiques qui n'ont pas d'équivalent, BuckleScript utilise `bs.raw` ([documentation](http://bucklescript.github.io/bucklescript/Manual.html#_embedding_arbitrary_js_code_as_an_expression)).
+- Effectuer d'autres changements similaires. Pour les expressions idiomatiques qui n'ont pas d'équivalent, BuckleScript utilise `bs.raw` ([documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript.html)).
 
 Encore une fois, **ne vous inquiétez que de rendre le fichier syntaxiquement valide**. Essayer d'apprendre les trois syntaxes, les types et autres sémantiques lors de la conversion d'un fichier réduit votre vitesse d'itération à moins d'un tiers.
 
@@ -68,11 +68,11 @@ Types, Passe 1
 
 Vous pouvez parfois obtenir des erreurs de syntaxe, mais pas aussi drastiques que l'étape précédente.
 
-- Changer `foo.bar` en `foo##bar`. Cette [fonctionnalité *escape-hatch* de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html#_how_to_consume_js_property_and_methods) sera votre ami à moyen terme.
+- Changer `foo.bar` en `foo##bar`. Cette [fonctionnalité *escape-hatch* de BuckleScript](https://bucklescript.github.io/docs/en/object.html#object-as-record) sera votre ami à moyen terme.
 
-- Convertir `{foo: bar}` en `[%bs.obj {foo: bar}]` ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj)). Après `refmt`, le tout sera *sucré* en `{"foo": bar}`.
+- Convertir `{foo: bar}` en `[%bs.obj {foo: bar}]` ([docs](https://bucklescript.github.io/docs/en/object.html#creation)). Après `refmt`, le tout sera *sucré* en `{"foo": bar}`.
 
-- Pour communiquer avec des fichiers JavaScript externes, utilisez `external`. Ils sont [l'interface de fonction étrangère](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) de BuckleScript.
+- Pour communiquer avec des fichiers JavaScript externes, utilisez `external`. Ils sont [l'interface de fonction étrangère](https://bucklescript.github.io/docs/en/intro-to-external.html) de BuckleScript.
 
   - Externals inline. Pas besoin de créer des fichiers propres et bien séparés pour les externals pour l'instant. Nous reviendrons là-dessus.
 

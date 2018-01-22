@@ -16,7 +16,7 @@ Les changements d'infra n'auraient pas eu lieu sans une coopération étroite de
 
 **Points principaux** :
 
-- [Voici à quoi ça ressmeble](https://github.com/reasonml-community/reason-react-example/commit/3640ce6bb6729c3b3d8a0c200a624996f8da8beb).
+- [Voici à quoi ça ressemble](https://github.com/reasonml-community/reason-react-example/commit/3640ce6bb6729c3b3d8a0c200a624996f8da8beb).
 - Plus de 100 problèmes d'analyse et de printing corrigés ! Le nombre total d'issues ouvertes est passé de près de 500 à moins de 300.
 - Nouvelle infro de  messages d'erreur, par Fred. Cela résout beaucoup de pain points existants avec les rapports d'erreur de refmt : mots-clés réservés, point-virgule manquant, etc. Plus à venir ! **S'il vous plaît, laissez un petit message sympathique à Fred sur son [Twitter](https://twitter.com/let_def)**. Montrez-lui que la communauté JavaScript apprécie son aide.
 - Unification de `[@foo]`, `[@@foo]` et `[@@@foo]` en `[@foo]`. Argument labelisé + punning de type, sucre syntaxique de type d'objet JavaScript `{. "foo": string}`, la concaténation de string se fait maintenant via `++`, tweaks de formattage d'opérateurs infixes, etc.
@@ -27,14 +27,14 @@ Les changements d'infra n'auraient pas eu lieu sans une coopération étroite de
 
 - Il existe un **script de migraiton** disponible à https://github.com/reasonml/upgradeSyntaxFrom2To3. Utilisez-le. Aucune modification manuelle de la syntaxe n'est requise.
 - Désinstallez & mettez à jour [reason-cli](/guide/editor-tools/global-installation) en version `3.0.0` (en lieu et place de l'ancienne version `1.13.7`), pour le tooling de l'éditeur.
-- Mettez à jour la version de [BuckleScript](https://github.com/BuckleScript/bucklescript) de votre projet en `2.0.0`.
+- Mettez à jour la version de [BuckleScript](https://bucklescript.github.io) de votre projet en version `2.1.0`.
 - Précisez `"refmt": 3` dans votre  `bsconfig.json`.
 - Redémarrez votre éditeur.
 - Si vous travaillez en natif, il s'agit de `reason.3.0.0` sur OPAM.
 
 **Comment cela affecte-t-il les projets existants ?**
 
-- Si vous ne précisez pas`"refmt": 3` dans votre `bsconfig.json`, rien ne change.
+- Si vous ne précisez pas`"refmt": 3` dans votre `bsconfig.json`, rien ne change. (Mise à jour: bs-platform 2.1.0 est par défaut sur refmt 3. Si vous voulez garder refmt 2, précisez `"refmt": 2`).
 - Vos dépendances tierces peuvent toujours rester à la version 2, et inversement. Les choses vont fonctionner comme prévu.
 - Entrain d'apprendre la nouvelle syntaxe ? [Reason-tools](https://github.com/reasonml/reason-tools) convertit maintenant entre les syntaxes aussi !
 - Pour le natif, les dépendances devront d'abord mettre à niveau la syntaxe. Nous allons résoudre cela un peu mieux dans le futur.

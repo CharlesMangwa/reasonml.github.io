@@ -41,7 +41,7 @@ Hehe...
 |};
 ```
 
-Par analogie, c'est comme l'interpolation de chaîne des backticks de JavaScript, excepté le fait d'avoir à échapper des caractères spéciaux, et sans interpolation intégrée de variables. Bien que vous puissiez récupérer trivialement cette dernière fonctionnalité, [comme BuckleScript l'a fait](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
+Par analogie, c'est comme l'interpolation de chaîne des backticks de JavaScript, excepté le fait d'avoir à échapper des caractères spéciaux, et sans interpolation intégrée de variables. Bien que vous puissiez récupérer trivialement cette dernière fonctionnalité, [comme BuckleScript l'a fait](https://bucklescript.github.io/docs/en/common-data-types.html#unicode-support):
 
 ```reason
 let world = {js|世界|js}; /* Supporte les caractères Unicode */
@@ -86,7 +86,7 @@ comparé à
 let r = Str.regexp("hello \\([A-Za-z]+\\)");
 ```
 
-Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) et [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) à la place, vu que `Str` n'est pas disponible.
+Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](https://bucklescript.github.io/docs/en/regular-expression.html) et [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) à la place, vu que `Str` n'est pas disponible.
 
 L'accent mis par Reason/OCaml sur la simplicité par rapport à l'ingéniosité est très bien représenté ici par son implémentation assez simple des strings natives. Une implémentation de string trop sophistiquée peut parfois se [retourner contre nous](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 

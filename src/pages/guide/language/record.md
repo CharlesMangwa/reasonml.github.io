@@ -8,8 +8,8 @@ Les records sont comme des objets JavaScript mais sont :
 - plus léger
 - immutables par défaut
 - fixes au niveau des noms de champ et des types
-- trrrès rapide
-- suuuuper bien typés
+- rapide
+- typés
 
 ### Utilisation
 
@@ -103,7 +103,7 @@ type car = {name: string, horsePower};
 
 #### Interopérabilité avec JavaScript
 
-Si vous travaillez avec JavaScript, la syntaxe et les opérations de records devraient être familières. Vous pourriez être tenté(e) de travaillez avec JavaScript en convertissant un objet JavaScript en un record et vice versa. C'est bien, mais nous avons **une bien meilleure solution qui ne présente aucun frais de conversion**. Voyez [cette partie](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) qui traite des **objets Reason**. Voici un exemple:
+Si vous travaillez avec JavaScript, la syntaxe et les opérations de records devraient être familières. Vous pourriez être tenté(e) de travaillez avec JavaScript en convertissant un objet JavaScript en un record et vice versa. C'est bien, mais nous avons **une bien meilleure solution qui ne présente aucun frais de conversion**. Voyez [cette partie](https://bucklescript.github.io/docs/en/object.html#object-as-record) qui traite des **objets Reason**. Voici un exemple:
 <!-- TODO: link to object doc  -->
 
 ```reason

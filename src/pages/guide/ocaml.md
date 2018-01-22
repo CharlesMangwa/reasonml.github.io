@@ -86,7 +86,9 @@ let ten = 10;;
 imperativeFunc ten ten;;
 imperativeFunc 0 0;;</pre>
     </td>
-    <td>Idem qu'au dessus</td>
+    <td>
+      Idem qu'au dessus
+    </td>
   </tr>
 
   <thead><tr> <th scope="col"><p>Scope local OCaml</p></th><th scope="col"><p>Scope local Reason</p></th></tr></thead>

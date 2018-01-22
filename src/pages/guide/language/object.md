@@ -50,7 +50,7 @@ let obj: tesla = {
 
 Cet objet est de type `tesla` et à une méthode publique `drive`. Il contient aussi une méthode privée `enableEnvy` uniquement accessible depuis l'intérieur de l'objet.
 
-Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Exactement comme le `this` de l'object JavaScript, notre `this` a un comportement extrêment irrégulier en fonction du contexte. Nan on rigole. Notre `this` pointe toujours correctement vers l'objet en question. Il faut savoir apprendre des erreurs de l'Histoire.
+Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Le `this` de l'objet JavaScript peut avoir  un comportement extrêment irrégulier; celui de Reason pointe toujours correctement vers l'objet en question.
 
 L'exemple suivant montre un type d'objet ouvert qui utilise un type comme paramètre. Le paramètre de type d'objet est requis afin d'implémenter toutes les méthodes du type d'objet ouvert.
 
@@ -79,7 +79,7 @@ obj#doYouWant();
 
 ### Conseils & astuces
 
-Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason natifs, mais plutôt [l'object spécial] (https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) de BuckleScript. Ils sont différents en ce qu'ils :
+Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason natifs, mais plutôt [l'object spécial] (https://bucklescript.github.io/docs/en/object.html#object-as-record) de BuckleScript. Ils sont différents en ce qu'ils :
 
 - accèdent aux champs via `##`
 - sont toujours utilisés avec `Js.t` (en tant que paramètres du type `Js.t`).

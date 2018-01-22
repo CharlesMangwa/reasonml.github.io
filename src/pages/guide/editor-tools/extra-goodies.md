@@ -9,7 +9,7 @@ order: 30
 
 ### BuckleScript
 
-Vous verrez [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html) en profondeur dans le reste de cette documentation, car c'est le moteur qui anime notre compilation JavaScript. Ses binaires globaux sont installés via `npm install -g bs-platform`.
+Vous verrez [BuckleScript](https://bucklescript.github.io) en profondeur dans le reste de cette documentation, car c'est le moteur qui anime notre compilation JavaScript. Ses binaires globaux sont installés via `npm install -g bs-platform`.
 
 ### Autres outils
 
@@ -38,6 +38,10 @@ Reason est fourni avec une boucle d'évaluation (REPL) nommée `rtop`, qui une f
 <img src="https://user-images.githubusercontent.com/1909539/28570943-3bd9eb00-70f5-11e7-981c-4846719c0943.gif" style="width:100%; max-width:466px; max-height:433px;">
 
 Utilisez `#quit;` pour fermer votre session REPL.
+
+#### re:bench
+
+[re:bench](https://rebench.github.io) est un outil de benchmarking en ligne. Il prend en charge les cas de test écrits en Reason, OCaml et JavaScript, et permet le partage de benchmarks via des URL uniques. Il est compile vers JavaScript en utilisant BuckleScript.
 
 **Vous noterez que `rtop` ne fonctionne pas facilement avec les packages et les `external`s** actuellement. Nous vous recommandons d'évaluer le code dans notre [Éditeur](/try).
 

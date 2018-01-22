@@ -152,9 +152,9 @@ JavaScript                |   Reason
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`<Foo bar=1 baz="hi" onClick={bla} />`  |  Idem
-`<Foo bar=bar />`                       |  `<Foo bar />` \*
-`<input checked />`                     |  `<input checked=true />`
+`<Foo bar={1} baz="hi" onClick={bla} />`  |  Idem
+`<Foo bar={bar} />`                       |  `<Foo bar />` \*
+`<input checked />`                       |  `<input checked=true />`
 
 \* Punning d'argument
 
@@ -194,3 +194,9 @@ let res = {
   </tr>
 </table>
 
+### Comments
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`/* Comment */`  |  Same
+`// line comment`  |  Coming soon

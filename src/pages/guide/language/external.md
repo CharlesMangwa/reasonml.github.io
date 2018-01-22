@@ -15,7 +15,9 @@ external myCFunction : int => string = "theCFunction";
 [@bs.val] external getElementsByClassName : string => array(Dom.element) = "document.getElementsByClassName";
 ```
 
-(Le code ci-dessus est un external spécifique à [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html) qui bind une fonction JavaScript portant le même nom).
+(Le code ci-dessus est un external spécifique à [BuckleScript](https://bucklescript.github.io/) qui bind une fonction JavaScript portant le même nom).
+
+**Note** : les `external`s ne peuvent être qu'au niveau supérieur ou à l'intérieur d'une définition de module. Vous ne pouvez pas les déclarer par exemple dans un corps de fonction.
 
 ### Utilisation
 
@@ -23,7 +25,7 @@ Vous utiliseriez une valeur/fonction externe comme s'il s'agissait d'un binding 
 
 ### Conseils & astuces
 
-Si vous venez d'un background JavaScript : **prenez le temps de vous renseigner sur les [externals de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html#_binding_to_simple_js_functions_values)** ! Au début, vous rencontrerez certainement un bon nombre d'externals avant d'écrire à 100% du code Reason idiomatique.
+Si vous venez d'un background JavaScript : **prenez le temps de vous renseigner sur les [externals de BuckleScript](https://bucklescript.github.io/docs/en/interop-overview.html)** ! Au début, vous rencontrerez certainement un bon nombre d'externals avant d'écrire à 100% du code Reason idiomatique.
 
 ### Décisions de conception
 

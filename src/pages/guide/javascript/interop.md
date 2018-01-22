@@ -77,7 +77,7 @@ Nous aurons besoin de quelques connaissances sur la représentation du runtime d
 - les `strings` sont des strings, `ints` and `floats` sont juste des nombres
 - un [Array](/guide/language/data-types/#array) est une liste de longueur fixe mutable en OCaml, et est représentée sous la forme d'un array simple en JavaScript.
 - une [List](/guide/language/data-types/#linked-list) est une liste immutable liée de style fonctionnel et est clairement la solution la plus idiomatique à utiliser dans la majorité des cas. Cependant sa représentation est plus compliquée (essayez `Js.log([1,2,3,4])` pour vous en rendre compte). À cause de cela, il est conseillé de convertir en et depuis des `Arrays` lorsqu'on communique avec JavaScript, via `Array.of_list` et `Array.to_list`.
-- Si vous voulez approfondir le sujet, il existe une liste exhaustive [dans le manuel de BuckleScript](https://github.com/bucklescript/bucklescript/wiki/Runtime-representation).
+- Si vous voulez approfondir le sujet, il existe une liste exhaustive [dans le manuel de BuckleScript](https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet).
 
 En sachant cela, nous pouvons écrire une fonction en JavaScript qui accepte juste un array et renvoie un number, sans trop de problèmes.
 
@@ -109,7 +109,7 @@ J'ai rencontré pas mal de bugs à cause du JavaScript brut que j'ai ajouté pou
 
 Jusqu'à maintenant nous avons utilisé `bs.raw`, ce qui est un moyen très rapide de procéder mais qui *n'est pas* adapté à la production.
 
-Mais que faire si nous avons besoin d'appeler une fonction qui est en JavaScript ? Ce qui est chose nécessaire pour interagir avec le DOM ou utiliser des nodes modules. Dans BuckleScript, vous utilisez une déclaration externe ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_binding_to_simple_js_functions_values)).
+Mais que faire si nous avons besoin d'appeler une fonction qui est en JavaScript ? Ce qui est chose nécessaire pour interagir avec le DOM ou utiliser des nodes modules. Dans BuckleScript, vous utilisez une déclaration externe ([docs](https://bucklescript.github.io/docs/en/function.html)).
 
 Récupérer une valeur et une fonction sont deux choses assez simples :
 
@@ -136,7 +136,7 @@ let ctx = getContext(myCanvas, "2d");
 
 Alors, voyons voir ce qu'il se passe. Nous avons créé des types abstraits pour le canvas du noeud du DOM et l'objet RenderingContext associé.
 
-Nous avons ensuite créé une fonction `getContext`, mais au lieu d'utiliser `@@bs.val` nous avons employé `@@bs.send`, et  utilisé une string vide pour le texte de l'external. `@@bs.send` signifie "nous appelons une méthode sur le premier argument", qui dans ce cas est le canevas. BuckleScript va traduire `getContext(theFirstArgument, theSecondArgument)` par `theFirstArgument.getContext(theSecondArgument, ...)`.
+Nous avons ensuite créé une fonction `getContext`, mais au lieu d'utiliser `@bs.val` nous avons employé `@bs.send`, et  utilisé une string vide pour le texte de l'external. `@bs.send` signifie "nous appelons une méthode sur le premier argument", qui dans ce cas est le canevas. BuckleScript va traduire `getContext(theFirstArgument, theSecondArgument)` par `theFirstArgument.getContext(theSecondArgument, ...)`.
 
 Et la string vide signifie "le nom js est le même que le nom que nous donnons à l'external ici en territoire BuckleScript", `getContext` dans le cas d'espèce. Si nous voulions le nommer différemment (`getRenderingContex` par exemple), nous devrions fournir la string `"getContext"` afin que BuckleScript appelle la bonne fonction.
 
@@ -172,7 +172,7 @@ Hou la la ! Vous avez vu comment BuckleScript vient de simplifier notre variable
 
 Quand les membres de la communauté écrivent des bindings pour une librairie JavaScript en particulier, ils les publient habituellement sur npm. Rendez-vous sur la partie [Librairies](/guide/javascript/libraries) pour savoir comment les trouver.
 
-Pour utiliser une librairie qui n'a pas de bindings existants, vous devez d'abord installer le paquet npm comme d'habitude. Par example en utilisant `npm install --save <package-name>`, et ensuite vous pouvez y aller et juste écrire vos bindings. Vous trouvez probablement la fonctionnalité [`bs.module`](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_a_value_from_a_module_code_bs_module_code) de l'IFE particulièrement utile. Elle emet les `import`s ou `require`s appropriés, en fonction du format du module de compilation JavaScript.
+Pour utiliser une librairie qui n'a pas de bindings existants, vous devez d'abord installer le paquet npm comme d'habitude. Par example en utilisant `npm install --save <package-name>`, et ensuite vous pouvez y aller et juste écrire vos bindings. Vous trouvez probablement la fonctionnalité [`bs.module`](https://bucklescript.github.io/docs/en/import-export.html) de l'IFE particulièrement utile. Elle emet les `import`s ou `require`s appropriés, en fonction du format du module de compilation JavaScript.
 
 À titre d'exemple, voici le code source entier des bindings [`bs.glob`](https://github.com/reasonml-community/bs-glob) (convertit en Reason, l'original est en OCaml) :
 
